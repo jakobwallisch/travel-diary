@@ -4,4 +4,5 @@ module diary {
     requires javafx.fxml;
 
     opens at.jku.se.diary;
+    opens at.jku.se.diary.controller;
 }
