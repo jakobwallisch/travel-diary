@@ -5,18 +5,21 @@
  */
 package at.jku.se.diary;
 
+import java.util.Date;
+
 /**
  *
  * @author reinhold
  */
+
 public class DiaryEntry {
     
     private String title;
-     
-    public DiaryEntry(String title) {
-        this.title= title;
-    }
-    
+    private String notes;
+    private String location;
+    private Date date;
+
+
     
     public void setTitle(String title) {
         if (title != null && title.length() > 0)
@@ -27,4 +30,35 @@ public class DiaryEntry {
         return title;
     }
 
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
+    public DiaryEntry(String title, Date date) {
+        this.title= title;
+        this.date= date;
+
+    }
 }

@@ -52,6 +52,7 @@ public class HelloFX extends Application {
 
         stage.setScene(new Scene(root));
 
+
         // Methode, damit die Stage angezeigt wird
         stage.show();
     }
