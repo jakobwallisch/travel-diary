@@ -5,7 +5,8 @@
  */
 package at.jku.se.diary;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 /**
  *
@@ -13,23 +14,22 @@ import java.util.Date;
  */
 
 public class DiaryEntry {
-    
+
+
     private String title;
     private String notes;
     private String location;
-    private Date date;
+    private LocalDate date;
 
+    public DiaryEntry(){};
 
-    
-    public void setTitle(String title) {
-        if (title != null && title.length() > 0)
-            this.title= title;
-    }  
-    
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getNotes() {
         return notes;
@@ -47,20 +47,13 @@ public class DiaryEntry {
         this.location = location;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
 
-    public DiaryEntry(String title, Date date) {
-        this.title= title;
-        this.date= date;
-
-    }
-
-    public DiaryEntry(){};
 }

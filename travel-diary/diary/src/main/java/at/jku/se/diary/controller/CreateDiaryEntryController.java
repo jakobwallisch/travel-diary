@@ -1,5 +1,6 @@
 package at.jku.se.diary.controller;
 
+import at.jku.se.diary.DiaryEntry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,16 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+//imports for storing in XML-File
+import java.beans.*;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilterOutputStream;
+
+import java.time.LocalDate;
+
 
 public class CreateDiaryEntryController {
 
@@ -44,8 +54,46 @@ public class CreateDiaryEntryController {
 
     }
 
+    public LocalDate getDate(){
+        return diaryDate.getValue();
+    }
 
+    //create diary entry, store to XML-File and stores to the listview on the homescreen
     public void createDiaryEntry(ActionEvent event) throws IOException {
+
+        DiaryEntry newEntry = new DiaryEntry();
+
+        newEntry.setTitle(diaryTitleTextfield.getText());
+        newEntry.setLocation(diaryLocationTextfield.getText());
+        newEntry.setNotes(diaryNotesTextfield.getText());
+        newEntry.setDate(getDate());
+
+
+        try {
+            FileOutputStream fos = new FileOutputStream(new File("/.database.xml"));
+            XMLEncoder encoder = new XMLEncoder(fos);
+
+
+            encoder.setPersistenceDelegate(LocalDate.class,
+                    new PersistenceDelegate() {
+                        @Override
+                        protected Expression instantiate(Object localDate, Encoder encdr) {
+                            return new Expression(localDate,
+                                    LocalDate.class,
+                                    "parse",
+                                    new Object[]{localDate.toString()});
+                        }
+                    });
+
+
+
+            encoder.writeObject(newEntry);
+            encoder.close();
+            fos.close();
+        }catch (IOException ex){
+            System.out.println("-------------------Error while storing in XML-File--------------------");
+            ex.printStackTrace();
+       }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
         root = loader.load();

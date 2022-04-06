@@ -24,7 +24,7 @@
       <Label layoutX="31.0" layoutY="69.0" text="Title: *" />
       <TextField fx:id="diaryTitleTextfield" layoutX="116.0" layoutY="65.0" />
       <Label layoutX="31.0" layoutY="113.0" text="Date: *" />
-      <DatePicker fx:id="diaryDate" layoutX="116.0" layoutY="109.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="diaryDate" layoutX="116.0" layoutY="109.0" onAction="#getDate" prefHeight="25.0" prefWidth="149.0" />
       <Label layoutX="31.0" layoutY="164.0" text="Location:" />
       <TextField fx:id="diaryLocationTextfield" layoutX="116.0" layoutY="160.0" />
       <Label layoutX="304.0" layoutY="69.0" text="Notes:" />

@@ -1,5 +1,6 @@
 package at.jku.se.diary.controller;
 
+import at.jku.se.diary.DiaryEntry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HomeScreenController {
 
