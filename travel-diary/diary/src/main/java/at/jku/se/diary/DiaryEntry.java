@@ -61,4 +61,6 @@ public class DiaryEntry {
         this.date= date;
 
     }
+
+    public DiaryEntry(){};
 }

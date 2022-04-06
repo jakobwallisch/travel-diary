@@ -27,5 +27,7 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:17.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:19-ea+4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:19-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:19-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:19-ea+4" level="project" />
   </component>
 </module>

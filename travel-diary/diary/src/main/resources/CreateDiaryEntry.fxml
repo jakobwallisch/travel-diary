@@ -14,20 +14,20 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="535.0" layoutY="355.0" mnemonicParsing="false" text="Create" />
+      <Button fx:id="createDiaryEntryButton" layoutX="535.0" layoutY="355.0" mnemonicParsing="false" onAction="#createDiaryEntry" text="Create" />
       <Button layoutX="31.0" layoutY="355.0" mnemonicParsing="false" onAction="#switchToHomescreen" text="Back to Homescreen" />
-      <Label layoutX="31.0" layoutY="24.0" text="Neuen Tagebucheintrag erstellen:">
+      <Label layoutX="31.0" layoutY="24.0" text="Create new diary entry:">
          <font>
             <Font name="MS Outlook" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="31.0" layoutY="69.0" text="Titel: *" />
-      <TextField layoutX="116.0" layoutY="65.0" />
-      <Label layoutX="31.0" layoutY="113.0" text="Datum: *" />
-      <DatePicker layoutX="116.0" layoutY="109.0" prefHeight="25.0" prefWidth="149.0" />
-      <Label layoutX="31.0" layoutY="164.0" text="Ort:" />
-      <TextField layoutX="116.0" layoutY="160.0" />
-      <Label layoutX="304.0" layoutY="69.0" text="Notizen:" />
-      <TextField layoutX="304.0" layoutY="100.0" prefHeight="88.0" prefWidth="282.0" />
+      <Label layoutX="31.0" layoutY="69.0" text="Title: *" />
+      <TextField fx:id="diaryTitleTextfield" layoutX="116.0" layoutY="65.0" />
+      <Label layoutX="31.0" layoutY="113.0" text="Date: *" />
+      <DatePicker fx:id="diaryDate" layoutX="116.0" layoutY="109.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label layoutX="31.0" layoutY="164.0" text="Location:" />
+      <TextField fx:id="diaryLocationTextfield" layoutX="116.0" layoutY="160.0" />
+      <Label layoutX="304.0" layoutY="69.0" text="Notes:" />
+      <TextField fx:id="diaryNotesTextfield" layoutX="358.0" layoutY="65.0" prefHeight="121.0" prefWidth="232.0" />
    </children>
 </AnchorPane>
