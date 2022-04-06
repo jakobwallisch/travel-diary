@@ -1,5 +1,6 @@
 package at.jku.se.diary.controller;
 
+import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ import java.time.LocalDate;
 
 
 public class CreateDiaryEntryController {
+
+    Application application = new Application();
 
     @FXML
     TextField diaryTitleTextfield;
@@ -68,33 +71,6 @@ public class CreateDiaryEntryController {
         newEntry.setNotes(diaryNotesTextfield.getText());
         newEntry.setDate(getDate());
 
-
-        try {
-            FileOutputStream fos = new FileOutputStream(new File("/.database.xml"));
-            XMLEncoder encoder = new XMLEncoder(fos);
-
-
-            encoder.setPersistenceDelegate(LocalDate.class,
-                    new PersistenceDelegate() {
-                        @Override
-                        protected Expression instantiate(Object localDate, Encoder encdr) {
-                            return new Expression(localDate,
-                                    LocalDate.class,
-                                    "parse",
-                                    new Object[]{localDate.toString()});
-                        }
-                    });
-
-
-
-            encoder.writeObject(newEntry);
-            encoder.close();
-            fos.close();
-        }catch (IOException ex){
-            System.out.println("-------------------Error while storing in XML-File--------------------");
-            ex.printStackTrace();
-       }
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
         root = loader.load();
 
@@ -107,6 +83,8 @@ public class CreateDiaryEntryController {
             homeScreenController.addToDiaryEntries(diaryTitleTextfield.getText());
             homeScreenController.updateOverview(diaryTitleTextfield.getText());
         }
+
+        application.storeDiaryEntry(newEntry);
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

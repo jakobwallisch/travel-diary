@@ -11,8 +11,21 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+import java.beans.Encoder;
+import java.beans.Expression;
+import java.beans.PersistenceDelegate;
+import java.beans.XMLEncoder;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
+
 
 public class Application extends javafx.application.Application {
+
+    //private static File database = new File("/.database.xml");
+    private static File database = new File("D:\\travel-diary SE PR\\database.xml");
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -54,5 +67,33 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public void storeDiaryEntry(DiaryEntry newEntry){
+        try {
+            FileOutputStream fos = new FileOutputStream(database);
+            XMLEncoder encoder = new XMLEncoder(fos);
+
+
+            encoder.setPersistenceDelegate(LocalDate.class,
+                    new PersistenceDelegate() {
+                        @Override
+                        protected Expression instantiate(Object localDate, Encoder encdr) {
+                            return new Expression(localDate,
+                                    LocalDate.class,
+                                    "parse",
+                                    new Object[]{localDate.toString()});
+                        }
+                    });
+
+
+
+            encoder.writeObject(newEntry);
+            encoder.close();
+            fos.close();
+        }catch (IOException ex){
+            System.out.println("-------------------Error while storing in XML-File--------------------");
+            ex.printStackTrace();
+        }
     }
 }
