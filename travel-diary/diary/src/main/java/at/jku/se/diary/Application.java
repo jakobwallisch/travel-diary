@@ -5,19 +5,14 @@
  */
 package at.jku.se.diary;
 
-import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
-import java.io.File;
 
-
-public class HelloFX extends Application {
+public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws Exception {

@@ -57,7 +57,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>at.jku.se.diary.HelloFX</mainClass>
+                    <mainClass>at.jku.se.diary.Application</mainClass>
                 </configuration>
             </plugin>
             <plugin>
