@@ -1,9 +1,11 @@
 package at.jku.se.diary.controller;
 
-import at.jku.se.diary.DiaryEntry;
+import at.jku.se.diary.Application;
+import at.jku.se.diary.database.EntryDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,34 +14,40 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.ResourceBundle;
 
-public class HomeScreenController {
+public class HomeScreenController implements Initializable {
+
+    EntryDatabase entryDatabase = new EntryDatabase();
 
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    public HomeScreenController() throws IOException {
+    }
 
 
     // Listview on the Homescreen
     @FXML
     private ListView<String> diaryEntryListOverview;
 
+
     //in this list the titles of the diary entries get stored for the listview on the homescreen
-    private static ArrayList<String> diaryEntries = new ArrayList<>();
+    private  ArrayList<String> diaryEntriesTitles = entryDatabase.getTitlesOfAllDiaryEntries();
 
 
     //title gets stored in the diaryEntries list
     public void addToDiaryEntries(String title){
-        diaryEntries.add(title);
+        diaryEntriesTitles.add(title);
     }
     //the overview on the homescreen gets updated with new titles of entries
     public void updateOverview(String title){
-        diaryEntryListOverview.getItems().addAll(diaryEntries);
+        diaryEntryListOverview.getItems().addAll(diaryEntriesTitles);
 
     }
-
 
     // Get to the CreateDiaryEntry Screen - Method --- for the "zurück zum Homescreen" button
     public void switchToCreateDiaryEntry(ActionEvent event) throws IOException {
@@ -54,5 +62,21 @@ public class HomeScreenController {
         stage.show();
 
     }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+     /*   ArrayList<String> entries = new ArrayList<>();
+
+        for (DiaryEntry e: application.readDiaryEntries()) {
+            entries.add(e.getTitle());
+        }
+
+        diaryEntryListOverview.getItems().addAll(entries);
+
+      */
+    }
+
 }
 

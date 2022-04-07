@@ -1,7 +1,7 @@
 package at.jku.se.diary.controller;
 
-import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
+import at.jku.se.diary.database.EntryDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,20 +12,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-//imports for storing in XML-File
-import java.beans.*;
 import java.io.IOException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilterOutputStream;
-
 import java.time.LocalDate;
 
 
-public class CreateDiaryEntryController {
 
-    Application application = new Application();
+public class CreateDiaryEntryController {
 
     @FXML
     TextField diaryTitleTextfield;
@@ -40,22 +32,12 @@ public class CreateDiaryEntryController {
     static private Scene scene;
     private Parent root;
 
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
+    EntryDatabase entryDatabase = new EntryDatabase();
 
-
-// Get back to the Homescreen -Method
-    public void switchToHomescreen(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
-        root = loader.load();
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        //scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-
+    public CreateDiaryEntryController() throws IOException {
     }
+
+    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
 
     public LocalDate getDate(){
         return diaryDate.getValue();
@@ -66,10 +48,14 @@ public class CreateDiaryEntryController {
 
         DiaryEntry newEntry = new DiaryEntry();
 
+        //Read data from FXML File
         newEntry.setTitle(diaryTitleTextfield.getText());
         newEntry.setLocation(diaryLocationTextfield.getText());
         newEntry.setNotes(diaryNotesTextfield.getText());
-        newEntry.setDate(getDate());
+        newEntry.setDate(diaryDate.getValue());
+
+        //only for testing
+        System.out.println(diaryDate.getValue());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
         root = loader.load();
@@ -84,10 +70,27 @@ public class CreateDiaryEntryController {
             homeScreenController.updateOverview(diaryTitleTextfield.getText());
         }
 
-        application.storeDiaryEntry(newEntry);
+        //stores new entry in database
+        entryDatabase.storeEntryInDatabase(newEntry);
 
+        //entryDatabase.readEntriesFromDatabase();
+
+        //switch to Homescreen
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    // Get back to the Homescreen -Method
+    public void switchToHomescreen(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        //scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
