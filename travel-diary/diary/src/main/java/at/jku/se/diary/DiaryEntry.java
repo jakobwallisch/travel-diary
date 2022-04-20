@@ -21,7 +21,7 @@ public class DiaryEntry {
     private String location;
     private LocalDate date;
 
-    public DiaryEntry(){};
+    public DiaryEntry(){}
 
     public String getTitle() {
         return title;

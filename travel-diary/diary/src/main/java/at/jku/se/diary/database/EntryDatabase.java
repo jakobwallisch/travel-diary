@@ -1,83 +1,78 @@
 package at.jku.se.diary.database;
 
 import at.jku.se.diary.DiaryEntry;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.time.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EntryDatabase {
 
     //private static File database = new File("/.database.json");
-    private static File database = new File("D:\\travel-diary SE PR\\database.json");
+    private static final File database = new File("database.json");
 
-    private FileWriter fileWriter = new FileWriter(database);
-    //private JsonWriter jsonWriter = new JsonWriter(fileWriter);
-
-
-    private static ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
-
-    public EntryDatabase() throws IOException {
-    }
+    private ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
 
     public void storeEntryInDatabase(DiaryEntry entry) throws IOException {
 
-        //this check doesn't works right
-       if (!(getTitlesOfAllDiaryEntries().contains(entry.getTitle()))){
+        //this check doesn't work right
+//       if (!(getTitlesOfAllDiaryEntries().contains(entry.getTitle()))){
             diaryEntries.add(entry);
+//        }
+
+        Gson json = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .create();
+
+        try (final FileWriter fw = new FileWriter(database)) { // make sure FileWriter is closed when leaving scope
+            json.toJson(diaryEntries, fw);
+        }
+   }
+
+
+    public void readEntriesFromDatabase() throws IOException {
+        Gson json = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .create();
+
+        ArrayList<DiaryEntry> loadedDiaryEntries;
+
+        try (final FileReader fr = new FileReader(database)) { // make sure FileReader is closed when leaving scope
+            loadedDiaryEntries = json.fromJson(fr, new TypeToken<ArrayList<DiaryEntry>>() {}.getType());
         }
 
-        Gson json = new GsonBuilder()
-                //.setPrettyPrinting()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                .create();
-
-        String jsonString = json.toJson(diaryEntries);
-
-        System.out.println(jsonString);
-
-        fileWriter.write(json.toJson(jsonString));
-        fileWriter.close();
-    }
-
-    //---NOT WORKING--- reads the json objects from the json file and returns a ArrayList with DiaryEntry objects
-    public ArrayList<DiaryEntry> readEntriesFromDatabase() throws IOException {
-        Gson json = new GsonBuilder()
-                //.setPrettyPrinting()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                .create();
-
-        String jsonString = json.toJson(diaryEntries);
-
-
-        Type entryALType = new TypeToken<ArrayList<DiaryEntry>>(){}.getType();
-        ArrayList<DiaryEntry> result = json.fromJson(jsonString,entryALType);
-
-        System.out.println(result.get(0).getTitle());
-
-        return result;
+        // if we didn't load anything (empty file or the like), then stick with an empty list
+        if (loadedDiaryEntries != null) {
+            diaryEntries = loadedDiaryEntries;
+        }
     }
 
     //returns the titles of all the entries
-    public ArrayList<String> getTitlesOfAllDiaryEntries(){
-
-        ArrayList<String> result= new ArrayList<>();
-
-        for (DiaryEntry e: diaryEntries) {
-            result.add(e.getTitle());
-        }
-        return result;
+    public List<String> getTitlesOfAllDiaryEntries(){
+        return diaryEntries.stream().map(DiaryEntry::getTitle).collect(Collectors.toList());
+//
+//        ArrayList<String> result= new ArrayList<>();
+//
+//        for (DiaryEntry e: diaryEntries) {
+//            result.add(e.getTitle());
+//        }
+//        return result;
     }
 
 
-    //Getters and Setters
-    public static ArrayList<DiaryEntry> getDiaryEntries() {
-        return diaryEntries;
+    //Getter
+    public List<DiaryEntry> getDiaryEntries() {
+        return Collections.unmodifiableList(diaryEntries);
     }
 
 }

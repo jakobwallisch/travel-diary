@@ -1,18 +1,30 @@
-//This class is only needed to store data in a Json-File
 package at.jku.se.diary.database;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 
-import java.lang.reflect.Type;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-public class LocalDateAdapter implements JsonSerializer<LocalDate> {
+class LocalDateAdapter extends TypeAdapter<LocalDate> {
+    @Override
+    public void write(final JsonWriter jsonWriter, final LocalDate localDate) throws IOException {
+        if (localDate == null) {
+            jsonWriter.nullValue();
+        } else {
+            jsonWriter.value(localDate.toString());
+        }
+    }
 
-    public JsonElement serialize(LocalDate date, Type typeOfSrc, JsonSerializationContext context) {
-        return new JsonPrimitive(date.format(DateTimeFormatter.ISO_LOCAL_DATE)); // "yyyy-mm-dd"
+    @Override
+    public LocalDate read(final JsonReader jsonReader) throws IOException {
+        if (jsonReader.peek() == JsonToken.NULL) {
+            jsonReader.nextNull();
+            return null;
+        } else {
+            return LocalDate.parse(jsonReader.nextString());
+        }
     }
 }
