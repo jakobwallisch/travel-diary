@@ -8,10 +8,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -27,6 +32,24 @@ public class CreateDiaryEntryController {
     TextField diaryNotesTextfield;
     @FXML
     DatePicker diaryDate;
+
+    //image views for selected pictures
+    @FXML
+    private ImageView imageView1;
+    @FXML
+    private ImageView imageView2;
+    @FXML
+    private ImageView imageView3;
+
+    //buttons for adding a picture
+    @FXML
+    private Button btnOpenPicture1;
+    @FXML
+    private Button btnOpenPicture2;
+    @FXML
+    private Button btnOpenPicture3;
+
+
 
     private Stage stage;
     static private Scene scene;
@@ -88,4 +111,69 @@ public class CreateDiaryEntryController {
         stage.show();
 
     }
+
+    //----------- file chooser implementation ----------------
+
+    //create a file chooser object
+    final FileChooser fileChooser = new FileChooser();
+
+    public void initialiseFileChooser(){
+        //Set the title of the displayed file dialog
+        fileChooser.setTitle("Foto auswählen");
+
+        //Set the initial directory for the displayed file dialog
+        //user.home refers to the path to the user directory
+        fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
+
+        //Gets the extension filters used in the displayed file dialog
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png","*.jpg", "*.jpeg", "*..jfif"));
+
+    }
+
+
+    public void handleOpenPicture1(ActionEvent actionEvent){
+
+        initialiseFileChooser();
+
+        //Set the selected file or null if no file has been selected
+        File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
+
+        if(file != null){
+            imageView1.setImage(new Image(file.toURI().toString()));
+        }else {
+            System.out.println("invalid file");
+        }
+    }
+
+    public void handleOpenPicture2(ActionEvent actionEvent){
+
+        initialiseFileChooser();
+
+        //Set the selected file or null if no file has been selected
+        File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
+
+        if(file != null){
+            imageView2.setImage(new Image(file.toURI().toString()));
+        }else {
+            System.out.println("invalid file");
+        }
+    }
+
+    public void handleOpenPicture3(ActionEvent actionEvent){
+
+        initialiseFileChooser();
+
+        //Set the selected file or null if no file has been selected
+        File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
+
+        if(file != null){
+            imageView3.setImage(new Image(file.toURI().toString()));
+        }else {
+            System.out.println("invalid file");
+        }
+    }
+
+
+
+
 }
