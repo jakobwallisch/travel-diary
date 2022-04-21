@@ -1,7 +1,7 @@
 package at.jku.se.diary.controller;
 
+import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
-import at.jku.se.diary.database.EntryDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,10 +32,6 @@ public class CreateDiaryEntryController {
     static private Scene scene;
     private Parent root;
 
-    EntryDatabase entryDatabase = new EntryDatabase();
-
-    public CreateDiaryEntryController() throws IOException {
-    }
 
     //FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
 
@@ -65,15 +61,12 @@ public class CreateDiaryEntryController {
         if (diaryTitleTextfield.getText().isEmpty()){
             System.out.println("Das Titelfeld ist leer.");
             return;
-        }else{
-            homeScreenController.addToDiaryEntries(diaryTitleTextfield.getText());
-            homeScreenController.updateOverview(diaryTitleTextfield.getText());
         }
 
-        //stores new entry in database
-        entryDatabase.storeEntryInDatabase(newEntry);
+        homeScreenController.updateOverview(diaryTitleTextfield.getText());
 
-        //entryDatabase.readEntriesFromDatabase();
+        //stores new entry in database
+        Application.getInstance().getEntryDatabase().storeEntryInDatabase(newEntry);
 
         //switch to Homescreen
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
