@@ -49,6 +49,8 @@ public class EntryDatabase {
 
         try (final FileReader fr = new FileReader(database)) { // make sure FileReader is closed when leaving scope
             loadedDiaryEntries = json.fromJson(fr, new TypeToken<ArrayList<DiaryEntry>>() {}.getType());
+        }catch (Exception e){
+            throw new RuntimeException("Error creating FileReader");
         }
 
         // if we didn't load anything (empty file or the like), then stick with an empty list
