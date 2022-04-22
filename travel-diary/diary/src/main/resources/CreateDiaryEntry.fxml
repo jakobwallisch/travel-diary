@@ -31,11 +31,14 @@
       <Label layoutX="304.0" layoutY="69.0" text="Notes:" />
       <TextField fx:id="diaryNotesTextfield" layoutX="358.0" layoutY="65.0" prefHeight="121.0" prefWidth="232.0" />
       <Button fx:id="btnOpenPicture1" layoutX="358.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleOpenPicture1" text="+" />
-      <ImageView fx:id="imageView1" fitHeight="53.0" fitWidth="73.0" layoutX="334.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView1" fitHeight="53.0" fitWidth="73.0" layoutX="347.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="btnOpenPicture2" layoutX="448.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleOpenPicture2" text="+" />
-      <ImageView fx:id="imageView2" fitHeight="53.0" fitWidth="73.0" layoutX="424.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView2" fitHeight="53.0" fitWidth="73.0" layoutX="436.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="btnOpenPicture3" layoutX="538.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleOpenPicture3" text="+" />
-      <ImageView fx:id="imageView3" fitHeight="53.0" fitWidth="73.0" layoutX="514.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="411.0" layoutY="216.0" text="Press + to add a picture" />
+      <ImageView fx:id="imageView3" fitHeight="53.0" fitWidth="73.0" layoutX="527.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="383.0" layoutY="200.0" text="Press +/ - to add/ delete a picture" />
+      <Button fx:id="btnDeletePicture1" layoutX="383.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnDeletePicture2" layoutX="473.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnDeletePicture3" layoutX="563.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
    </children>
 </AnchorPane>

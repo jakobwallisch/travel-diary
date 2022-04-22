@@ -48,6 +48,13 @@ public class CreateDiaryEntryController {
     private Button btnOpenPicture2;
     @FXML
     private Button btnOpenPicture3;
+    //buttons to delete a picture
+    @FXML
+    private Button btnDeletePicture1;
+    @FXML
+    private Button btnDeletePicture2;
+    @FXML
+    private Button btnDeletePicture3;
 
 
 
@@ -171,6 +178,17 @@ public class CreateDiaryEntryController {
         }else {
             System.out.println("invalid file");
         }
+    }
+
+    // Methods to delete de selected picture from the image view
+    public void handleDeletePicture1(ActionEvent actionEvent){
+            imageView1.setImage(null);
+    }
+    public void handleDeletePicture2(ActionEvent actionEvent){
+        imageView2.setImage(null);
+    }
+    public void handleDeletePicture3(ActionEvent actionEvent){
+        imageView3.setImage(null);
     }
 
 
