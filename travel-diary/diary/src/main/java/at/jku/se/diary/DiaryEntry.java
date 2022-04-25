@@ -21,6 +21,13 @@ public class DiaryEntry {
     private String location;
     private LocalDate date;
 
+    //Path of the stored Pictures
+    private String pathPicture1;
+    private String pathPicture2;
+    private String pathPicture3;
+
+
+
     public DiaryEntry(){}
 
     public String getTitle() {
@@ -54,5 +61,30 @@ public class DiaryEntry {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public String getPathPicture1() {
+        return pathPicture1;
+    }
+
+    public void setPathPicture1(String pathPicture1) {
+        this.pathPicture1 = pathPicture1;
+    }
+
+    public String getPathPicture2() {
+        return pathPicture2;
+    }
+
+    public void setPathPicture2(String pathPicture2) {
+        this.pathPicture2 = pathPicture2;
+    }
+
+    public String getPathPicture3() {
+        return pathPicture3;
+    }
+
+    public void setPathPicture3(String pathPicture3) {
+        this.pathPicture3 = pathPicture3;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package at.jku.se.diary.controller;
 
+import at.jku.se.diary.AlertBox;
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
 import javafx.event.ActionEvent;
@@ -11,10 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -56,6 +57,8 @@ public class CreateDiaryEntryController {
     @FXML
     private Button btnDeletePicture3;
 
+    @FXML
+    private Button createDiaryEntryButton;
 
 
     private Stage stage;
@@ -76,22 +79,39 @@ public class CreateDiaryEntryController {
 
         //Read data from FXML File
         newEntry.setTitle(diaryTitleTextfield.getText());
+
         newEntry.setLocation(diaryLocationTextfield.getText());
         newEntry.setNotes(diaryNotesTextfield.getText());
         newEntry.setDate(diaryDate.getValue());
-
-        //only for testing
-        System.out.println(diaryDate.getValue());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
         root = loader.load();
 
         HomeScreenController homeScreenController = loader.getController();
 
+        //proofs if the title field is empty or not inkl. AlertBox
         if (diaryTitleTextfield.getText().isEmpty()){
-            System.out.println("Das Titelfeld ist leer.");
+            AlertBox.display("Error", "The title-field is empty!");
             return;
         }
+        //proofs if the date field is empty or not inkl. AlertBox
+        if (diaryDate.getValue() == null){
+            AlertBox.display("Error", "The date-field is empty!");
+            return;
+        }
+
+        //stores the URLs of the selected images
+        if(!(imageView1.getImage() == null)){
+            newEntry.setPathPicture1(imageView1.getImage().getUrl());
+        }
+        if(!(imageView2.getImage() == null)){
+            newEntry.setPathPicture1(imageView1.getImage().getUrl());
+        }
+        if(!(imageView3.getImage() == null)){
+            newEntry.setPathPicture1(imageView1.getImage().getUrl());
+        }
+
+        System.out.println(newEntry.getPathPicture1());
 
         homeScreenController.updateOverview(diaryTitleTextfield.getText());
 
@@ -133,7 +153,7 @@ public class CreateDiaryEntryController {
         fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
 
         //Gets the extension filters used in the displayed file dialog
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png","*.jpg", "*.jpeg", "*..jfif"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png","*.jpg", "*.jpeg", "*.jfif"));
 
     }
 
@@ -178,6 +198,7 @@ public class CreateDiaryEntryController {
         }else {
             System.out.println("invalid file");
         }
+
     }
 
     // Methods to delete de selected picture from the image view
@@ -190,8 +211,5 @@ public class CreateDiaryEntryController {
     public void handleDeletePicture3(ActionEvent actionEvent){
         imageView3.setImage(null);
     }
-
-
-
 
 }

@@ -13,4 +13,9 @@
       <module name="diary" target="15" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="diary" options="" />
+    </option>
+  </component>
 </project>
