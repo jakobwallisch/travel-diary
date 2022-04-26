@@ -105,13 +105,11 @@ public class CreateDiaryEntryController {
             newEntry.setPathPicture1(imageView1.getImage().getUrl());
         }
         if(!(imageView2.getImage() == null)){
-            newEntry.setPathPicture1(imageView1.getImage().getUrl());
+            newEntry.setPathPicture2(imageView2.getImage().getUrl());
         }
         if(!(imageView3.getImage() == null)){
-            newEntry.setPathPicture1(imageView1.getImage().getUrl());
+            newEntry.setPathPicture3(imageView3.getImage().getUrl());
         }
-
-        System.out.println(newEntry.getPathPicture1());
 
         homeScreenController.updateOverview(diaryTitleTextfield.getText());
 
