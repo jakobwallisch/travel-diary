@@ -111,7 +111,7 @@ public class CreateDiaryEntryController {
             newEntry.setPathPicture3(imageView3.getImage().getUrl());
         }
 
-        homeScreenController.updateOverview(diaryTitleTextfield.getText());
+        homeScreenController.updateTableView(newEntry);
 
         //stores new entry in database
         Application.getInstance().getEntryDatabase().storeEntryInDatabase(newEntry);

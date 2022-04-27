@@ -24,10 +24,7 @@ public class EntryDatabase {
 
     public void storeEntryInDatabase(DiaryEntry entry) throws IOException {
 
-        //this check doesn't work right
-//       if (!(getTitlesOfAllDiaryEntries().contains(entry.getTitle()))){
-            diaryEntries.add(entry);
-//        }
+        diaryEntries.add(entry);
 
         Gson json = new GsonBuilder()
                 .setPrettyPrinting()
@@ -38,6 +35,20 @@ public class EntryDatabase {
             json.toJson(diaryEntries, fw);
         }
    }
+
+    public void deleteEntryInDatabase(DiaryEntry entry) throws IOException {
+
+        diaryEntries.remove(entry);
+
+        Gson json = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .create();
+
+        try (final FileWriter fw = new FileWriter(database)) { // make sure FileWriter is closed when leaving scope
+            json.toJson(diaryEntries, fw);
+        }
+    }
 
 
     public void readEntriesFromDatabase() throws IOException {
