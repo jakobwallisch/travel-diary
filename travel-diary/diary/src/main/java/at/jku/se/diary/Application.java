@@ -11,9 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.Objects;
+
+
 
 public class Application extends javafx.application.Application {
 
@@ -50,7 +50,7 @@ public class Application extends javafx.application.Application {
             Parent root = loader.load();
 
             //Titel des Fensters (der Stage)
-            stage.setTitle("Reisetagebuch");
+            stage.setTitle("Travel Diary");
 
             //Setzt Icon des Fensters (der Stage)
             Image icon = new Image("img.png");
