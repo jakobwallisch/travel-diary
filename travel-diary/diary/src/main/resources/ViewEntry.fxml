@@ -45,7 +45,7 @@
       </Label>
       <ImageView fx:id="imageView1" fitHeight="85.0" fitWidth="113.0" layoutX="463.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imageView3" fitHeight="85.0" fitWidth="113.0" layoutX="463.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageView2" fitHeight="85.0" fitWidth="113.0" layoutX="463.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView2" fitHeight="85.0" fitWidth="113.0" layoutX="463.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="backToHomescreenEntryView" layoutX="25.0" layoutY="361.0" mnemonicParsing="false" onAction="#switchToHomescreen" text="Back to Homescreen" />
       <Button fx:id="deleteEntryTableViewBtn" layoutX="247.0" layoutY="362.0" mnemonicParsing="false" onAction="#removeDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Delete Entry">
          <font>
