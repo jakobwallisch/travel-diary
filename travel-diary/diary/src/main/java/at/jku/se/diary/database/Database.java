@@ -19,8 +19,26 @@ public class Database {
 
     //private static File database = new File("/.database.json");
     private static final File database = new File("database.json");
+    private static final File tags = new File("tags.json");
+
+
 
     private ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
+    private ArrayList<String> tagEntries = new ArrayList<>();
+
+
+    public void storeTagInDatabase(String tagName) throws IOException {
+
+        tagEntries.add(tagName);
+
+        Gson json = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        try (final FileWriter fw = new FileWriter(tags)) { // make sure FileWriter is closed when leaving scope
+            json.toJson(tagEntries, fw);
+        }
+    }
 
     public void storeEntryInDatabase(DiaryEntry entry) throws IOException {
 

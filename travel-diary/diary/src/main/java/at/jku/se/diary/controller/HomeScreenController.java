@@ -68,6 +68,20 @@ public class HomeScreenController implements Initializable {
 
     }
 
+    public void switchTagView(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/TagView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
     //switch to the entry-view of the selected entry in the tableview
     public void switchToViewEntry(ActionEvent event) throws IOException {
 
