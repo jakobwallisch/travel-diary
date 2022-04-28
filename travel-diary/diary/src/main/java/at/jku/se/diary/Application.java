@@ -9,9 +9,11 @@ import at.jku.se.diary.database.Database;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+
+
 
 public class Application extends javafx.application.Application {
 
@@ -48,11 +50,11 @@ public class Application extends javafx.application.Application {
             Parent root = loader.load();
 
             //Titel des Fensters (der Stage)
-            stage.setTitle("Reisetagebuch");
+            stage.setTitle("Travel Diary");
 
             //Setzt Icon des Fensters (der Stage)
-            //Image icon = new Image("img.png");
-            //stage.getIcons().add(icon);
+            Image icon = new Image("img.png");
+            stage.getIcons().add(icon);
 
             stage.setScene(new Scene(root));
 
