@@ -5,21 +5,19 @@
  */
 package at.jku.se.diary;
 
-import at.jku.se.diary.database.EntryDatabase;
+import at.jku.se.diary.database.Database;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Application extends javafx.application.Application {
 
     private static Application instance;
 
-    private EntryDatabase entryDatabase = new EntryDatabase();
+    private Database database = new Database();
 
     public static Application getInstance() {
         return instance;
@@ -27,7 +25,7 @@ public class Application extends javafx.application.Application {
 
     public Application() {
         try {
-            entryDatabase.readEntriesFromDatabase();
+            database.readEntriesFromDatabase();
         } catch (final IOException e) {
 //            e.printStackTrace(System.err);
         }
@@ -39,8 +37,8 @@ public class Application extends javafx.application.Application {
         instance = this;
     }
 
-    public EntryDatabase getEntryDatabase() {
-        return entryDatabase;
+    public Database getEntryDatabase() {
+        return database;
     }
 
     @Override
@@ -53,8 +51,8 @@ public class Application extends javafx.application.Application {
             stage.setTitle("Reisetagebuch");
 
             //Setzt Icon des Fensters (der Stage)
-            Image icon = new Image("img.png");
-            stage.getIcons().add(icon);
+            //Image icon = new Image("img.png");
+            //stage.getIcons().add(icon);
 
             stage.setScene(new Scene(root));
 

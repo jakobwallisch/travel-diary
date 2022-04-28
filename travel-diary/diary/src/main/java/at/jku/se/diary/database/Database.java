@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EntryDatabase {
+public class Database {
 
     //private static File database = new File("/.database.json");
     private static final File database = new File("database.json");
