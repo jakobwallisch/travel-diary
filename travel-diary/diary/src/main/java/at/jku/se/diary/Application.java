@@ -29,7 +29,7 @@ public class Application extends javafx.application.Application {
         try {
             database.readEntriesFromDatabase();
         } catch (final IOException e) {
-//            e.printStackTrace(System.err);
+            e.printStackTrace(System.err);
         }
 
         // Initialize our Application Singleton

@@ -65,9 +65,6 @@ public class CreateDiaryEntryController {
     static private Scene scene;
     private Parent root;
 
-
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
-
     public LocalDate getDate(){
         return diaryDate.getValue();
     }

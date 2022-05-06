@@ -14,6 +14,7 @@ public class AlertBox {
 
         //the window is always in the foreground
         window.initModality(Modality.APPLICATION_MODAL);
+
         //set title of the window
         window.setTitle(title);
 
