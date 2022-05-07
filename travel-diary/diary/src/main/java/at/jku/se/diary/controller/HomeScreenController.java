@@ -26,6 +26,7 @@ public class HomeScreenController implements Initializable {
     private Parent root;
 
     private ViewEntryController viewEntryController = new ViewEntryController();
+    private WebViewController webViewController = new WebViewController();
 
     //TableView on Homescreen
     @FXML
@@ -49,7 +50,7 @@ public class HomeScreenController implements Initializable {
 
 
 
-    //the overview on the homescreen gets updated with new entries
+    //the overview on the HomeScreen gets updated with new entries
     public void updateTableView(DiaryEntry entry){
         tableView.getItems().addAll(entry);
     }
@@ -79,6 +80,27 @@ public class HomeScreenController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/ViewEntry.fxml"));
         root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    //switch to the WebView of the selected entry in the tableview
+    public void switchToWebView(ActionEvent event) throws IOException {
+
+        webViewController.setLocations(Application.getInstance().getEntryDatabase().getLocationsOfDiaryEntries());
+
+        System.out.println(webViewController.getLocations().toString());
+        System.out.println(webViewController.getLocations().size());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/WebView.fxml"));
+        root = loader.load();
+
+
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ViewEntryController implements Initializable {
@@ -43,6 +44,8 @@ public class ViewEntryController implements Initializable {
 
     //this entry will be displayed
     static DiaryEntry entryToView;
+
+    private WebViewController webViewController = new WebViewController();
 
     public DiaryEntry getEntryToView() {
         return entryToView;
@@ -99,6 +102,23 @@ public class ViewEntryController implements Initializable {
         if (!(entryToView.getPathPicture3() == null)){
             imageView3.setImage(new Image(entryToView.getPathPicture3()));
         }
+    }
+
+    //switch to the WebView of the selected entry in the tableview
+    public void switchToWebView(ActionEvent event) throws IOException {
+
+        //set the Location of the Entry which will be displayed
+        webViewController.setLocationsOneEntry(entryToView.getLocation());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/WebView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
 

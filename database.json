@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "title": "Reise1",
+    "notes": "Schön!",
+    "location": "Linz",
+    "date": "2022-05-19"
+  },
+  {
+    "title": "asd",
+    "notes": "",
+    "location": "Wien",
+    "date": "2022-04-26"
+  }
+]
