@@ -2,20 +2,16 @@ package at.jku.se.diary.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
-
 import java.io.IOException;
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -31,9 +27,6 @@ public class WebViewController implements Initializable{
 
     @FXML
     private WebView webView;
-    @FXML
-    private TextField webViewTextField;
-
 
     private WebEngine webEngine;
 
@@ -83,6 +76,19 @@ public class WebViewController implements Initializable{
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    // Get back to the Homescreen -Method
+    public void switchToViewEntry(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewEntry.fxml"));
         root = loader.load();
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
