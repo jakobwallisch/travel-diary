@@ -80,4 +80,18 @@ public class Database {
         return Collections.unmodifiableList(diaryEntries);
     }
 
+    //Get locations of the entries to show them on the map
+    public List<String> getLocationsOfDiaryEntries(){
+
+        List<DiaryEntry> allEntries = this.getDiaryEntries();
+        List<String> result = new ArrayList<>();
+
+        for (DiaryEntry entry: allEntries) {
+
+            result.add(entry.getLocation());
+        }
+
+        return result;
+    }
+
 }

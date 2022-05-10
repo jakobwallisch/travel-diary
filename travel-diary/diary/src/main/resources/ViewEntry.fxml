@@ -52,5 +52,10 @@
             <Font size="11.0" />
          </font>
       </Button>
+      <Button layoutX="462.0" layoutY="362.0" mnemonicParsing="false" onAction="#switchToWebView" prefHeight="22.0" prefWidth="116.0" text="View on Map">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

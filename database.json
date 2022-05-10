@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "title": "Reise1",
+    "notes": "Schön!",
+    "location": "Linz",
+    "date": "2022-05-19"
+  },
+  {
+    "title": "Ausflug mit Alex",
+    "notes": "",
+    "location": "Brunnenthal",
+    "date": "2022-05-26",
+    "pathPicture1": "file:/D:/OneDrive%20-%20Johannes%20Kepler%20Universität%20Linz/Sonstiges/Fotos%20Brüder%20Weihnachten/IMG_20201222_130514.jpg"
+  },
+  {
+    "title": "asdasd",
+    "notes": "",
+    "location": "Wien",
+    "date": "2022-05-04"
+  }
+]
