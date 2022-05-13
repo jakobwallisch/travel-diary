@@ -68,6 +68,21 @@ public class Database {
         }
     }
 
+    public void deleteTagInDatabase(String tag) throws IOException {
+
+        tagEntries.remove(tag);
+
+        Gson json = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        try (final FileWriter fw = new FileWriter(tags)) { // make sure FileWriter is closed when leaving scope
+            json.toJson(tagEntries, fw);
+        }
+    }
+
+
+
 
     public void readEntriesFromDatabase() throws IOException {
         Gson json = new GsonBuilder()
@@ -88,6 +103,26 @@ public class Database {
         }
     }
 
+
+    public void readTagsFromDatabase() throws IOException {
+        Gson json = new GsonBuilder()
+                .create();
+
+        ArrayList<String> loadedTags;
+
+        try (final FileReader fr = new FileReader(tags)) { // make sure FileReader is closed when leaving scope
+            loadedTags = json.fromJson(fr, new TypeToken<ArrayList<String>>() {}.getType());
+        }catch (Exception e){
+            throw new RuntimeException("Error creating FileReader");
+        }
+
+        // if we didn't load anything (empty file or the like), then stick with an empty list
+        if (loadedTags != null) {
+            tagEntries = loadedTags;
+        }
+    }
+
+
     //returns the titles of all the entries
     public List<String> getTitlesOfAllDiaryEntries(){
         return diaryEntries.stream().map(DiaryEntry::getTitle).collect(Collectors.toList());
@@ -105,5 +140,7 @@ public class Database {
     public List<DiaryEntry> getDiaryEntries() {
         return Collections.unmodifiableList(diaryEntries);
     }
-
+    public List<String> getTagEntries() {
+        return Collections.unmodifiableList(tagEntries);
+    }
 }

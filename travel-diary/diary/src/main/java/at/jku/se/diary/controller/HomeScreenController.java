@@ -38,7 +38,7 @@ public class HomeScreenController implements Initializable {
     @FXML
     private TableColumn<DiaryEntry, String> locationColumn;
 
-
+    // Wieseo FXML hier?
     // Deletes the selected entry in the tableview
     @FXML
     void removeDiaryEntry(ActionEvent event) throws IOException {
