@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Ausflug Linz",
+    "notes": "Linz ist schön.",
+    "location": "Linz",
+    "date": "2022-05-03"
+  },
+  {
+    "title": "Wien ",
+    "notes": "Wien ist schön.",
+    "location": "Wien",
+    "date": "2022-05-04"
+  },
+  {
+    "title": "Wels",
+    "notes": "Wels ist nicht so schön.",
+    "location": "Wels",
+    "date": "2022-05-23"
+  }
+]
