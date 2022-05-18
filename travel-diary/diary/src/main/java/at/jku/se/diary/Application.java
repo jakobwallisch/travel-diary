@@ -32,6 +32,12 @@ public class Application extends javafx.application.Application {
             e.printStackTrace(System.err);
         }
 
+        try {
+            database.readTagsFromDatabase();
+        } catch (final IOException e) {
+//            e.printStackTrace(System.err);
+        }
+
         // Initialize our Application Singleton
         if (instance != null) {
             throw new IllegalStateException("expected Application to be instantiated only once");
