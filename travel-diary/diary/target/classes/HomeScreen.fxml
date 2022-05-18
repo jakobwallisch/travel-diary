@@ -40,7 +40,7 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <Button layoutX="476.0" layoutY="217.0" mnemonicParsing="false" onAction="#switchTagView" prefHeight="22.0" prefWidth="116.0" text="Add Tag">
+      <Button layoutX="476.0" layoutY="241.0" mnemonicParsing="false" onAction="#switchTagView" prefHeight="22.0" prefWidth="116.0" text="Add Tag">
          <font>
             <Font size="11.0" />
          </font>
