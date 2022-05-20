@@ -1,6 +1,5 @@
 package at.jku.se.diary.controller;
 
-import at.jku.se.diary.AlertBox;
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
 import javafx.beans.binding.Bindings;
