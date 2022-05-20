@@ -58,9 +58,6 @@ public class TagViewController implements Initializable {
 
     }
 
-
-
-
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));

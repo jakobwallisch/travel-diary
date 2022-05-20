@@ -81,10 +81,6 @@ public class CreateDiaryEntryController {
         newEntry.setNotes(diaryNotesTextfield.getText());
         newEntry.setDate(diaryDate.getValue());
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
-        root = loader.load();
-
-        HomeScreenController homeScreenController = loader.getController();
 
         //proofs if the title field is empty or not inkl. AlertBox
         if (diaryTitleTextfield.getText().isEmpty()){
@@ -107,17 +103,10 @@ public class CreateDiaryEntryController {
         if(!(imageView3.getImage() == null)){
             newEntry.setPathPicture3(imageView3.getImage().getUrl());
         }
-
-        homeScreenController.updateTableView(newEntry);
-
         //stores new entry in database
         Application.getInstance().getEntryDatabase().storeEntryInDatabase(newEntry);
 
-        //switch to Homescreen
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchToHomescreen(event);
 
     }
 

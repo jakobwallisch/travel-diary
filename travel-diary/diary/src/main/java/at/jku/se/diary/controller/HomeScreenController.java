@@ -2,6 +2,10 @@ package at.jku.se.diary.controller;
 
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,15 +13,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 
 public class HomeScreenController implements Initializable {
 
@@ -31,7 +37,6 @@ public class HomeScreenController implements Initializable {
     //TableView on Homescreen
     @FXML
     private TableView<DiaryEntry> tableView;
-
     @FXML
     private TableColumn<DiaryEntry, String> titleColumn;
     @FXML
@@ -39,20 +44,22 @@ public class HomeScreenController implements Initializable {
     @FXML
     private TableColumn<DiaryEntry, String> locationColumn;
 
-    // Wieseo FXML hier?
-    // Deletes the selected entry in the tableview
+    //for filtering
     @FXML
+    TextField titleFilterTextfield;
+    @FXML
+    TextField locationFilterTextfield;
+    @FXML
+    DatePicker startDatePicker;
+    @FXML
+    DatePicker endDatePicker;
+
+    @FXML //this annotation is needed
+    // Deletes the selected entry in the tableview
     void removeDiaryEntry(ActionEvent event) throws IOException {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         Application.getInstance().getEntryDatabase().deleteEntryInDatabase(tableView.getItems().get(selectedID));
-        tableView.getItems().remove(selectedID);
-    }
-
-
-
-    //the overview on the HomeScreen gets updated with new entries
-    public void updateTableView(DiaryEntry entry){
-        tableView.getItems().addAll(entry);
+        viewEntryController.switchToHomescreen(event);
     }
 
     // Get to the CreateDiaryEntry Screen - Method --- for the "zurück zum Homescreen" button
@@ -66,9 +73,9 @@ public class HomeScreenController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
+    //switches to the TagView window
     public void switchTagView(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
@@ -79,7 +86,6 @@ public class HomeScreenController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
 
@@ -114,8 +120,6 @@ public class HomeScreenController implements Initializable {
         loader.setLocation(getClass().getResource("/WebView.fxml"));
         root = loader.load();
 
-
-
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -123,16 +127,55 @@ public class HomeScreenController implements Initializable {
 
     }
 
-
-    //initialises the tableview with the entries which are stored in the database
+    //This window initialises the tableview on the HomeScreen
+    //also the filtering logic is stored in this method
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tableView.getItems().addAll(Application.getInstance().getEntryDatabase().getDiaryEntries());
-        titleColumn.setCellValueFactory(new PropertyValueFactory<DiaryEntry, String>("title"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<DiaryEntry, LocalDate>("date"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<DiaryEntry, String>("location"));
+
+        //creating a observableList for filtering purposes
+        ObservableList<DiaryEntry> list = FXCollections.observableArrayList(Application.getInstance().getEntryDatabase().getDiaryEntries());
+        //creating a filteredList with the items of the observableList for filtering purposes
+        FilteredList<DiaryEntry> filterList = new FilteredList<>(list);
+        //set the Items of the tableView
+        tableView.setItems(filterList);
+
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+
+        //initialises the datePicker fields
+        startDatePicker.setValue(LocalDate.of(2022, 01, 01));
+        endDatePicker.setValue(LocalDate.now());
+
+    //filtering logic
+        filterList.predicateProperty().bind(Bindings.createObjectBinding(()
+                        -> entry
+                        -> entry.getTitle().contains(titleFilterTextfield.getText())
+                        && entry.getLocation().contains(locationFilterTextfield.getText())
+                        && (((entry.getDate().isAfter(startDatePicker.getValue()))||entry.getDate().isEqual(startDatePicker.getValue()))
+                        && ((entry.getDate().isBefore(endDatePicker.getValue()))||(entry.getDate().isEqual(endDatePicker.getValue())))),
+
+
+                    titleFilterTextfield.textProperty(),
+                    locationFilterTextfield.textProperty(),
+                    startDatePicker.converterProperty(),
+                    endDatePicker.converterProperty()
+
+
+        ));
+
     }
 
-
+    //this method refreshes the datePicker fields
+    public void refreshDate(ActionEvent event) throws IOException{
+        titleFilterTextfield.setText("");
+        }
+    //resets the filter paramter to a default value
+    public void resetFilter(ActionEvent event) throws IOException{
+        titleFilterTextfield.setText("");
+        locationFilterTextfield.setText("");
+        startDatePicker.setValue(LocalDate.of(2021,12,01));
+        endDatePicker.setValue(LocalDate.now());
+    }
 }
 
