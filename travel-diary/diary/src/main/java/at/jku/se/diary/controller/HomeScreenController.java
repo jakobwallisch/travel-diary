@@ -1,5 +1,6 @@
 package at.jku.se.diary.controller;
 
+import at.jku.se.diary.AlertBox;
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
 import javafx.beans.binding.Bindings;
@@ -50,9 +51,12 @@ public class HomeScreenController implements Initializable {
     @FXML
     TextField locationFilterTextfield;
     @FXML
+    TextField notesFilterTextfield;
+    @FXML
     DatePicker startDatePicker;
     @FXML
     DatePicker endDatePicker;
+
 
     @FXML //this annotation is needed
     // Deletes the selected entry in the tableview
@@ -153,17 +157,15 @@ public class HomeScreenController implements Initializable {
                         -> entry.getTitle().contains(titleFilterTextfield.getText())
                         && entry.getLocation().contains(locationFilterTextfield.getText())
                         && (((entry.getDate().isAfter(startDatePicker.getValue()))||entry.getDate().isEqual(startDatePicker.getValue()))
-                        && ((entry.getDate().isBefore(endDatePicker.getValue()))||(entry.getDate().isEqual(endDatePicker.getValue())))),
-
+                        && ((entry.getDate().isBefore(endDatePicker.getValue()))||(entry.getDate().isEqual(endDatePicker.getValue()))))
+                        && entry.getNotes().contains(notesFilterTextfield.getText()),
 
                     titleFilterTextfield.textProperty(),
                     locationFilterTextfield.textProperty(),
                     startDatePicker.converterProperty(),
-                    endDatePicker.converterProperty()
-
-
+                    endDatePicker.converterProperty(),
+                    notesFilterTextfield.textProperty()
         ));
-
     }
 
     //this method refreshes the datePicker fields

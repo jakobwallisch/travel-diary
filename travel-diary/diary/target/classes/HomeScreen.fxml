@@ -52,6 +52,7 @@
       <DatePicker fx:id="startDatePicker" layoutX="349.0" layoutY="88.0" onAction="#refreshDate" promptText="From" />
       <DatePicker fx:id="endDatePicker" layoutX="547.0" layoutY="88.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
       <Button layoutX="737.0" layoutY="88.0" mnemonicParsing="false" onAction="#refreshDate" text="✓" />
-      <Button layoutX="12.0" layoutY="127.0" mnemonicParsing="false" onAction="#resetFilter" text="reset filters" />
+      <Button layoutX="12.0" layoutY="46.0" mnemonicParsing="false" onAction="#resetFilter" text="reset filters" />
+      <TextField fx:id="notesFilterTextfield" layoutX="12.0" layoutY="120.0" promptText="Notes filter" />
    </children>
 </AnchorPane>
