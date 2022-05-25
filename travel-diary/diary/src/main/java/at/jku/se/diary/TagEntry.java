@@ -4,7 +4,8 @@ public class TagEntry {
 
     private String tag;
     private String tagText;
-    private double rating;
+    private int rating;
+    private String starString;
 
     public String getTag() {
         return tag;
@@ -22,11 +23,19 @@ public class TagEntry {
         this.tagText = tagText;
     }
 
-    public double getRating() {
+    public String getStarString() {
+        return starString;
+    }
+
+    public void setStarString(String starString) {
+        this.starString = starString;
+    }
+
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 }

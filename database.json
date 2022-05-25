@@ -39,12 +39,12 @@
       {
         "tag": "Bar",
         "tagText": "text",
-        "rating": 5.0
+        "rating": 5
       },
       {
         "tag": "Pub",
         "tagText": "super Drunk",
-        "rating": 5.0
+        "rating": 5
       }
     ]
   },
@@ -57,30 +57,12 @@
       {
         "tag": "Bar",
         "tagText": "super drunk 4 stars",
-        "rating": 4.0
+        "rating": 4
       },
       {
         "tag": "Restaurant",
         "tagText": "puked",
-        "rating": 1.0
-      }
-    ]
-  },
-  {
-    "title": "title",
-    "notes": "nice day",
-    "location": "Batman",
-    "date": "2022-05-11",
-    "tagEntryArrayList": [
-      {
-        "tag": "Beach",
-        "tagText": "super wet",
-        "rating": 4.0
-      },
-      {
-        "tag": "Hotel",
-        "tagText": "clean",
-        "rating": 5.0
+        "rating": 1
       }
     ]
   },
@@ -93,12 +75,58 @@
       {
         "tag": "Beach",
         "tagText": "hot",
-        "rating": 4.0
+        "rating": 4
       },
       {
         "tag": "Pub",
         "tagText": "whisky sour",
-        "rating": 4.0
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "title": "Konzert ",
+    "notes": "war da.",
+    "location": "Tirol",
+    "date": "2022-05-04",
+    "pathPicture2": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/e4e0bdc7-6086-425f-9ca6-c7f7e1b09a87.jpg",
+    "tagEntryArrayList": [
+      {
+        "tag": "Pub",
+        "tagText": "sdfasdfs",
+        "rating": 3
+      },
+      {
+        "tag": "Beach",
+        "tagText": "sdfsf",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "title": "Trip to Rome",
+    "notes": "very old",
+    "location": "Rom",
+    "date": "2022-04-26",
+    "pathPicture1": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/ffd7e510-6192-414d-a6e8-bbef9a365d5a.jpg",
+    "tagEntryArrayList": [
+      {
+        "tag": "Restaurant",
+        "tagText": "Pizza gut",
+        "rating": 4,
+        "starString": "★★★★"
+      },
+      {
+        "tag": "Bar",
+        "tagText": "Cocktail lecker",
+        "rating": 5,
+        "starString": "★★★★★"
+      },
+      {
+        "tag": "Hotel",
+        "tagText": "laut",
+        "rating": 1,
+        "starString": "★"
       }
     ]
   }

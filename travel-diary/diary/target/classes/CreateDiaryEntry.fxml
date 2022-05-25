@@ -4,21 +4,23 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.CreateDiaryEntryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.CreateDiaryEntryController">
    <children>
       <Label layoutX="157.0" layoutY="24.0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="createDiaryEntryButton" layoutX="652.0" layoutY="463.0" mnemonicParsing="false" onAction="#createDiaryEntry" text="Create" />
-      <Button layoutX="29.0" layoutY="463.0" mnemonicParsing="false" onAction="#switchToHomescreen" text="Back to Homescreen" />
+      <Button fx:id="createDiaryEntryButton" layoutX="655.0" layoutY="526.0" mnemonicParsing="false" onAction="#createDiaryEntry" text="Create" />
+      <Button layoutX="31.0" layoutY="526.0" mnemonicParsing="false" onAction="#switchToHomescreen" text="Back to Homescreen" />
       <Label layoutX="31.0" layoutY="24.0" text="Create new diary entry:">
          <font>
             <Font name="MS Outlook" size="14.0" />
@@ -42,10 +44,22 @@
       <Button fx:id="btnDeletePicture1" layoutX="383.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Button fx:id="btnDeletePicture2" layoutX="473.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Button fx:id="btnDeletePicture3" layoutX="563.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Label layoutX="31.0" layoutY="277.0" text="Add Tag:" />
-      <ChoiceBox fx:id="tagChoiceBox" layoutX="29.0" layoutY="304.0" prefWidth="150.0" />
-      <TextField fx:id="tagTextfield" layoutX="190.0" layoutY="304.0" prefHeight="25.0" prefWidth="189.0" />
-      <Rating fx:id="tagRating" layoutX="398.0" layoutY="301.0" />
-      <Button fx:id="createDiaryEntryButton1" layoutX="577.0" layoutY="301.0" mnemonicParsing="false" onAction="#createTagEntry" prefHeight="32.0" prefWidth="125.0" text="Create tag entry" />
+      <Label layoutX="31.0" layoutY="330.0" text="Add Tag:" />
+      <ChoiceBox fx:id="tagChoiceBox" layoutX="30.0" layoutY="361.0" prefHeight="32.0" prefWidth="150.0" />
+      <TextField fx:id="tagTextfield" layoutX="184.0" layoutY="361.0" prefHeight="32.0" prefWidth="200.0" />
+      <Rating fx:id="tagRating" layoutX="386.0" layoutY="361.0" />
+      <Button fx:id="createDiaryEntryButton1" layoutX="577.0" layoutY="361.0" mnemonicParsing="false" onAction="#createTagEntry" prefHeight="32.0" prefWidth="117.0" text="Create tag entry" />
+      <TableView fx:id="tableView" layoutX="29.0" layoutY="397.0" prefHeight="121.0" prefWidth="546.0">
+         <columns>
+            <TableColumn fx:id="tagColumn" prefWidth="211.5" text="Tag" />
+            <TableColumn fx:id="textColumn" prefWidth="197.5" text="Text" />
+            <TableColumn fx:id="starsColumn" prefWidth="141.33322143554688" text="Stars" />
+         </columns>
+      </TableView>
+      <Button layoutX="577.0" layoutY="397.0" mnemonicParsing="false" onAction="#removeTagEntry" prefHeight="25.0" prefWidth="117.0" text="Delete Entry">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

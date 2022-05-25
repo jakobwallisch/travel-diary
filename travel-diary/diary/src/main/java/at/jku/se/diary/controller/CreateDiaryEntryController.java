@@ -4,6 +4,8 @@ import at.jku.se.diary.AlertBox;
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
 import at.jku.se.diary.TagEntry;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -75,6 +78,19 @@ public class CreateDiaryEntryController implements Initializable {
 
     @FXML
     private TextField tagTextfield;
+
+
+
+    //table View
+    @FXML
+    private TableView<TagEntry> tableView;
+    @FXML
+    private TableColumn<TagEntry, String> tagColumn;
+    @FXML
+    private TableColumn<TagEntry, String> textColumn;
+    @FXML
+    private TableColumn<TagEntry, String> starsColumn;
+
 
 
     private ArrayList<TagEntry> tagEntryArrayListController = new ArrayList<>();
@@ -235,7 +251,11 @@ public class CreateDiaryEntryController implements Initializable {
         TagEntry tagEntry = new TagEntry();
         tagEntry.setTagText(tagTextfield.getText());
         tagEntry.setTag(tag);
-        tagEntry.setRating(tagRating.getRating());
+        tagEntry.setRating((int)tagRating.getRating());
+        tagEntry.setStarString("");
+        for(int i = 0; i< tagEntry.getRating();i++) {
+            tagEntry.setStarString(tagEntry.getStarString() + '★');
+        }
 
         tagEntryArrayListController.add(tagEntry);
 
@@ -243,6 +263,22 @@ public class CreateDiaryEntryController implements Initializable {
         tagTextfield.clear();
         tagChoiceBox.setValue(null);
 
+        ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
+        tableView.setItems(list);
+
+        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
+        textColumn.setCellValueFactory(new PropertyValueFactory<>("tagText"));
+        starsColumn.setCellValueFactory(new PropertyValueFactory<>("starString"));
+
+
+    }
+
+
+    public void removeTagEntry(ActionEvent event) throws IOException {
+        int selectedID = tableView.getSelectionModel().getSelectedIndex();
+        tagEntryArrayListController.remove(selectedID);
+        ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
+        tableView.setItems(list);
 
     }
 
@@ -250,6 +286,10 @@ public class CreateDiaryEntryController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
         tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
+
+
+
+
 
 
     }
