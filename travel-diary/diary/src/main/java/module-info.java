@@ -5,6 +5,7 @@ module diary {
     requires java.desktop;
     requires com.google.gson;
     requires javafx.web;
+    requires org.controlsfx.controls;
 
     opens at.jku.se.diary;
     opens at.jku.se.diary.controller;

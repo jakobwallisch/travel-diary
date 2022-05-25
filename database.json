@@ -6,15 +6,100 @@
     "date": "2022-05-03"
   },
   {
-    "title": "Wien ",
-    "notes": "Wien ist schön.",
-    "location": "Wien",
-    "date": "2022-05-04"
-  },
-  {
     "title": "Wels",
     "notes": "Wels ist nicht so schön.",
     "location": "Wels",
     "date": "2022-05-23"
+  },
+  {
+    "title": "Linz Wien",
+    "notes": "super",
+    "location": "Linz",
+    "date": "2022-05-11",
+    "pathPicture1": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/20201007-_F8A9776b.jpg"
+  },
+  {
+    "title": "Graz",
+    "notes": "Supa",
+    "location": "Graz",
+    "date": "2022-04-06"
+  },
+  {
+    "title": "test x",
+    "notes": "",
+    "location": "",
+    "date": "2022-05-05"
+  },
+  {
+    "title": "yo is there a tag",
+    "notes": "",
+    "location": "Ufa",
+    "date": "2022-05-04",
+    "tagEntryArrayList": [
+      {
+        "tag": "Bar",
+        "tagText": "text",
+        "rating": 5.0
+      },
+      {
+        "tag": "Pub",
+        "tagText": "super Drunk",
+        "rating": 5.0
+      }
+    ]
+  },
+  {
+    "title": "Trip to funky tags",
+    "notes": "wow tags",
+    "location": "batman",
+    "date": "2022-05-04",
+    "tagEntryArrayList": [
+      {
+        "tag": "Bar",
+        "tagText": "super drunk 4 stars",
+        "rating": 4.0
+      },
+      {
+        "tag": "Restaurant",
+        "tagText": "puked",
+        "rating": 1.0
+      }
+    ]
+  },
+  {
+    "title": "title",
+    "notes": "nice day",
+    "location": "Batman",
+    "date": "2022-05-11",
+    "tagEntryArrayList": [
+      {
+        "tag": "Beach",
+        "tagText": "super wet",
+        "rating": 4.0
+      },
+      {
+        "tag": "Hotel",
+        "tagText": "clean",
+        "rating": 5.0
+      }
+    ]
+  },
+  {
+    "title": "trip to Rammstein",
+    "notes": "",
+    "location": "",
+    "date": "2022-05-26",
+    "tagEntryArrayList": [
+      {
+        "tag": "Beach",
+        "tagText": "hot",
+        "rating": 4.0
+      },
+      {
+        "tag": "Pub",
+        "tagText": "whisky sour",
+        "rating": 4.0
+      }
+    ]
   }
 ]
