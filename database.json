@@ -6,15 +6,128 @@
     "date": "2022-05-03"
   },
   {
-    "title": "Wien ",
-    "notes": "Wien ist schön.",
-    "location": "Wien",
-    "date": "2022-05-04"
-  },
-  {
     "title": "Wels",
     "notes": "Wels ist nicht so schön.",
     "location": "Wels",
     "date": "2022-05-23"
+  },
+  {
+    "title": "Linz Wien",
+    "notes": "super",
+    "location": "Linz",
+    "date": "2022-05-11",
+    "pathPicture1": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/20201007-_F8A9776b.jpg"
+  },
+  {
+    "title": "Graz",
+    "notes": "Supa",
+    "location": "Graz",
+    "date": "2022-04-06"
+  },
+  {
+    "title": "test x",
+    "notes": "",
+    "location": "",
+    "date": "2022-05-05"
+  },
+  {
+    "title": "yo is there a tag",
+    "notes": "",
+    "location": "Ufa",
+    "date": "2022-05-04",
+    "tagEntryArrayList": [
+      {
+        "tag": "Bar",
+        "tagText": "text",
+        "rating": 5
+      },
+      {
+        "tag": "Pub",
+        "tagText": "super Drunk",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "title": "Trip to funky tags",
+    "notes": "wow tags",
+    "location": "batman",
+    "date": "2022-05-04",
+    "tagEntryArrayList": [
+      {
+        "tag": "Bar",
+        "tagText": "super drunk 4 stars",
+        "rating": 4
+      },
+      {
+        "tag": "Restaurant",
+        "tagText": "puked",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "title": "trip to Rammstein",
+    "notes": "",
+    "location": "",
+    "date": "2022-05-26",
+    "tagEntryArrayList": [
+      {
+        "tag": "Beach",
+        "tagText": "hot",
+        "rating": 4
+      },
+      {
+        "tag": "Pub",
+        "tagText": "whisky sour",
+        "rating": 4
+      }
+    ]
+  },
+  {
+    "title": "Konzert ",
+    "notes": "war da.",
+    "location": "Tirol",
+    "date": "2022-05-04",
+    "pathPicture2": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/e4e0bdc7-6086-425f-9ca6-c7f7e1b09a87.jpg",
+    "tagEntryArrayList": [
+      {
+        "tag": "Pub",
+        "tagText": "sdfasdfs",
+        "rating": 3
+      },
+      {
+        "tag": "Beach",
+        "tagText": "sdfsf",
+        "rating": 5
+      }
+    ]
+  },
+  {
+    "title": "Trip to Rome",
+    "notes": "very old",
+    "location": "Rom",
+    "date": "2022-04-26",
+    "pathPicture1": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/ffd7e510-6192-414d-a6e8-bbef9a365d5a.jpg",
+    "tagEntryArrayList": [
+      {
+        "tag": "Restaurant",
+        "tagText": "Pizza gut",
+        "rating": 4,
+        "starString": "★★★★"
+      },
+      {
+        "tag": "Bar",
+        "tagText": "Cocktail lecker",
+        "rating": 5,
+        "starString": "★★★★★"
+      },
+      {
+        "tag": "Hotel",
+        "tagText": "laut",
+        "rating": 1,
+        "starString": "★"
+      }
+    ]
   }
 ]

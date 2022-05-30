@@ -6,10 +6,12 @@
 package at.jku.se.diary;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 
 /**
+ *
  * @author reinhold
  */
 
@@ -25,6 +27,16 @@ public class DiaryEntry {
     private String pathPicture1;
     private String pathPicture2;
     private String pathPicture3;
+
+    public ArrayList<TagEntry> getTagEntryArrayList() {
+        return tagEntryArrayList;
+    }
+
+    public void setTagEntryArrayList(ArrayList<TagEntry> tagEntryArrayList) {
+        this.tagEntryArrayList = tagEntryArrayList;
+    }
+
+    private ArrayList<TagEntry> tagEntryArrayList;
 
 
     public DiaryEntry() {
