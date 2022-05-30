@@ -3,6 +3,7 @@ package at.jku.se.diary.controller;
 import at.jku.se.diary.AlertBox;
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
+import at.jku.se.diary.DiaryEntryException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-
 
 
 public class CreateDiaryEntryController {
@@ -65,49 +65,54 @@ public class CreateDiaryEntryController {
     static private Scene scene;
     private Parent root;
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return diaryDate.getValue();
     }
 
     //create diary entry, store to XML-File and stores to the listview on the homescreen
     public void createDiaryEntry(ActionEvent event) throws IOException {
+        try {
+            //create new entry by calling the method createNewEntry(with parameters title, location, notes and date)
+            DiaryEntry newEntry = DiaryEntry.createNewEntry(diaryTitleTextfield.getText(), diaryLocationTextfield.getText(), diaryNotesTextfield.getText(), diaryDate.getValue());
 
-        DiaryEntry newEntry = new DiaryEntry();
+            //stores the URLs of the selected images
+            if (!(imageView1.getImage() == null)) {
+                newEntry.setPathPicture1(imageView1.getImage().getUrl());
+            }
+            if (!(imageView2.getImage() == null)) {
+                newEntry.setPathPicture2(imageView2.getImage().getUrl());
+            }
+            if (!(imageView3.getImage() == null)) {
+                newEntry.setPathPicture3(imageView3.getImage().getUrl());
+            }
+            //stores new entry in database
+            Application.getInstance().getEntryDatabase().storeEntryInDatabase(newEntry);
+            //switch to homescreen event is triggered
+            switchToHomescreen(event);
+        } catch (DiaryEntryException e) {
+            AlertBox.display("Error", e.getMessage());
+        }
 
         //Read data from FXML File
-        newEntry.setTitle(diaryTitleTextfield.getText());
+        //newEntry.setTitle(diaryTitleTextfield.getText());
 
-        newEntry.setLocation(diaryLocationTextfield.getText());
-        newEntry.setNotes(diaryNotesTextfield.getText());
-        newEntry.setDate(diaryDate.getValue());
+        //newEntry.setLocation(diaryLocationTextfield.getText());
+        //newEntry.setNotes(diaryNotesTextfield.getText());
+        //newEntry.setDate(diaryDate.getValue());
 
 
         //proofs if the title field is empty or not inkl. AlertBox
-        if (diaryTitleTextfield.getText().isEmpty()){
+        /*if (diaryTitleTextfield.getText().isEmpty()) {
             AlertBox.display("Error", "The title-field is empty!");
-            return;
+            return null;
         }
         //proofs if the date field is empty or not inkl. AlertBox
-        if (diaryDate.getValue() == null){
+        if (diaryDate.getValue() == null) {
             AlertBox.display("Error", "The date-field is empty!");
-            return;
+            return null;
         }
-
-        //stores the URLs of the selected images
-        if(!(imageView1.getImage() == null)){
-            newEntry.setPathPicture1(imageView1.getImage().getUrl());
-        }
-        if(!(imageView2.getImage() == null)){
-            newEntry.setPathPicture2(imageView2.getImage().getUrl());
-        }
-        if(!(imageView3.getImage() == null)){
-            newEntry.setPathPicture3(imageView3.getImage().getUrl());
-        }
-        //stores new entry in database
-        Application.getInstance().getEntryDatabase().storeEntryInDatabase(newEntry);
-
-        switchToHomescreen(event);
-
+        */
+        //switchToHomescreen(event);
     }
 
     // Get back to the Homescreen -Method
@@ -116,7 +121,7 @@ public class CreateDiaryEntryController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
         root = loader.load();
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -128,7 +133,7 @@ public class CreateDiaryEntryController {
     //create a file chooser object
     final FileChooser fileChooser = new FileChooser();
 
-    public void initialiseFileChooser(){
+    public void initialiseFileChooser() {
         //Set the title of the displayed file dialog
         fileChooser.setTitle("Foto auswählen");
 
@@ -137,62 +142,64 @@ public class CreateDiaryEntryController {
         fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
 
         //Gets the extension filters used in the displayed file dialog
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png","*.jpg", "*.jpeg", "*.jfif"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
 
     }
 
 
-    public void handleOpenPicture1(ActionEvent actionEvent){
+    public void handleOpenPicture1(ActionEvent actionEvent) {
 
         initialiseFileChooser();
 
         //Set the selected file or null if no file has been selected
         File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
 
-        if(file != null){
+        if (file != null) {
             imageView1.setImage(new Image(file.toURI().toString()));
-        }else {
+        } else {
             System.out.println("invalid file");
         }
     }
 
-    public void handleOpenPicture2(ActionEvent actionEvent){
+    public void handleOpenPicture2(ActionEvent actionEvent) {
 
         initialiseFileChooser();
 
         //Set the selected file or null if no file has been selected
         File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
 
-        if(file != null){
+        if (file != null) {
             imageView2.setImage(new Image(file.toURI().toString()));
-        }else {
+        } else {
             System.out.println("invalid file");
         }
     }
 
-    public void handleOpenPicture3(ActionEvent actionEvent){
+    public void handleOpenPicture3(ActionEvent actionEvent) {
 
         initialiseFileChooser();
 
         //Set the selected file or null if no file has been selected
         File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
 
-        if(file != null){
+        if (file != null) {
             imageView3.setImage(new Image(file.toURI().toString()));
-        }else {
+        } else {
             System.out.println("invalid file");
         }
 
     }
 
     // Methods to delete de selected picture from the image view
-    public void handleDeletePicture1(ActionEvent actionEvent){
-            imageView1.setImage(null);
+    public void handleDeletePicture1(ActionEvent actionEvent) {
+        imageView1.setImage(null);
     }
-    public void handleDeletePicture2(ActionEvent actionEvent){
+
+    public void handleDeletePicture2(ActionEvent actionEvent) {
         imageView2.setImage(null);
     }
-    public void handleDeletePicture3(ActionEvent actionEvent){
+
+    public void handleDeletePicture3(ActionEvent actionEvent) {
         imageView3.setImage(null);
     }
 

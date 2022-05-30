@@ -6,10 +6,10 @@
 package at.jku.se.diary;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 
 /**
- *
  * @author reinhold
  */
 
@@ -27,8 +27,33 @@ public class DiaryEntry {
     private String pathPicture3;
 
 
+    public DiaryEntry() {
+    }
 
-    public DiaryEntry(){}
+    public static DiaryEntry createNewEntry(String title, String location, String notes, LocalDate date) throws DiaryEntryException {
+        if(title == null || title.length() < 1) {
+            throw new DiaryEntryException("No title inserted!");
+        }
+
+        if(date == null){
+            throw new DiaryEntryException("No date inserted!");
+        }
+
+        if(location == null || location.length() < 1){
+            throw new DiaryEntryException("No location inserted!");
+        }
+
+        DiaryEntry newEntry = new DiaryEntry();
+        newEntry.setTitle(title);
+        newEntry.setLocation(location);
+        newEntry.setNotes(notes);
+        newEntry.setDate(date);
+        return newEntry;
+    }
+
+    public static void setPictures(){
+
+    }
 
     public String getTitle() {
         return title;
