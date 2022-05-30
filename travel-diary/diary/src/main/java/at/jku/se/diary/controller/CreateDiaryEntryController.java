@@ -1,10 +1,6 @@
 package at.jku.se.diary.controller;
 
-import at.jku.se.diary.AlertBox;
-import at.jku.se.diary.Application;
-import at.jku.se.diary.DiaryEntry;
-import at.jku.se.diary.DiaryEntryException;
-import at.jku.se.diary.TagEntry;
+import at.jku.se.diary.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -88,7 +84,6 @@ public class CreateDiaryEntryController implements Initializable {
     private TableColumn<TagEntry, String> textColumn;
     @FXML
     private TableColumn<TagEntry, String> starsColumn;
-
 
 
     private ArrayList<TagEntry> tagEntryArrayListController = new ArrayList<>();
@@ -221,9 +216,9 @@ public class CreateDiaryEntryController implements Initializable {
 
 
     //Method to create TagEntry and add it to tagEntryArrayListController
-    public void createTagEntry(ActionEvent event) throws IOException {
+    public void createTagEntry(ActionEvent event) throws IOException, TagEntryException {
         String tag = (String) tagChoiceBox.getValue();
-
+        //GUI abhängig, deshalb nicht in methode ausgelagert
         if (tag == null) {
             System.out.println("No Tag select");
             Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -232,14 +227,7 @@ public class CreateDiaryEntryController implements Initializable {
             a.show();
             return;
         }
-        TagEntry tagEntry = new TagEntry();
-        tagEntry.setTagText(tagTextfield.getText());
-        tagEntry.setTag(tag);
-        tagEntry.setRating((int)tagRating.getRating());
-        tagEntry.setStarString("");
-        for(int i = 0; i< tagEntry.getRating();i++) {
-            tagEntry.setStarString(tagEntry.getStarString() + '★');
-        }
+        TagEntry tagEntry = TagEntry.createNewTagEntry(tagTextfield.getText(), tag, (int) tagRating.getRating());
 
         tagEntryArrayListController.add(tagEntry);
 
