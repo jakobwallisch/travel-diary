@@ -65,7 +65,6 @@ public class CreateDiaryEntryController implements Initializable {
     @FXML
     private Button createDiaryEntryButton;
 
-    //Button TagEntry
     @FXML
     private ChoiceBox tagChoiceBox;
 
@@ -173,6 +172,7 @@ public class CreateDiaryEntryController implements Initializable {
         } else {
             System.out.println("invalid file");
         }
+
     }
 
     public void handleOpenPicture2(ActionEvent actionEvent) {
