@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -57,8 +58,9 @@ public class HomeScreenController implements Initializable {
     DatePicker endDatePicker;
 
 
-    @FXML //this annotation is needed
-    // Deletes the selected entry in the tableview
+    @FXML
+        //this annotation is needed
+        // Deletes the selected entry in the tableview
     void removeDiaryEntry(ActionEvent event) throws IOException {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         Application.getInstance().getEntryDatabase().deleteEntryInDatabase(tableView.getItems().get(selectedID));
@@ -150,32 +152,33 @@ public class HomeScreenController implements Initializable {
         startDatePicker.setValue(LocalDate.of(2022, 01, 01));
         endDatePicker.setValue(LocalDate.now());
 
-    //filtering logic
+        //filtering logic
         filterList.predicateProperty().bind(Bindings.createObjectBinding(()
                         -> entry
-                        -> entry.getTitle().contains(titleFilterTextfield.getText())
-                        && entry.getLocation().contains(locationFilterTextfield.getText())
-                        && (((entry.getDate().isAfter(startDatePicker.getValue()))||entry.getDate().isEqual(startDatePicker.getValue()))
-                        && ((entry.getDate().isBefore(endDatePicker.getValue()))||(entry.getDate().isEqual(endDatePicker.getValue()))))
-                        && entry.getNotes().contains(notesFilterTextfield.getText()),
+                        -> entry.getTitle().toLowerCase().contains(titleFilterTextfield.getText().toLowerCase())
+                        && entry.getLocation().toLowerCase().contains(locationFilterTextfield.getText().toLowerCase())
+                        && (((entry.getDate().isAfter(startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
+                        && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
+                        && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase()),
 
-                    titleFilterTextfield.textProperty(),
-                    locationFilterTextfield.textProperty(),
-                    startDatePicker.converterProperty(),
-                    endDatePicker.converterProperty(),
-                    notesFilterTextfield.textProperty()
+                titleFilterTextfield.textProperty(),
+                locationFilterTextfield.textProperty(),
+                startDatePicker.converterProperty(),
+                endDatePicker.converterProperty(),
+                notesFilterTextfield.textProperty()
         ));
     }
 
     //this method refreshes the datePicker fields
-    public void refreshDate(ActionEvent event) throws IOException{
+    public void refreshDate(ActionEvent event) throws IOException {
         titleFilterTextfield.setText("");
-        }
+    }
+
     //resets the filter paramter to a default value
-    public void resetFilter(ActionEvent event) throws IOException{
+    public void resetFilter(ActionEvent event) throws IOException {
         titleFilterTextfield.setText("");
         locationFilterTextfield.setText("");
-        startDatePicker.setValue(LocalDate.of(2021,12,01));
+        startDatePicker.setValue(LocalDate.of(2021, 12, 1));
         endDatePicker.setValue(LocalDate.now());
     }
 }

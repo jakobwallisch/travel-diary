@@ -1,9 +1,7 @@
 package at.jku.se.diary.controller;
 
-import at.jku.se.diary.AlertBox;
-import at.jku.se.diary.Application;
-import at.jku.se.diary.DiaryEntry;
-import at.jku.se.diary.TagEntry;
+import at.jku.se.diary.*;
+import at.jku.se.diary.exceptions.TagEntryException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +26,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-//import org.controlsfx.*;
 
 public class CreateDiaryEntryController implements Initializable {
 
@@ -90,7 +87,6 @@ public class CreateDiaryEntryController implements Initializable {
     private TableColumn<TagEntry, String> starsColumn;
 
 
-
     private ArrayList<TagEntry> tagEntryArrayListController = new ArrayList<>();
 
 
@@ -99,49 +95,36 @@ public class CreateDiaryEntryController implements Initializable {
     static private Scene scene;
     private Parent root;
 
-    public LocalDate getDate() {
+    public LocalDate getDate(){
         return diaryDate.getValue();
     }
 
     //create diary entry, store to XML-File and stores to the listview on the homescreen
     public void createDiaryEntry(ActionEvent event) throws IOException {
+        try {
+            //create new entry by calling the method createNewEntry(with parameters title, location, notes and date)
+            DiaryEntry newEntry = DiaryEntry.createNewEntry(diaryTitleTextfield.getText(), diaryLocationTextfield.getText(), diaryNotesTextfield.getText(), diaryDate.getValue(), tagEntryArrayListController);
 
-        DiaryEntry newEntry = new DiaryEntry();
+            //stores the URLs of the selected images
+            if (!(imageView1.getImage() == null)) {
+                newEntry.setPathPicture1(imageView1.getImage().getUrl());
+            }
+            if (!(imageView2.getImage() == null)) {
+                newEntry.setPathPicture2(imageView2.getImage().getUrl());
+            }
+            if (!(imageView3.getImage() == null)) {
+                newEntry.setPathPicture3(imageView3.getImage().getUrl());
+            }
+            //stores new entry in database
+            Application.getInstance().getEntryDatabase().storeEntryInDatabase(newEntry);
+            //switch to homescreen event is triggered
+            switchToHomescreen(event);
+        } catch (DiaryEntryException e) {
+            AlertBox.display("Error", e.getMessage());
+        }
 
         //Read data from FXML File
-        newEntry.setTitle(diaryTitleTextfield.getText());
-
-        newEntry.setLocation(diaryLocationTextfield.getText());
-        newEntry.setNotes(diaryNotesTextfield.getText());
-        newEntry.setDate(diaryDate.getValue());
-        newEntry.setTagEntryArrayList(tagEntryArrayListController);
-
-
-        //proofs if the title field is empty or not inkl. AlertBox
-        if (diaryTitleTextfield.getText().isEmpty()) {
-            AlertBox.display("Error", "The title-field is empty!");
-            return;
-        }
-        //proofs if the date field is empty or not inkl. AlertBox
-        if (diaryDate.getValue() == null) {
-            AlertBox.display("Error", "The date-field is empty!");
-            return;
-        }
-
-        //stores the URLs of the selected images
-        if (!(imageView1.getImage() == null)) {
-            newEntry.setPathPicture1(imageView1.getImage().getUrl());
-        }
-        if (!(imageView2.getImage() == null)) {
-            newEntry.setPathPicture2(imageView2.getImage().getUrl());
-        }
-        if (!(imageView3.getImage() == null)) {
-            newEntry.setPathPicture3(imageView3.getImage().getUrl());
-        }
-        //stores new entry in database
-        Application.getInstance().getEntryDatabase().storeEntryInDatabase(newEntry);
-
-        switchToHomescreen(event);
+        //newEntry.setTitle(diaryTitleTextfield.getText());
 
     }
 
@@ -228,16 +211,15 @@ public class CreateDiaryEntryController implements Initializable {
     public void handleDeletePicture2(ActionEvent actionEvent) {
         imageView2.setImage(null);
     }
-
-    public void handleDeletePicture3(ActionEvent actionEvent) {
+    public void handleDeletePicture3(ActionEvent actionEvent){
         imageView3.setImage(null);
     }
 
 
     //Method to create TagEntry and add it to tagEntryArrayListController
-    public void createTagEntry(ActionEvent event) throws IOException {
+    public void createTagEntry(ActionEvent event) throws IOException, TagEntryException {
         String tag = (String) tagChoiceBox.getValue();
-
+        //GUI abhängig, deshalb nicht in methode ausgelagert
         if (tag == null) {
             System.out.println("No Tag select");
             Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -246,14 +228,7 @@ public class CreateDiaryEntryController implements Initializable {
             a.show();
             return;
         }
-        TagEntry tagEntry = new TagEntry();
-        tagEntry.setTagText(tagTextfield.getText());
-        tagEntry.setTag(tag);
-        tagEntry.setRating((int)tagRating.getRating());
-        tagEntry.setStarString("");
-        for(int i = 0; i< tagEntry.getRating();i++) {
-            tagEntry.setStarString(tagEntry.getStarString() + '★');
-        }
+        TagEntry tagEntry = TagEntry.createNewTagEntry(tagTextfield.getText(), tag, (int) tagRating.getRating());
 
         tagEntryArrayListController.add(tagEntry);
 
