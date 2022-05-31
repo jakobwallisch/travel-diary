@@ -76,9 +76,9 @@ public class DiaryEntry {
         return false;
     }
     //iterates through the tagArrayList for filtering purposes
-    public boolean containsTagRatingFilter(ArrayList<TagEntry> arrayList, int rating){
+    public boolean containsTagRatingFilter(ArrayList<TagEntry> arrayList, int rating, String filterValue){
         for (TagEntry tag: arrayList) {
-            if (tag.getRating() == rating){
+            if ((tag.getRating() == rating) && (tag.getTag().equalsIgnoreCase(filterValue))){
                 return true;
             };
         }
