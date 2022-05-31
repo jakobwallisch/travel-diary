@@ -7,6 +7,14 @@ public class TagEntry {
     private int rating;
     private String starString;
 
+    public TagEntry(){};
+
+    public TagEntry(String tag, String tagText, int rating){
+        this.tag = tag;
+        this.tagText = tagText;
+        this.rating = rating;
+    }
+
     public static TagEntry createNewTagEntry(String tagText, String tag, int rating) throws TagEntryException{
         if(tag == null){
             throw new TagEntryException("No Tag selected!");

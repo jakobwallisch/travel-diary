@@ -156,10 +156,10 @@ public class HomeScreenController implements Initializable {
         filterList.predicateProperty().bind(Bindings.createObjectBinding(()
                         -> entry
                         -> entry.getTitle().toLowerCase().contains(titleFilterTextfield.getText().toLowerCase())
-                        && entry.getLocation().contains(locationFilterTextfield.getText())
+                        && entry.getLocation().toLowerCase().contains(locationFilterTextfield.getText().toLowerCase())
                         && (((entry.getDate().isAfter(startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
                         && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
-                        && entry.getNotes().contains(notesFilterTextfield.getText()),
+                        && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase()),
 
                 titleFilterTextfield.textProperty(),
                 locationFilterTextfield.textProperty(),

@@ -102,7 +102,7 @@ public class CreateDiaryEntryController implements Initializable {
     public void createDiaryEntry(ActionEvent event) throws IOException {
         try {
             //create new entry by calling the method createNewEntry(with parameters title, location, notes and date)
-            DiaryEntry newEntry = DiaryEntry.createNewEntry(diaryTitleTextfield.getText(), diaryLocationTextfield.getText(), diaryNotesTextfield.getText(), diaryDate.getValue());
+            DiaryEntry newEntry = DiaryEntry.createNewEntry(diaryTitleTextfield.getText(), diaryLocationTextfield.getText(), diaryNotesTextfield.getText(), diaryDate.getValue(), tagEntryArrayListController);
 
             //stores the URLs of the selected images
             if (!(imageView1.getImage() == null)) {

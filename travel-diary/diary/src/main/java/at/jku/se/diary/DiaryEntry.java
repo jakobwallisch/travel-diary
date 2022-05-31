@@ -36,13 +36,13 @@ public class DiaryEntry {
         this.tagEntryArrayList = tagEntryArrayList;
     }
 
-    private ArrayList<TagEntry> tagEntryArrayList;
+    private ArrayList<TagEntry> tagEntryArrayList = new ArrayList<>();
 
 
     public DiaryEntry() {
     }
 
-    public static DiaryEntry createNewEntry(String title, String location, String notes, LocalDate date) throws DiaryEntryException {
+    public static DiaryEntry createNewEntry(String title, String location, String notes, LocalDate date, ArrayList<TagEntry> tagEntryArrayList) throws DiaryEntryException {
         if(title == null || title.length() < 1) {
             throw new DiaryEntryException("No title inserted!");
         }
@@ -60,6 +60,7 @@ public class DiaryEntry {
         newEntry.setLocation(location);
         newEntry.setNotes(notes);
         newEntry.setDate(date);
+        newEntry.setTagEntryArrayList(tagEntryArrayList);
         return newEntry;
     }
 

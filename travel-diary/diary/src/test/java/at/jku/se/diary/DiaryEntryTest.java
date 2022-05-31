@@ -9,6 +9,7 @@ package at.jku.se.diary;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,16 +19,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class DiaryEntryTest {
 
     private final DiaryEntry e = new DiaryEntry();
+    private final ArrayList<TagEntry> tagEntryArrayList= new ArrayList<>();
     /**
      * Test of createDiaryEntry method, of class CreateDiaryEntryController by using method createNewEntry of class DiaryEntry.
      */
     @Test
     void TestCreateDiaryEntry() throws DiaryEntryException {
         assertThrows(DiaryEntryException.class, () -> {
-            DiaryEntry.createNewEntry(null, null, null, null);
+            DiaryEntry.createNewEntry(null, null, null, null, null);
         });
+        tagEntryArrayList.add(new TagEntry("Bar", "Schöne Strandbar", 4));
+        tagEntryArrayList.add(new TagEntry("Hotel", "schöne Hotelbar", 5));
         LocalDate date = LocalDate.of(2022, 05, 25);
-        DiaryEntry e = DiaryEntry.createNewEntry("Test", "Linz", "hallo", date);
+        DiaryEntry e = DiaryEntry.createNewEntry("Test", "Linz", "hallo", date, tagEntryArrayList);
         assertEquals(e.getTitle(), "Test");
         assertEquals(e.getLocation(), "Linz");
         assertEquals(e.getNotes(), "hallo");
@@ -42,6 +46,8 @@ class DiaryEntryTest {
         e.setPathPicture3(picture3);
         assertEquals(e.getPathPicture3(), "pic3");
     }
+
+
 
     @Test
     void TestRemoveDiaryEntry(){

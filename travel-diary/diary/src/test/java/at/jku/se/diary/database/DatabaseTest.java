@@ -2,11 +2,10 @@ package at.jku.se.diary.database;
 
 import at.jku.se.diary.DiaryEntry;
 import at.jku.se.diary.DiaryEntryException;
-import org.assertj.core.internal.bytebuddy.asm.Advice;
+import at.jku.se.diary.TagEntry;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-import javax.swing.text.html.HTML;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +14,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseTest {
+
+    private static ArrayList<TagEntry> tagEntryList = new ArrayList<>();
+
+    @BeforeAll
+    static void fillTagEntryList(){
+        tagEntryList.add(new TagEntry("Bar", "gutes Bier", 4));
+        tagEntryList.add(new TagEntry("Hotel", "gutes Bett", 5));
+    }
 
     @Test
     void storeTagInDatabaseTest() {
@@ -69,18 +76,18 @@ class DatabaseTest {
         LocalDate date = LocalDate.of(2022, 05, 25);
         Database database = new Database();
         assertDoesNotThrow(() -> {
-            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry1", "Linz", "notes", date);
+            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry1", "Linz", "notes", date, tagEntryList);
             database.storeEntryInDatabase(e1);
         });
         assertDoesNotThrow(() -> {
-            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry2", "Linz", "notes", date);
+            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry2", "Linz", "notes", date, tagEntryList);
             database.storeEntryInDatabase(e1);
         });
         assertDoesNotThrow(() -> {
             database.readEntriesFromDatabase();
         });
         assertThrows(DiaryEntryException.class, () -> {
-            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry3", "Linz", "notes", null);
+            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry3", "Linz", "notes", null, tagEntryList);
         });
     }
 
@@ -101,11 +108,11 @@ class DatabaseTest {
         LocalDate date = LocalDate.of(2022, 05, 25);
         Database database = new Database();
         assertDoesNotThrow(() -> {
-            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry1", "Linz", "notes", date);
+            DiaryEntry e1 = DiaryEntry.createNewEntry("Entry1", "Linz", "notes", date, tagEntryList);
             database.storeEntryInDatabase(e1);
         });
         assertDoesNotThrow(() -> {
-            DiaryEntry e2 = DiaryEntry.createNewEntry("Entry2", "Linz", "notes", date);
+            DiaryEntry e2 = DiaryEntry.createNewEntry("Entry2", "Linz", "notes", date, tagEntryList);
             database.storeEntryInDatabase(e2);
         });
         assertEquals(database.getTitlesOfAllDiaryEntries().get(0), "Entry1");
@@ -129,7 +136,7 @@ class DatabaseTest {
         Database database = new Database();
         LocalDate date = LocalDate.of(2022, 05, 26);
         assertDoesNotThrow(() -> {
-            DiaryEntry e = DiaryEntry.createNewEntry("Test1", "Linz", "notes", date);
+            DiaryEntry e = DiaryEntry.createNewEntry("Test1", "Linz", "notes", date, tagEntryList);
             database.storeEntryInDatabase(e);
         });
        assertEquals(database.getLocationsOfDiaryEntries().get(0), "Linz");
@@ -145,4 +152,6 @@ class DatabaseTest {
         assertEquals(database.getTagEntries().get(0), "Hotel");
         assertEquals(database.getTagEntries().get(1), "Strand");
     }
+
+
 }
