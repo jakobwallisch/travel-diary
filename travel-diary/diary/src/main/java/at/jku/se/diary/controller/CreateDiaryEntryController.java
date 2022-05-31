@@ -1,6 +1,7 @@
 package at.jku.se.diary.controller;
 
 import at.jku.se.diary.*;
+import at.jku.se.diary.exceptions.TagEntryException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

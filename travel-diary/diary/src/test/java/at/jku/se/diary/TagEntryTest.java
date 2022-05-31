@@ -1,5 +1,6 @@
 package at.jku.se.diary;
 
+import at.jku.se.diary.exceptions.TagEntryException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

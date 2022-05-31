@@ -1,5 +1,7 @@
 package at.jku.se.diary;
 
+import at.jku.se.diary.exceptions.TagEntryException;
+
 public class TagEntry {
 
     private String tag;
@@ -15,7 +17,7 @@ public class TagEntry {
         this.rating = rating;
     }
 
-    public static TagEntry createNewTagEntry(String tagText, String tag, int rating) throws TagEntryException{
+    public static TagEntry createNewTagEntry(String tagText, String tag, int rating) throws TagEntryException {
         if(tag == null){
             throw new TagEntryException("No Tag selected!");
         }

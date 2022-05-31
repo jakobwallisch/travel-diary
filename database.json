@@ -3,32 +3,37 @@
     "title": "Ausflug Linz",
     "notes": "Linz ist schön.",
     "location": "Linz",
-    "date": "2022-05-03"
+    "date": "2022-05-03",
+    "tagEntryArrayList": []
   },
   {
     "title": "Wels",
     "notes": "Wels ist nicht so schön.",
     "location": "Wels",
-    "date": "2022-05-23"
+    "date": "2022-05-23",
+    "tagEntryArrayList": []
   },
   {
     "title": "Linz Wien",
     "notes": "super",
     "location": "Linz",
     "date": "2022-05-11",
-    "pathPicture1": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/20201007-_F8A9776b.jpg"
+    "pathPicture1": "file:/C:/Users/franz/Desktop/Fotos%20Portrait/20201007-_F8A9776b.jpg",
+    "tagEntryArrayList": []
   },
   {
     "title": "Graz",
     "notes": "Supa",
     "location": "Graz",
-    "date": "2022-04-06"
+    "date": "2022-04-06",
+    "tagEntryArrayList": []
   },
   {
     "title": "test x",
     "notes": "",
     "location": "",
-    "date": "2022-05-05"
+    "date": "2022-05-05",
+    "tagEntryArrayList": []
   },
   {
     "title": "yo is there a tag",
@@ -127,6 +132,54 @@
         "tagText": "laut",
         "rating": 1,
         "starString": "★"
+      }
+    ]
+  },
+  {
+    "title": "Testversuch",
+    "notes": "TEST",
+    "location": "Linz",
+    "date": "2022-05-26",
+    "tagEntryArrayList": [
+      {
+        "tag": "Pub",
+        "tagText": "Bier",
+        "rating": 5,
+        "starString": "★★★★★"
+      }
+    ]
+  },
+  {
+    "title": "ervus",
+    "notes": "asd",
+    "location": "Linz",
+    "date": "2022-05-16",
+    "tagEntryArrayList": [
+      {
+        "tag": "Beach",
+        "tagText": "cooler Strand",
+        "rating": 5,
+        "starString": "★★★★★"
+      }
+    ]
+  },
+  {
+    "title": "TESTETS",
+    "notes": "",
+    "location": "Wien",
+    "date": "2022-05-11",
+    "tagEntryArrayList": [
+      {
+        "tag": "Restaurant",
+        "tagText": "restaurant",
+        "rating": 5,
+        "starString": "★★★★★"
+      },
+      {
+        "tag": "Hotel",
+        "tagText": "hotel",
+        "rating": 5,
+        "starString": "★★★★★"
       }
     ]
   }
