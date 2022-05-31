@@ -22,6 +22,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
+import java.awt.desktop.AppForegroundListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -74,6 +75,8 @@ public class ViewEntryController implements Initializable {
     static DiaryEntry entryToView;
 
     private WebViewController webViewController = new WebViewController();
+
+    private BigImageViewController bigImageViewController = new BigImageViewController();
 
     private ArrayList<TagEntry> tagEntryArrayListController = new ArrayList<>();
 
@@ -231,7 +234,7 @@ public class ViewEntryController implements Initializable {
 
     }
 
-    public void handleOpenPicture1(ActionEvent actionEvent) {
+    public void handleOpenPicture1(ActionEvent actionEvent) throws IOException {
 
         initialiseFileChooser();
 
@@ -241,12 +244,21 @@ public class ViewEntryController implements Initializable {
         if (file != null) {
             imageView1.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture1(imageView1.getImage().getUrl());
-        } else {
+
+            for (DiaryEntry e: Application.getInstance().getEntryDatabase().getDiaryEntries()) {
+
+                if (e.getTitle().equalsIgnoreCase(entryToView.getTitle())){
+                    Application.getInstance().getEntryDatabase().deleteEntryInDatabase(e);
+                    Application.getInstance().getEntryDatabase().storeEntryInDatabase(entryToView);
+                }
+            }
+        }
+         else {
             System.out.println("invalid file");
         }
     }
 
-    public void handleOpenPicture2(ActionEvent actionEvent) {
+    public void handleOpenPicture2(ActionEvent actionEvent) throws IOException {
 
         initialiseFileChooser();
 
@@ -256,12 +268,20 @@ public class ViewEntryController implements Initializable {
         if (file != null) {
             imageView2.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture2(imageView2.getImage().getUrl());
+
+            for (DiaryEntry e: Application.getInstance().getEntryDatabase().getDiaryEntries()) {
+
+                if (e.getTitle().equalsIgnoreCase(entryToView.getTitle())){
+                    Application.getInstance().getEntryDatabase().deleteEntryInDatabase(e);
+                    Application.getInstance().getEntryDatabase().storeEntryInDatabase(entryToView);
+                }
+            }
         } else {
             System.out.println("invalid file");
         }
     }
 
-    public void handleOpenPicture3(ActionEvent actionEvent) {
+    public void handleOpenPicture3(ActionEvent actionEvent) throws IOException {
 
         initialiseFileChooser();
 
@@ -271,10 +291,66 @@ public class ViewEntryController implements Initializable {
         if (file != null) {
             imageView3.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture3(imageView3.getImage().getUrl());
+
+            for (DiaryEntry e: Application.getInstance().getEntryDatabase().getDiaryEntries()) {
+
+                if (e.getTitle().equalsIgnoreCase(entryToView.getTitle())){
+                    Application.getInstance().getEntryDatabase().deleteEntryInDatabase(e);
+                    Application.getInstance().getEntryDatabase().storeEntryInDatabase(entryToView);
+                }
+            }
         } else {
             System.out.println("invalid file");
         }
 
+    }
+
+    //switch to the big ImageView
+    public void viewImage3(ActionEvent event) throws IOException {
+
+        //sets the picture to view
+        bigImageViewController.setImageToView(imageView3.getImage());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/BigImageView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    //switch to the big ImageView
+    public void viewImage2(ActionEvent event) throws IOException {
+
+        //sets the picture to view
+        bigImageViewController.setImageToView(imageView2.getImage());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/BigImageView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    //switch to the big ImageView
+    public void viewImage1(ActionEvent event) throws IOException {
+
+        //sets the picture to view
+        bigImageViewController.setImageToView(imageView1.getImage());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/BigImageView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

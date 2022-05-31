@@ -75,8 +75,6 @@ public class CreateDiaryEntryController implements Initializable {
     @FXML
     private TextField tagTextfield;
 
-
-
     //table View
     @FXML
     private TableView<TagEntry> tableView;
@@ -256,6 +254,7 @@ public class CreateDiaryEntryController implements Initializable {
         tableView.setItems(list);
 
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -57,7 +57,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="734.0" layoutY="68.0" mnemonicParsing="false" onAction="#resetFilter" prefHeight="30.0" prefWidth="87.0" text="reset filters">
+      <Button layoutX="717.0" layoutY="68.0" mnemonicParsing="false" onAction="#resetFilter" prefHeight="30.0" prefWidth="105.0" text="reset filters">
          <font>
             <Font size="14.0" />
          </font></Button>
