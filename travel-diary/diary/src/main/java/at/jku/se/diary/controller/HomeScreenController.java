@@ -63,6 +63,7 @@ public class HomeScreenController implements Initializable {
     private ChoiceBox tagChoiceBox;
 
 
+
     @FXML
         //this annotation is needed
         // Deletes the selected entry in the tableview
