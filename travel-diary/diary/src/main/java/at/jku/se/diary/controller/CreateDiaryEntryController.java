@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
@@ -35,7 +36,7 @@ public class CreateDiaryEntryController implements Initializable {
     @FXML
     TextField diaryLocationTextfield;
     @FXML
-    TextField diaryNotesTextfield;
+    HTMLEditor diaryNotesTextfield;
     @FXML
     DatePicker diaryDate;
 
@@ -103,7 +104,7 @@ public class CreateDiaryEntryController implements Initializable {
     public void createDiaryEntry(ActionEvent event) throws IOException {
         try {
             //create new entry by calling the method createNewEntry(with parameters title, location, notes and date)
-            DiaryEntry newEntry = DiaryEntry.createNewEntry(diaryTitleTextfield.getText(), diaryLocationTextfield.getText(), diaryNotesTextfield.getText(), diaryDate.getValue(), tagEntryArrayListController);
+            DiaryEntry newEntry = DiaryEntry.createNewEntry(diaryTitleTextfield.getText(), diaryLocationTextfield.getText(), diaryNotesTextfield.getHtmlText(), diaryDate.getValue(), tagEntryArrayListController);
 
             //stores the URLs of the selected images
             if (!(imageView1.getImage() == null)) {

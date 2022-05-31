@@ -10,9 +10,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.CreateDiaryEntryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.CreateDiaryEntryController">
    <children>
       <Label layoutX="157.0" layoutY="24.0">
          <font>
@@ -33,17 +34,16 @@
       <Label layoutX="31.0" layoutY="164.0" text="Location:" />
       <TextField fx:id="diaryLocationTextfield" layoutX="116.0" layoutY="160.0" />
       <Label layoutX="304.0" layoutY="69.0" text="Notes:" />
-      <TextField fx:id="diaryNotesTextfield" alignment="TOP_LEFT" layoutX="358.0" layoutY="65.0" prefHeight="121.0" prefWidth="232.0" />
-      <Button fx:id="btnOpenPicture1" layoutX="358.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleOpenPicture1" text="+" />
-      <ImageView fx:id="imageView1" fitHeight="53.0" fitWidth="73.0" layoutX="347.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnOpenPicture2" layoutX="448.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleOpenPicture2" text="+" />
-      <ImageView fx:id="imageView2" fitHeight="53.0" fitWidth="73.0" layoutX="436.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnOpenPicture3" layoutX="538.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleOpenPicture3" text="+" />
-      <ImageView fx:id="imageView3" fitHeight="53.0" fitWidth="73.0" layoutX="527.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="383.0" layoutY="200.0" text="Press +/ - to add/ delete a picture" />
-      <Button fx:id="btnDeletePicture1" layoutX="383.0" layoutY="233.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Button fx:id="btnDeletePicture2" layoutX="473.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Button fx:id="btnDeletePicture3" layoutX="563.0" layoutY="234.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnOpenPicture1" layoutX="367.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleOpenPicture1" text="+" />
+      <ImageView fx:id="imageView1" fitHeight="53.0" fitWidth="73.0" layoutX="356.0" layoutY="679.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnOpenPicture2" layoutX="457.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleOpenPicture2" text="+" />
+      <ImageView fx:id="imageView2" fitHeight="53.0" fitWidth="73.0" layoutX="445.0" layoutY="679.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnOpenPicture3" layoutX="547.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleOpenPicture3" text="+" />
+      <ImageView fx:id="imageView3" fitHeight="53.0" fitWidth="73.0" layoutX="536.0" layoutY="679.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="392.0" layoutY="602.0" text="Press +/ - to add/ delete a picture" />
+      <Button fx:id="btnDeletePicture1" layoutX="392.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnDeletePicture2" layoutX="482.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnDeletePicture3" layoutX="572.0" layoutY="635.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
       <Label layoutX="31.0" layoutY="330.0" text="Add Tag:" />
       <ChoiceBox fx:id="tagChoiceBox" layoutX="30.0" layoutY="361.0" prefHeight="32.0" prefWidth="150.0" />
       <TextField fx:id="tagTextfield" layoutX="184.0" layoutY="361.0" prefHeight="32.0" prefWidth="200.0" />
@@ -61,5 +61,6 @@
             <Font size="11.0" />
          </font>
       </Button>
+      <HTMLEditor fx:id="diaryNotesTextfield" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="345.0" layoutY="65.0" prefHeight="265.0" prefWidth="618.0" />
    </children>
 </AnchorPane>

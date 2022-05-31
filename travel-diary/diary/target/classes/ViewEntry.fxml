@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
 <?import org.controlsfx.control.Rating?>
 
 <AnchorPane prefHeight="775.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.ViewEntryController">
@@ -18,46 +19,41 @@
             <Font name="MS Outlook" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="227.0" text="Date:">
+      <Label layoutX="34.0" layoutY="107.0" text="Date:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="dateOfTitleToView" layoutX="133.0" layoutY="227.0" prefHeight="20.0" prefWidth="195.0">
+      <Label fx:id="dateOfTitleToView" layoutX="133.0" layoutY="107.0" prefHeight="20.0" prefWidth="195.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="265.0" text="Location:">
+      <Label layoutX="34.0" layoutY="145.0" text="Location:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="locationOfTitleToView" layoutX="133.0" layoutY="265.0" prefHeight="20.0" prefWidth="195.0">
+      <Label fx:id="locationOfTitleToView" layoutX="133.0" layoutY="145.0" prefHeight="20.0" prefWidth="195.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="306.0" text="Notes:">
+      <Label layoutX="34.0" layoutY="186.0" text="Notes:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="notesOfTitleToView" alignment="TOP_LEFT" layoutX="133.0" layoutY="306.0" prefHeight="65.0" prefWidth="195.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="imageView1" fitHeight="132.0" fitWidth="175.0" layoutX="522.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageView3" fitHeight="132.0" fitWidth="175.0" layoutX="639.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imageView2" fitHeight="132.0" fitWidth="175.0" layoutX="398.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView1" fitHeight="132.0" fitWidth="175.0" layoutX="781.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView3" fitHeight="132.0" fitWidth="175.0" layoutX="782.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageView2" fitHeight="132.0" fitWidth="175.0" layoutX="780.0" layoutY="617.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="backToHomescreenEntryView" layoutX="34.0" layoutY="723.0" mnemonicParsing="false" onAction="#switchToHomescreen" text="Back to Homescreen" />
       <Button fx:id="deleteEntryTableViewBtn" layoutX="315.0" layoutY="724.0" mnemonicParsing="false" onAction="#removeDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Delete Entry">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button layoutX="581.0" layoutY="724.0" mnemonicParsing="false" onAction="#switchToWebView" prefHeight="22.0" prefWidth="116.0" text="View on Map">
+      <Button layoutX="470.0" layoutY="724.0" mnemonicParsing="false" onAction="#switchToWebView" prefHeight="22.0" prefWidth="116.0" text="View on Map">
          <font>
             <Font size="11.0" />
          </font>
@@ -69,7 +65,7 @@
             <TableColumn fx:id="starsColumn" prefWidth="149.0" text="Stars" />
          </columns>
       </TableView>
-      <Button layoutX="602.0" layoutY="559.0" mnemonicParsing="false" onAction="#removeTagEntry" prefHeight="25.0" prefWidth="74.0" text="Delete Tag">
+      <Button layoutX="583.0" layoutY="526.0" mnemonicParsing="false" onAction="#removeTagEntry" prefHeight="25.0" prefWidth="74.0" text="Delete Tag">
          <font>
             <Font size="11.0" />
          </font>
@@ -79,12 +75,13 @@
       <TextField fx:id="tagTextfield" layoutX="188.0" layoutY="459.0" prefHeight="32.0" prefWidth="200.0" />
       <Rating fx:id="tagRating" layoutX="390.0" layoutY="459.0" />
       <Button fx:id="createDiaryEntryButton1" layoutX="586.0" layoutY="461.0" mnemonicParsing="false" onAction="#createTagEntry" prefHeight="28.0" prefWidth="106.0" text="Create tag entry" />
-      <Label layoutX="520.0" layoutY="212.0" text="Press +/ - to add/ delete a picture" />
-      <Button fx:id="btnOpenPicture2" layoutX="328.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleOpenPicture2" text="+" />
-      <Button fx:id="btnDeletePicture2" layoutX="353.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Button fx:id="btnOpenPicture1" layoutX="453.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleOpenPicture1" text="+" />
-      <Button fx:id="btnDeletePicture1" layoutX="478.0" layoutY="294.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Button fx:id="btnOpenPicture3" layoutX="832.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleOpenPicture3" text="+" />
-      <Button fx:id="btnDeletePicture3" layoutX="857.0" layoutY="134.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Label layoutX="782.0" layoutY="298.0" text="Press +/ - to add/ delete a picture" />
+      <Button fx:id="btnOpenPicture2" layoutX="710.0" layoutY="671.0" mnemonicParsing="false" onAction="#handleOpenPicture2" text="+" />
+      <Button fx:id="btnDeletePicture2" layoutX="735.0" layoutY="671.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnOpenPicture1" layoutX="712.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleOpenPicture1" text="+" />
+      <Button fx:id="btnDeletePicture1" layoutX="737.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnOpenPicture3" layoutX="712.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleOpenPicture3" text="+" />
+      <Button fx:id="btnDeletePicture3" layoutX="737.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <HTMLEditor fx:id="notesOfEntryToView" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="109.0" layoutY="186.0" prefHeight="211.0" prefWidth="557.0" />
    </children>
 </AnchorPane>

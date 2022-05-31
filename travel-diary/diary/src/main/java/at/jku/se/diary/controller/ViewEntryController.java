@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
@@ -41,7 +42,7 @@ public class ViewEntryController implements Initializable {
     @FXML
     private Label locationOfTitleToView;
     @FXML
-    private Label notesOfTitleToView;
+    private HTMLEditor notesOfEntryToView;
 
     //tableView with Columns
     @FXML
@@ -120,7 +121,7 @@ public class ViewEntryController implements Initializable {
         titleOfEntry.setText(entryToView.getTitle());
         dateOfTitleToView.setText(entryToView.getDate().toString());
         locationOfTitleToView.setText(entryToView.getLocation());
-        notesOfTitleToView.setText(entryToView.getNotes());
+        notesOfEntryToView.setHtmlText(entryToView.getNotes());
 
         if (!(entryToView.getPathPicture1() == null)){
             imageView1.setImage(new Image(entryToView.getPathPicture1()));
