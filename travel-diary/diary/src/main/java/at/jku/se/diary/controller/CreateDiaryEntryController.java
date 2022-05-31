@@ -261,10 +261,5 @@ public class CreateDiaryEntryController implements Initializable {
         tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
         tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
 
-
-
-
-
-
     }
 }

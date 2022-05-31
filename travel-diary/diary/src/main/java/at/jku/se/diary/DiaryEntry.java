@@ -65,6 +65,17 @@ public class DiaryEntry {
         return newEntry;
     }
 
+
+    //iterates through the tagArrayList for filtering purposes
+    public boolean containsTagFilter(ArrayList<TagEntry> arrayList, String filterValue){
+        for (TagEntry tag: arrayList) {
+            if (tag.getTag().equalsIgnoreCase(filterValue)){
+                return true;
+            };
+        }
+        return false;
+    }
+
     public static void setPictures(){
 
     }

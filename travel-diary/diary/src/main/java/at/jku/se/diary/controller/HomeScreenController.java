@@ -2,6 +2,7 @@ package at.jku.se.diary.controller;
 
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
+import at.jku.se.diary.TagEntry;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,16 +14,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -44,6 +43,8 @@ public class HomeScreenController implements Initializable {
     private TableColumn<DiaryEntry, LocalDate> dateColumn;
     @FXML
     private TableColumn<DiaryEntry, String> locationColumn;
+    @FXML
+    private ChoiceBox tagChoiceBox;
 
     //for filtering
     @FXML
@@ -151,6 +152,10 @@ public class HomeScreenController implements Initializable {
         //initialises the datePicker fields
         startDatePicker.setValue(LocalDate.of(2022, 01, 01));
         endDatePicker.setValue(LocalDate.now());
+        //initialises tagChoiceBox
+        tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
+        tagChoiceBox.setValue("all");
+        tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
 
         //filtering logic
         filterList.predicateProperty().bind(Bindings.createObjectBinding(()
@@ -159,13 +164,15 @@ public class HomeScreenController implements Initializable {
                         && entry.getLocation().toLowerCase().contains(locationFilterTextfield.getText().toLowerCase())
                         && (((entry.getDate().isAfter(startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
                         && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
-                        && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase()),
+                        && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase())
+                        && (entry.containsTagFilter(entry.getTagEntryArrayList(), tagChoiceBox.getValue().toString())) || (tagChoiceBox.getValue().equals("all")),
 
                 titleFilterTextfield.textProperty(),
                 locationFilterTextfield.textProperty(),
                 startDatePicker.converterProperty(),
                 endDatePicker.converterProperty(),
-                notesFilterTextfield.textProperty()
+                notesFilterTextfield.textProperty(),
+                tagChoiceBox.converterProperty()
         ));
     }
 
@@ -180,6 +187,8 @@ public class HomeScreenController implements Initializable {
         locationFilterTextfield.setText("");
         startDatePicker.setValue(LocalDate.of(2021, 12, 1));
         endDatePicker.setValue(LocalDate.now());
+        tagChoiceBox.setValue("all");
+        refreshDate(event);
     }
 }
 

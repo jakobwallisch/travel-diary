@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.HomeScreenController">
+<AnchorPane prefHeight="584.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.HomeScreenController">
    <children>
-      <Button layoutX="645.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchToCreateDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Create Entry">
+      <Button layoutX="648.0" layoutY="325.0" mnemonicParsing="false" onAction="#switchToCreateDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Create Entry">
          <font>
             <Font size="11.0" />
          </font></Button>
@@ -20,39 +21,41 @@
             <Font name="MS Outlook" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="11.0" layoutY="176.0" prefHeight="319.0" prefWidth="613.0">
+      <TableView fx:id="tableView" layoutX="11.0" layoutY="243.0" prefHeight="319.0" prefWidth="613.0">
         <columns>
           <TableColumn fx:id="titleColumn" prefWidth="211.5" text="Titel" />
           <TableColumn fx:id="dateColumn" prefWidth="197.5" text="Date" />
             <TableColumn fx:id="locationColumn" prefWidth="203.0" text="Location" />
         </columns>
       </TableView>
-      <Button fx:id="deleteEntryTableViewBtn" layoutX="645.0" layoutY="291.0" mnemonicParsing="false" onAction="#removeDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Delete Entry">
+      <Button fx:id="deleteEntryTableViewBtn" layoutX="648.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Delete Entry">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button fx:id="viewEntryTableView" layoutX="645.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchToViewEntry" prefHeight="22.0" prefWidth="116.0" text="View Entry">
+      <Button fx:id="viewEntryTableView" layoutX="648.0" layoutY="394.0" mnemonicParsing="false" onAction="#switchToViewEntry" prefHeight="22.0" prefWidth="116.0" text="View Entry">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button fx:id="switchToWebViewBtn" layoutX="645.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToWebView" prefHeight="22.0" prefWidth="116.0" text="View on Map">
+      <Button fx:id="switchToWebViewBtn" layoutX="648.0" layoutY="427.0" mnemonicParsing="false" onAction="#switchToWebView" prefHeight="22.0" prefWidth="116.0" text="View on Map">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button layoutX="645.0" layoutY="391.0" mnemonicParsing="false" onAction="#switchTagView" prefHeight="22.0" prefWidth="116.0" text="Add Tag">
+      <Button layoutX="648.0" layoutY="458.0" mnemonicParsing="false" onAction="#switchTagView" prefHeight="22.0" prefWidth="116.0" text="Add Tag">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
       <TextField fx:id="titleFilterTextfield" layoutX="11.0" layoutY="70.0" promptText="Title filter" />
-      <TextField fx:id="locationFilterTextfield" layoutX="180.0" layoutY="70.0" promptText="Location filter" />
-      <DatePicker fx:id="startDatePicker" layoutX="348.0" layoutY="70.0" onAction="#refreshDate" promptText="From" />
-      <DatePicker fx:id="endDatePicker" layoutX="546.0" layoutY="70.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
-      <Button layoutX="736.0" layoutY="70.0" mnemonicParsing="false" onAction="#refreshDate" text="✓" />
-      <Button layoutX="11.0" layoutY="141.0" mnemonicParsing="false" onAction="#resetFilter" text="reset filters" />
+      <TextField fx:id="locationFilterTextfield" layoutX="11.0" layoutY="135.0" promptText="Location filter" />
+      <DatePicker fx:id="startDatePicker" layoutX="192.0" layoutY="70.0" onAction="#refreshDate" promptText="From" />
+      <DatePicker fx:id="endDatePicker" layoutX="192.0" layoutY="102.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
+      <Button layoutX="338.0" layoutY="135.0" mnemonicParsing="false" onAction="#refreshDate" text="✓" />
+      <Button layoutX="11.0" layoutY="177.0" mnemonicParsing="false" onAction="#resetFilter" text="reset filters" />
       <TextField fx:id="notesFilterTextfield" layoutX="11.0" layoutY="102.0" promptText="Notes filter" />
+      <ChoiceBox fx:id="tagChoiceBox" layoutX="474.0" layoutY="70.0" prefWidth="150.0" />
+      <Label layoutX="410.0" layoutY="74.0" text="Tag filter:" />
    </children>
 </AnchorPane>
