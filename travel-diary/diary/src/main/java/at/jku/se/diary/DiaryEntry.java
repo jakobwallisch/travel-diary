@@ -75,6 +75,15 @@ public class DiaryEntry {
         }
         return false;
     }
+    //iterates through the tagArrayList for filtering purposes
+    public boolean containsTagRatingFilter(ArrayList<TagEntry> arrayList, int rating){
+        for (TagEntry tag: arrayList) {
+            if (tag.getRating() == rating){
+                return true;
+            };
+        }
+        return false;
+    }
 
     public static void setPictures(){
 

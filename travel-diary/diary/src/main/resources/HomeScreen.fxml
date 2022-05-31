@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 
 <AnchorPane prefHeight="584.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.HomeScreenController">
    <children>
@@ -53,9 +54,10 @@
       <DatePicker fx:id="startDatePicker" layoutX="192.0" layoutY="70.0" onAction="#refreshDate" promptText="From" />
       <DatePicker fx:id="endDatePicker" layoutX="192.0" layoutY="102.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
       <Button layoutX="338.0" layoutY="135.0" mnemonicParsing="false" onAction="#refreshDate" text="✓" />
-      <Button layoutX="11.0" layoutY="177.0" mnemonicParsing="false" onAction="#resetFilter" text="reset filters" />
+      <Button layoutX="11.0" layoutY="194.0" mnemonicParsing="false" onAction="#resetFilter" text="reset filters" />
       <TextField fx:id="notesFilterTextfield" layoutX="11.0" layoutY="102.0" promptText="Notes filter" />
       <ChoiceBox fx:id="tagChoiceBox" layoutX="474.0" layoutY="70.0" prefWidth="150.0" />
       <Label layoutX="410.0" layoutY="74.0" text="Tag filter:" />
+      <Rating fx:id="tagRating" layoutX="648.0" layoutY="67.0" prefHeight="0.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
