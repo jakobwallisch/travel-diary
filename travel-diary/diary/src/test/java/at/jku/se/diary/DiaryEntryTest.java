@@ -6,6 +6,7 @@
  */
 package at.jku.se.diary;
 
+import at.jku.se.diary.exceptions.DiaryEntryException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

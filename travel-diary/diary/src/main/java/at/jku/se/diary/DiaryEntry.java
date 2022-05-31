@@ -5,9 +5,10 @@
  */
 package at.jku.se.diary;
 
+import at.jku.se.diary.exceptions.DiaryEntryException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 /**

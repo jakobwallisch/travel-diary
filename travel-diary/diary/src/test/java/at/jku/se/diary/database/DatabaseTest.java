@@ -1,7 +1,7 @@
 package at.jku.se.diary.database;
 
 import at.jku.se.diary.DiaryEntry;
-import at.jku.se.diary.DiaryEntryException;
+import at.jku.se.diary.exceptions.DiaryEntryException;
 import at.jku.se.diary.TagEntry;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
