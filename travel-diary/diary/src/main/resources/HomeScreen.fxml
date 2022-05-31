@@ -11,53 +11,62 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane prefHeight="584.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.HomeScreenController">
+<AnchorPane prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.HomeScreenController">
    <children>
-      <Button layoutX="648.0" layoutY="325.0" mnemonicParsing="false" onAction="#switchToCreateDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Create Entry">
+      <Button layoutX="873.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToCreateDiaryEntry" prefHeight="30.0" prefWidth="134.0" text="Create Entry 🎨">
          <font>
-            <Font size="11.0" />
+            <Font size="14.0" />
          </font></Button>
-      <Label alignment="CENTER" layoutY="14.0" prefHeight="28.0" prefWidth="775.0" text="Diary Entries">
+      <Label alignment="CENTER" layoutY="14.0" prefHeight="28.0" prefWidth="1024.0" text="Diary Entries">
          <font>
             <Font name="MS Outlook" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="11.0" layoutY="243.0" prefHeight="319.0" prefWidth="613.0">
+      <TableView fx:id="tableView" layoutX="11.0" layoutY="219.0" prefHeight="489.0" prefWidth="840.0">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="211.5" text="Titel" />
-          <TableColumn fx:id="dateColumn" prefWidth="197.5" text="Date" />
-            <TableColumn fx:id="locationColumn" prefWidth="203.0" text="Location" />
+          <TableColumn fx:id="titleColumn" prefWidth="353.0" text="Titel" />
+          <TableColumn fx:id="dateColumn" prefWidth="202.0" text="Date" />
+            <TableColumn fx:id="locationColumn" prefWidth="284.0" text="Location" />
         </columns>
       </TableView>
-      <Button fx:id="deleteEntryTableViewBtn" layoutX="648.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeDiaryEntry" prefHeight="22.0" prefWidth="116.0" text="Delete Entry">
+      <Button fx:id="deleteEntryTableViewBtn" layoutX="873.0" layoutY="403.0" mnemonicParsing="false" onAction="#removeDiaryEntry" prefHeight="30.0" prefWidth="134.0" text="Delete Entry ❌">
          <font>
-            <Font size="11.0" />
+            <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="viewEntryTableView" layoutX="648.0" layoutY="394.0" mnemonicParsing="false" onAction="#switchToViewEntry" prefHeight="22.0" prefWidth="116.0" text="View Entry">
+      <Button fx:id="viewEntryTableView" layoutX="873.0" layoutY="447.0" mnemonicParsing="false" onAction="#switchToViewEntry" prefHeight="30.0" prefWidth="134.0" text="View Entry 📋">
          <font>
-            <Font size="11.0" />
+            <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="switchToWebViewBtn" layoutX="648.0" layoutY="427.0" mnemonicParsing="false" onAction="#switchToWebView" prefHeight="22.0" prefWidth="116.0" text="View on Map">
+      <Button fx:id="switchToWebViewBtn" alignment="CENTER" contentDisplay="TOP" layoutX="873.0" layoutY="572.0" mnemonicParsing="false" onAction="#switchToWebView" prefHeight="30.0" prefWidth="134.0" text="View on Map 📍">
          <font>
-            <Font size="11.0" />
+            <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="648.0" layoutY="458.0" mnemonicParsing="false" onAction="#switchTagView" prefHeight="22.0" prefWidth="116.0" text="Add Tag">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="873.0" layoutY="527.0" mnemonicParsing="false" onAction="#switchTagView" prefHeight="30.0" prefWidth="134.0" text="Add Tag 📁">
          <font>
-            <Font size="11.0" />
+            <Font size="14.0" />
          </font>
       </Button>
       <TextField fx:id="titleFilterTextfield" layoutX="11.0" layoutY="70.0" promptText="Title filter" />
-      <TextField fx:id="locationFilterTextfield" layoutX="11.0" layoutY="135.0" promptText="Location filter" />
-      <DatePicker fx:id="startDatePicker" layoutX="192.0" layoutY="70.0" onAction="#refreshDate" promptText="From" />
-      <DatePicker fx:id="endDatePicker" layoutX="192.0" layoutY="102.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
-      <Button layoutX="338.0" layoutY="135.0" mnemonicParsing="false" onAction="#refreshDate" text="✓" />
-      <Button layoutX="11.0" layoutY="194.0" mnemonicParsing="false" onAction="#resetFilter" text="reset filters" />
-      <TextField fx:id="notesFilterTextfield" layoutX="11.0" layoutY="102.0" promptText="Notes filter" />
-      <ChoiceBox fx:id="tagChoiceBox" layoutX="474.0" layoutY="70.0" prefWidth="150.0" />
-      <Label layoutX="410.0" layoutY="74.0" text="Tag filter:" />
-      <Rating fx:id="tagRating" layoutX="648.0" layoutY="67.0" prefHeight="0.0" prefWidth="150.0" />
+      <TextField fx:id="locationFilterTextfield" layoutX="394.0" layoutY="70.0" promptText="Location filter" />
+      <DatePicker fx:id="startDatePicker" layoutX="11.0" layoutY="131.0" onAction="#refreshDate" promptText="From" />
+      <DatePicker fx:id="endDatePicker" layoutX="203.0" layoutY="131.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
+      <Button layoutX="751.0" layoutY="176.0" mnemonicParsing="false" onAction="#refreshDate" text="apply ✓">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="734.0" layoutY="68.0" mnemonicParsing="false" onAction="#resetFilter" prefHeight="30.0" prefWidth="87.0" text="reset filters">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <TextField fx:id="notesFilterTextfield" layoutX="203.0" layoutY="70.0" promptText="Notes filter" />
+      <ChoiceBox fx:id="tagChoiceBox" layoutX="467.0" layoutY="131.0" prefWidth="150.0" />
+      <Label layoutX="394.0" layoutY="134.0" text="Tag filter:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Rating fx:id="tagRating" layoutX="646.0" layoutY="128.0" prefHeight="0.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
