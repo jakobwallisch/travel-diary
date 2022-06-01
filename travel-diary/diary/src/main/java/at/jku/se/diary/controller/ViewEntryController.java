@@ -101,6 +101,7 @@ public class ViewEntryController implements Initializable {
         entryToView.setNotes(notesOfEntryToView.getHtmlText());
         entryToView.setDate(dateOfTitleToView.getValue());
         entryToView.setLocation(locationOfTitleToView.getText());
+        entryToView.setTagEntryArrayList(tagEntryArrayListController);
         Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
@@ -201,7 +202,9 @@ public class ViewEntryController implements Initializable {
         }
         TagEntry tagEntry = TagEntry.createNewTagEntry(tagTextfield.getText(), tag, (int) tagRating.getRating());
 
+        tagEntryArrayListController = entryToView.getTagEntryArrayList();
         tagEntryArrayListController.add(tagEntry);
+        //tagEntryArrayListController.add(tagEntry);
 
         tagRating.setRating(2.0);
         tagTextfield.clear();
@@ -347,6 +350,7 @@ public class ViewEntryController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 
 }
 
