@@ -197,12 +197,12 @@ public class HomeScreenController implements Initializable {
         titleFilterTextfield.setText("");
     }
 
-    //resets the filter paramter to a default value
+    //resets the filter parameter to a default value
     public void resetFilter(ActionEvent event) throws IOException {
         titleFilterTextfield.setText("");
         locationFilterTextfield.setText("");
         startDatePicker.setValue(LocalDate.of(2021, 12, 1));
-        endDatePicker.setValue(LocalDate.now());
+        endDatePicker.setValue(LocalDate.of(2022,8,01));
         tagChoiceBox.setValue("all");
         tagRating.setRating(0);
         tagTextTextfield.setText("");

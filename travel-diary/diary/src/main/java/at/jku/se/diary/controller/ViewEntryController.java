@@ -39,9 +39,11 @@ public class ViewEntryController implements Initializable {
     @FXML
     private Label titleOfEntry;
     @FXML
-    private Label dateOfTitleToView;
+    private TextField titleOfEntryTextfield;
     @FXML
-    private Label locationOfTitleToView;
+    private DatePicker dateOfTitleToView;
+    @FXML
+    private TextField locationOfTitleToView;
     @FXML
     private HTMLEditor notesOfEntryToView;
 
@@ -88,10 +90,17 @@ public class ViewEntryController implements Initializable {
         this.entryToView = entryToView;
     }
 
+    public void switchToEditEntry(ActionEvent event) throws IOException{
+
+    }
+
+
     // Get back to the Homescreen -Method
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
         entryToView.setNotes(notesOfEntryToView.getHtmlText());
+        entryToView.setDate(dateOfTitleToView.getValue());
+        entryToView.setLocation(locationOfTitleToView.getText());
         Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
@@ -125,7 +134,8 @@ public class ViewEntryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleOfEntry.setText(entryToView.getTitle());
-        dateOfTitleToView.setText(entryToView.getDate().toString());
+        titleOfEntryTextfield.setText(entryToView.getTitle());
+        dateOfTitleToView.setValue(entryToView.getDate());
         locationOfTitleToView.setText(entryToView.getLocation());
         notesOfEntryToView.setHtmlText(entryToView.getNotes());
 
