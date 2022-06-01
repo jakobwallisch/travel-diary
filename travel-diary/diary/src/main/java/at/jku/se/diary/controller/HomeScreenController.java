@@ -158,25 +158,28 @@ public class HomeScreenController implements Initializable {
 
         //initialises the datePicker fields
         startDatePicker.setValue(LocalDate.of(2022, 01, 01));
-        endDatePicker.setValue(LocalDate.now());
+        endDatePicker.setValue(LocalDate.of(2022,8,01));
         //initialises tagChoiceBox
         tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
         tagChoiceBox.setValue("all");
         tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
         //initialises tagRating
         tagRating.setRating(0);
+        //initialise tagTextField
+        tagTextTextfield.setText("");
 
         //filtering logic
         filterList.predicateProperty().bind(Bindings.createObjectBinding(()
                         -> entry
                         -> entry.getTitle().toLowerCase().contains(titleFilterTextfield.getText().toLowerCase())
+                        && ((entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText().toLowerCase()))|| tagTextTextfield.getText().equalsIgnoreCase(""))
                         && entry.getLocation().toLowerCase().contains(locationFilterTextfield.getText().toLowerCase())
                         && (((entry.getDate().isAfter(startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
                         && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
                         && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase())
                         && ((entry.containsTagFilter(entry.getTagEntryArrayList(), tagChoiceBox.getValue().toString())) || (tagChoiceBox.getValue().equals("all")))
                         && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString())) || (tagRating.getRating() == 0)),
-                        //&& (entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText())),
+
 
                 titleFilterTextfield.textProperty(),
                 locationFilterTextfield.textProperty(),
@@ -184,8 +187,8 @@ public class HomeScreenController implements Initializable {
                 endDatePicker.converterProperty(),
                 notesFilterTextfield.textProperty(),
                 tagChoiceBox.converterProperty(),
-                tagRating.ratingProperty()
-                //tagTextTextfield.textProperty()
+                tagRating.ratingProperty(),
+                tagTextTextfield.textProperty()
         ));
     }
 

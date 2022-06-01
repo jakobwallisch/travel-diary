@@ -87,10 +87,13 @@ public class DiaryEntry {
 
     //iterates through the tagArrayList for filtering purposes
     public boolean containsTagTextFilter(ArrayList<TagEntry> arrayList,String filterValue){
-        for (TagEntry tag: arrayList) {
-            if ((tag.getTagText().toLowerCase().contains(filterValue.toLowerCase()))){
-                return true;
-            };
+        if (!arrayList.isEmpty()) {
+
+            for (TagEntry tag : arrayList) {
+                if ((tag.getTagText().toLowerCase().contains(filterValue.toLowerCase()))) {
+                    return true;
+                }
+            }
         }
         return false;
     }
