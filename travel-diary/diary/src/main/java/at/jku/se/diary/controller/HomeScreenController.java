@@ -175,8 +175,8 @@ public class HomeScreenController implements Initializable {
                         && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
                         && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase())
                         && ((entry.containsTagFilter(entry.getTagEntryArrayList(), tagChoiceBox.getValue().toString())) || (tagChoiceBox.getValue().equals("all")))
-                        && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString())) || (tagRating.getRating() == 0))
-                        && (entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText())),
+                        && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString())) || (tagRating.getRating() == 0)),
+                        //&& (entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText())),
 
                 titleFilterTextfield.textProperty(),
                 locationFilterTextfield.textProperty(),
@@ -184,8 +184,8 @@ public class HomeScreenController implements Initializable {
                 endDatePicker.converterProperty(),
                 notesFilterTextfield.textProperty(),
                 tagChoiceBox.converterProperty(),
-                tagRating.ratingProperty(),
-                tagTextTextfield.textProperty()
+                tagRating.ratingProperty()
+                //tagTextTextfield.textProperty()
         ));
     }
 
@@ -202,6 +202,7 @@ public class HomeScreenController implements Initializable {
         endDatePicker.setValue(LocalDate.now());
         tagChoiceBox.setValue("all");
         tagRating.setRating(0);
+        tagTextTextfield.setText("");
         refreshDate(event);
     }
 }

@@ -244,9 +244,8 @@ public class ViewEntryController implements Initializable {
         if (file != null) {
             imageView1.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture1(imageView1.getImage().getUrl());
-
-            }
-         else {
+            Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
+        } else {
             System.out.println("invalid file");
         }
     }
@@ -261,6 +260,7 @@ public class ViewEntryController implements Initializable {
         if (file != null) {
             imageView2.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture2(imageView2.getImage().getUrl());
+            Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
 
 
         } else {
@@ -278,6 +278,7 @@ public class ViewEntryController implements Initializable {
         if (file != null) {
             imageView3.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture3(imageView3.getImage().getUrl());
+            Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
 
 
         } else {

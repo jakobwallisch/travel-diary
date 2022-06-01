@@ -168,6 +168,7 @@ public class CreateDiaryEntryController implements Initializable {
 
         if (file != null) {
             imageView1.setImage(new Image(file.toURI().toString()));
+
         } else {
             System.out.println("invalid file");
         }

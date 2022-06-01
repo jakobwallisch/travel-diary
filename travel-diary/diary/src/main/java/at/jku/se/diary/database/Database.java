@@ -68,6 +68,28 @@ public class Database {
         }
     }
 
+    public void updateEntryInDatabase(DiaryEntry entry) throws IOException{
+
+        DiaryEntry newEntry = entry;
+
+        for (DiaryEntry e: diaryEntries) {
+            if (e.getTitle().equalsIgnoreCase(newEntry.getTitle())){
+                deleteEntryInDatabase(e);
+                storeEntryInDatabase(newEntry);
+
+                Gson json = new GsonBuilder()
+                        .setPrettyPrinting()
+                        .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                        .create();
+
+                try (final FileWriter fw = new FileWriter(database)) { // make sure FileWriter is closed when leaving scope
+                    json.toJson(diaryEntries, fw);
+                }
+                return;
+            }
+        }
+    }
+
     public void deleteTagInDatabase(String tag) throws IOException {
 
         tagEntries.remove(tag);
