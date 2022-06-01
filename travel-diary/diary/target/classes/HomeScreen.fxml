@@ -49,24 +49,25 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="titleFilterTextfield" layoutX="11.0" layoutY="70.0" promptText="Title filter" />
+      <TextField fx:id="titleFilterTextfield" layoutX="11.0" layoutY="70.0" prefHeight="25.0" prefWidth="174.0" promptText="Title filter" />
       <TextField fx:id="locationFilterTextfield" layoutX="394.0" layoutY="70.0" promptText="Location filter" />
-      <DatePicker fx:id="startDatePicker" layoutX="11.0" layoutY="131.0" onAction="#refreshDate" promptText="From" />
-      <DatePicker fx:id="endDatePicker" layoutX="203.0" layoutY="131.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
-      <Button layoutX="751.0" layoutY="176.0" mnemonicParsing="false" onAction="#refreshDate" text="apply ✓">
+      <DatePicker fx:id="startDatePicker" layoutX="11.0" layoutY="106.0" onAction="#refreshDate" promptText="From" />
+      <DatePicker fx:id="endDatePicker" layoutX="203.0" layoutY="106.0" onAction="#refreshDate" prefHeight="25.0" prefWidth="174.0" promptText="To" />
+      <Button layoutX="629.0" layoutY="169.0" mnemonicParsing="false" onAction="#refreshDate" text="apply ✓">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="734.0" layoutY="68.0" mnemonicParsing="false" onAction="#resetFilter" prefHeight="30.0" prefWidth="87.0" text="reset filters">
+      <Button layoutX="746.0" layoutY="167.0" mnemonicParsing="false" onAction="#resetFilter" prefHeight="30.0" prefWidth="105.0" text="reset filters">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <TextField fx:id="notesFilterTextfield" layoutX="203.0" layoutY="70.0" promptText="Notes filter" />
-      <ChoiceBox fx:id="tagChoiceBox" layoutX="467.0" layoutY="131.0" prefWidth="150.0" />
-      <Label layoutX="394.0" layoutY="134.0" text="Tag filter:">
+      <TextField fx:id="notesFilterTextfield" layoutX="203.0" layoutY="70.0" prefHeight="25.0" prefWidth="174.0" promptText="Notes filter" />
+      <ChoiceBox fx:id="tagChoiceBox" layoutX="14.0" layoutY="169.0" prefWidth="150.0" />
+      <Label layoutX="14.0" layoutY="142.0" text="Tag filter:">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Rating fx:id="tagRating" layoutX="646.0" layoutY="128.0" prefHeight="0.0" prefWidth="150.0" />
+      <Rating fx:id="tagRating" layoutX="394.0" layoutY="166.0" prefHeight="0.0" prefWidth="150.0" />
+      <TextField fx:id="tagTextTextfield" layoutX="203.0" layoutY="169.0" promptText="Structured info filter" />
    </children>
 </AnchorPane>

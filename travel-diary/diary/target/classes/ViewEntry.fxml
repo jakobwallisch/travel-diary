@@ -85,12 +85,15 @@
             <Font size="14.0" />
          </font></Button>
       <Label layoutX="33.0" layoutY="210.0" text="Press +/ - to add/ delete a picture" />
-      <Button fx:id="btnOpenPicture2" layoutX="223.0" layoutY="577.0" mnemonicParsing="false" onAction="#handleOpenPicture2" text="+" />
-      <Button fx:id="btnDeletePicture2" layoutX="248.0" layoutY="577.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Button fx:id="btnOpenPicture1" layoutX="223.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleOpenPicture1" text="+" />
-      <Button fx:id="btnDeletePicture1" layoutX="248.0" layoutY="433.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
-      <Button fx:id="btnOpenPicture3" layoutX="223.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleOpenPicture3" text="+" />
-      <Button fx:id="btnDeletePicture3" layoutX="248.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnOpenPicture2" layoutX="221.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleOpenPicture2" text="+" />
+      <Button fx:id="btnDeletePicture2" layoutX="246.0" layoutY="561.0" mnemonicParsing="false" onAction="#handleDeletePicture2" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnOpenPicture1" layoutX="223.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleOpenPicture1" text="+" />
+      <Button fx:id="btnDeletePicture1" layoutX="248.0" layoutY="418.0" mnemonicParsing="false" onAction="#handleDeletePicture1" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <Button fx:id="btnOpenPicture3" layoutX="222.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleOpenPicture3" text="+" />
+      <Button fx:id="btnDeletePicture3" layoutX="247.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleDeletePicture3" prefHeight="25.0" prefWidth="25.0" text="-" />
       <HTMLEditor fx:id="notesOfEntryToView" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="383.0" layoutY="85.0" prefHeight="256.0" prefWidth="631.0" />
+      <Button layoutX="214.0" layoutY="297.0" mnemonicParsing="false" onAction="#viewImage3" prefHeight="22.0" prefWidth="67.0" text="show 👁" />
+      <Button layoutX="215.0" layoutY="450.0" mnemonicParsing="false" onAction="#viewImage1" prefHeight="22.0" prefWidth="67.0" text="show 👁" />
+      <Button layoutX="213.0" layoutY="592.0" mnemonicParsing="false" onAction="#viewImage2" prefHeight="22.0" prefWidth="67.0" text="show 👁" />
    </children>
 </AnchorPane>

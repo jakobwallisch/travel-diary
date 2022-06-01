@@ -61,6 +61,8 @@ public class HomeScreenController implements Initializable {
     private Rating tagRating;
     @FXML
     private ChoiceBox tagChoiceBox;
+    @FXML
+    private TextField tagTextTextfield;
 
 
 
@@ -173,7 +175,8 @@ public class HomeScreenController implements Initializable {
                         && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
                         && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase())
                         && ((entry.containsTagFilter(entry.getTagEntryArrayList(), tagChoiceBox.getValue().toString())) || (tagChoiceBox.getValue().equals("all")))
-                        && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString())) || (tagRating.getRating() == 0)),
+                        && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString())) || (tagRating.getRating() == 0))
+                        && (entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText())),
 
                 titleFilterTextfield.textProperty(),
                 locationFilterTextfield.textProperty(),
@@ -181,7 +184,8 @@ public class HomeScreenController implements Initializable {
                 endDatePicker.converterProperty(),
                 notesFilterTextfield.textProperty(),
                 tagChoiceBox.converterProperty(),
-                tagRating.ratingProperty()
+                tagRating.ratingProperty(),
+                tagTextTextfield.textProperty()
         ));
     }
 
