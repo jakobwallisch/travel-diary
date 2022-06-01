@@ -243,8 +243,6 @@ public class CreateDiaryEntryController implements Initializable {
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
         textColumn.setCellValueFactory(new PropertyValueFactory<>("tagText"));
         starsColumn.setCellValueFactory(new PropertyValueFactory<>("starString"));
-
-
     }
 
 
@@ -253,7 +251,6 @@ public class CreateDiaryEntryController implements Initializable {
         tagEntryArrayListController.remove(selectedID);
         ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
         tableView.setItems(list);
-
     }
 
 

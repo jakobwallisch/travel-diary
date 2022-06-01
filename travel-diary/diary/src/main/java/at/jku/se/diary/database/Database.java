@@ -1,9 +1,12 @@
 package at.jku.se.diary.database;
 
+import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
+import at.jku.se.diary.TagEntry;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import javafx.scene.control.Alert;
 
 import java.io.File;
 import java.io.FileReader;
@@ -91,6 +94,21 @@ public class Database {
     }
 
     public void deleteTagInDatabase(String tag) throws IOException {
+
+/*
+        for (DiaryEntry e: Application.getInstance().getEntryDatabase().getDiaryEntries()) {
+            for (TagEntry t: e.getTagEntryArrayList()) {
+                if(t.getTag().equalsIgnoreCase(tag)){
+                    Alert a = new Alert(Alert.AlertType.INFORMATION );
+                    a.setContentText("This tag cannot be deleted because it is still used by an entry!");
+                    a.setTitle("Error");
+                    a.show();
+                    return;
+                }
+            }
+        }
+
+ */
 
         tagEntries.remove(tag);
 

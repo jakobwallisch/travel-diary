@@ -80,7 +80,7 @@ public class ViewEntryController implements Initializable {
 
     private BigImageViewController bigImageViewController = new BigImageViewController();
 
-    private ArrayList<TagEntry> tagEntryArrayListController = new ArrayList<>();
+    private ArrayList<TagEntry> tagEntryArrayListController;
 
     public DiaryEntry getEntryToView() {
         return entryToView;
@@ -139,6 +139,7 @@ public class ViewEntryController implements Initializable {
         dateOfTitleToView.setValue(entryToView.getDate());
         locationOfTitleToView.setText(entryToView.getLocation());
         notesOfEntryToView.setHtmlText(entryToView.getNotes());
+        tagEntryArrayListController = entryToView.getTagEntryArrayList();
 
         if (!(entryToView.getPathPicture1() == null)){
             imageView1.setImage(new Image(entryToView.getPathPicture1()));
@@ -150,7 +151,7 @@ public class ViewEntryController implements Initializable {
             imageView3.setImage(new Image(entryToView.getPathPicture3()));
         }
 
-        ObservableList<TagEntry> list = FXCollections.observableArrayList(entryToView.getTagEntryArrayList());
+        ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
         tableView.setItems(list);
 
         tagColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
@@ -179,10 +180,9 @@ public class ViewEntryController implements Initializable {
     }
 
     public void removeTagEntry(ActionEvent event) throws IOException {
-        tagEntryArrayListController.addAll(entryToView.getTagEntryArrayList());
+        //tagEntryArrayListController.addAll(entryToView.getTagEntryArrayList());
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         tagEntryArrayListController.remove(selectedID);
-        entryToView.setTagEntryArrayList(tagEntryArrayListController);
         ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
         tableView.setItems(list);
 
@@ -202,9 +202,8 @@ public class ViewEntryController implements Initializable {
         }
         TagEntry tagEntry = TagEntry.createNewTagEntry(tagTextfield.getText(), tag, (int) tagRating.getRating());
 
-        tagEntryArrayListController = entryToView.getTagEntryArrayList();
+        //entryToView.getTagEntryArrayList().add(tagEntry);
         tagEntryArrayListController.add(tagEntry);
-        //tagEntryArrayListController.add(tagEntry);
 
         tagRating.setRating(2.0);
         tagTextfield.clear();

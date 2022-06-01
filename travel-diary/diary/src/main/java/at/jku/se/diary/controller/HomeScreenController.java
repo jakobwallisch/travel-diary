@@ -72,7 +72,7 @@ public class HomeScreenController implements Initializable {
     void removeDiaryEntry(ActionEvent event) throws IOException {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         Application.getInstance().getEntryDatabase().deleteEntryInDatabase(tableView.getItems().get(selectedID));
-        viewEntryController.switchToHomescreen(event);
+        switchToHomescreen(event);
     }
 
     // Get to the CreateDiaryEntry Screen - Method --- for the "zurück zum Homescreen" button
@@ -207,6 +207,19 @@ public class HomeScreenController implements Initializable {
         tagRating.setRating(0);
         tagTextTextfield.setText("");
         refreshDate(event);
+    }
+
+    // Get back to the Homescreen -Method
+    public void switchToHomescreen(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
 
