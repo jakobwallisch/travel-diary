@@ -91,6 +91,9 @@ public class ViewEntryController implements Initializable {
     // Get back to the Homescreen -Method
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
+        entryToView.setNotes(notesOfEntryToView.getHtmlText());
+        Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
         root = loader.load();
 
