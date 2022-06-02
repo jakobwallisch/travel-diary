@@ -2,6 +2,7 @@ package at.jku.se.diary.controller;
 
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
+import at.jku.se.diary.TagEntry;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,15 +14,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -44,6 +45,7 @@ public class HomeScreenController implements Initializable {
     @FXML
     private TableColumn<DiaryEntry, String> locationColumn;
 
+
     //for filtering
     @FXML
     TextField titleFilterTextfield;
@@ -55,14 +57,22 @@ public class HomeScreenController implements Initializable {
     DatePicker startDatePicker;
     @FXML
     DatePicker endDatePicker;
+    @FXML
+    private Rating tagRating;
+    @FXML
+    private ChoiceBox tagChoiceBox;
+    @FXML
+    private TextField tagTextTextfield;
 
 
-    @FXML //this annotation is needed
-    // Deletes the selected entry in the tableview
+
+    @FXML
+        //this annotation is needed
+        // Deletes the selected entry in the tableview
     void removeDiaryEntry(ActionEvent event) throws IOException {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         Application.getInstance().getEntryDatabase().deleteEntryInDatabase(tableView.getItems().get(selectedID));
-        viewEntryController.switchToHomescreen(event);
+        switchToHomescreen(event);
     }
 
     // Get to the CreateDiaryEntry Screen - Method --- for the "zurück zum Homescreen" button
@@ -148,35 +158,68 @@ public class HomeScreenController implements Initializable {
 
         //initialises the datePicker fields
         startDatePicker.setValue(LocalDate.of(2022, 01, 01));
-        endDatePicker.setValue(LocalDate.now());
+        endDatePicker.setValue(LocalDate.of(2022,8,01));
+        //initialises tagChoiceBox
+        tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
+        tagChoiceBox.setValue("all");
+        tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
+        //initialises tagRating
+        tagRating.setRating(0);
+        //initialise tagTextField
+        tagTextTextfield.setText("");
 
-    //filtering logic
+        //filtering logic
         filterList.predicateProperty().bind(Bindings.createObjectBinding(()
                         -> entry
-                        -> entry.getTitle().contains(titleFilterTextfield.getText())
-                        && entry.getLocation().contains(locationFilterTextfield.getText())
-                        && (((entry.getDate().isAfter(startDatePicker.getValue()))||entry.getDate().isEqual(startDatePicker.getValue()))
-                        && ((entry.getDate().isBefore(endDatePicker.getValue()))||(entry.getDate().isEqual(endDatePicker.getValue()))))
-                        && entry.getNotes().contains(notesFilterTextfield.getText()),
+                        -> entry.getTitle().toLowerCase().contains(titleFilterTextfield.getText().toLowerCase())
+                        && ((entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText().toLowerCase()))|| tagTextTextfield.getText().equalsIgnoreCase(""))
+                        && entry.getLocation().toLowerCase().contains(locationFilterTextfield.getText().toLowerCase())
+                        && (((entry.getDate().isAfter(startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
+                        && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
+                        && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase())
+                        && ((entry.containsTagFilter(entry.getTagEntryArrayList(), tagChoiceBox.getValue().toString())) || (tagChoiceBox.getValue().equals("all")))
+                        && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString())) || (tagRating.getRating() == 0)),
 
-                    titleFilterTextfield.textProperty(),
-                    locationFilterTextfield.textProperty(),
-                    startDatePicker.converterProperty(),
-                    endDatePicker.converterProperty(),
-                    notesFilterTextfield.textProperty()
+
+                titleFilterTextfield.textProperty(),
+                locationFilterTextfield.textProperty(),
+                startDatePicker.converterProperty(),
+                endDatePicker.converterProperty(),
+                notesFilterTextfield.textProperty(),
+                tagChoiceBox.converterProperty(),
+                tagRating.ratingProperty(),
+                tagTextTextfield.textProperty()
         ));
     }
 
     //this method refreshes the datePicker fields
-    public void refreshDate(ActionEvent event) throws IOException{
+    public void refreshDate(ActionEvent event) throws IOException {
         titleFilterTextfield.setText("");
-        }
-    //resets the filter paramter to a default value
-    public void resetFilter(ActionEvent event) throws IOException{
+    }
+
+    //resets the filter parameter to a default value
+    public void resetFilter(ActionEvent event) throws IOException {
         titleFilterTextfield.setText("");
         locationFilterTextfield.setText("");
-        startDatePicker.setValue(LocalDate.of(2021,12,01));
-        endDatePicker.setValue(LocalDate.now());
+        startDatePicker.setValue(LocalDate.of(2021, 12, 1));
+        endDatePicker.setValue(LocalDate.of(2022,8,01));
+        tagChoiceBox.setValue("all");
+        tagRating.setRating(0);
+        tagTextTextfield.setText("");
+        refreshDate(event);
+    }
+
+    // Get back to the Homescreen -Method
+    public void switchToHomescreen(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
 

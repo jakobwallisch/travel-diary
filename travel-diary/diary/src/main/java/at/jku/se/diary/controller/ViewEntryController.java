@@ -2,6 +2,10 @@ package at.jku.se.diary.controller;
 
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
+import at.jku.se.diary.TagEntry;
+import at.jku.se.diary.exceptions.TagEntryException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,11 +13,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.web.HTMLEditor;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
 
+import java.awt.desktop.AppForegroundListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,11 +39,23 @@ public class ViewEntryController implements Initializable {
     @FXML
     private Label titleOfEntry;
     @FXML
-    private Label dateOfTitleToView;
+    private TextField titleOfEntryTextfield;
     @FXML
-    private Label locationOfTitleToView;
+    private DatePicker dateOfTitleToView;
     @FXML
-    private Label notesOfTitleToView;
+    private TextField locationOfTitleToView;
+    @FXML
+    private HTMLEditor notesOfEntryToView;
+
+    //tableView with Columns
+    @FXML
+    private TableView tableView;
+    @FXML
+    private TableColumn<TagEntry, String> tagColumn;
+    @FXML
+    private TableColumn<TagEntry, String> textColumn;
+    @FXML
+    private TableColumn<TagEntry, String> starsColumn;
 
     @FXML
     private ImageView imageView1;
@@ -42,10 +64,23 @@ public class ViewEntryController implements Initializable {
     @FXML
     private ImageView imageView3;
 
+    @FXML
+    private ChoiceBox tagChoiceBox;
+
+    @FXML
+    private Rating tagRating;
+
+    @FXML
+    private TextField tagTextfield;
+
     //this entry will be displayed
     static DiaryEntry entryToView;
 
     private WebViewController webViewController = new WebViewController();
+
+    private BigImageViewController bigImageViewController = new BigImageViewController();
+
+    private ArrayList<TagEntry> tagEntryArrayListController;
 
     public DiaryEntry getEntryToView() {
         return entryToView;
@@ -55,8 +90,19 @@ public class ViewEntryController implements Initializable {
         this.entryToView = entryToView;
     }
 
+    public void switchToEditEntry(ActionEvent event) throws IOException{
+
+    }
+
+
     // Get back to the Homescreen -Method
     public void switchToHomescreen(ActionEvent event) throws IOException {
+
+        entryToView.setNotes(notesOfEntryToView.getHtmlText());
+        entryToView.setDate(dateOfTitleToView.getValue());
+        entryToView.setLocation(locationOfTitleToView.getText());
+        entryToView.setTagEntryArrayList(tagEntryArrayListController);
+        Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
         root = loader.load();
@@ -89,9 +135,11 @@ public class ViewEntryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleOfEntry.setText(entryToView.getTitle());
-        dateOfTitleToView.setText(entryToView.getDate().toString());
+        titleOfEntryTextfield.setText(entryToView.getTitle());
+        dateOfTitleToView.setValue(entryToView.getDate());
         locationOfTitleToView.setText(entryToView.getLocation());
-        notesOfTitleToView.setText(entryToView.getNotes());
+        notesOfEntryToView.setHtmlText(entryToView.getNotes());
+        tagEntryArrayListController = entryToView.getTagEntryArrayList();
 
         if (!(entryToView.getPathPicture1() == null)){
             imageView1.setImage(new Image(entryToView.getPathPicture1()));
@@ -102,6 +150,16 @@ public class ViewEntryController implements Initializable {
         if (!(entryToView.getPathPicture3() == null)){
             imageView3.setImage(new Image(entryToView.getPathPicture3()));
         }
+
+        ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
+        tableView.setItems(list);
+
+        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
+        textColumn.setCellValueFactory(new PropertyValueFactory<>("tagText"));
+        starsColumn.setCellValueFactory(new PropertyValueFactory<>("starString"));
+
+        tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
+        tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
     }
 
     //switch to the WebView of the selected entry in the tableview
@@ -120,5 +178,178 @@ public class ViewEntryController implements Initializable {
         stage.show();
 
     }
+
+    public void removeTagEntry(ActionEvent event) throws IOException {
+        //tagEntryArrayListController.addAll(entryToView.getTagEntryArrayList());
+        int selectedID = tableView.getSelectionModel().getSelectedIndex();
+        tagEntryArrayListController.remove(selectedID);
+        ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
+        tableView.setItems(list);
+
+    }
+
+    //Method to create TagEntry and add it to tagEntryArrayListController
+    public void createTagEntry(ActionEvent event) throws IOException, TagEntryException {
+        String tag = (String) tagChoiceBox.getValue();
+        //GUI abhängig, deshalb nicht in methode ausgelagert
+        if (tag == null) {
+            System.out.println("No Tag select");
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("Please select a tag to add a Entry");
+            a.setTitle("Nothing selected");
+            a.show();
+            return;
+        }
+        TagEntry tagEntry = TagEntry.createNewTagEntry(tagTextfield.getText(), tag, (int) tagRating.getRating());
+
+        //entryToView.getTagEntryArrayList().add(tagEntry);
+        tagEntryArrayListController.add(tagEntry);
+
+        tagRating.setRating(2.0);
+        tagTextfield.clear();
+        tagChoiceBox.setValue(null);
+
+        ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
+        tableView.setItems(list);
+
+        tagColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
+        textColumn.setCellValueFactory(new PropertyValueFactory<>("tagText"));
+        starsColumn.setCellValueFactory(new PropertyValueFactory<>("starString"));
+
+    }
+
+    // Methods to delete de selected picture from the image view
+    public void handleDeletePicture1(ActionEvent actionEvent) {
+        imageView1.setImage(null);
+        entryToView.setPathPicture1(null);
+    }
+
+    public void handleDeletePicture2(ActionEvent actionEvent) {
+        imageView2.setImage(null);
+        entryToView.setPathPicture2(null);
+    }
+    public void handleDeletePicture3(ActionEvent actionEvent){
+        imageView3.setImage(null);
+        entryToView.setPathPicture3(null);
+    }
+
+    //create a file chooser object
+    final FileChooser fileChooser = new FileChooser();
+
+    public void initialiseFileChooser() {
+        //Set the title of the displayed file dialog
+        fileChooser.setTitle("Foto auswählen");
+
+        //Set the initial directory for the displayed file dialog
+        //user.home refers to the path to the user directory
+        fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
+
+        //Gets the extension filters used in the displayed file dialog
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
+
+    }
+
+    public void handleOpenPicture1(ActionEvent actionEvent) throws IOException {
+
+        initialiseFileChooser();
+
+        //Set the selected file or null if no file has been selected
+        File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
+
+        if (file != null) {
+            imageView1.setImage(new Image(file.toURI().toString()));
+            entryToView.setPathPicture1(imageView1.getImage().getUrl());
+            Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
+        } else {
+            System.out.println("invalid file");
+        }
+    }
+
+    public void handleOpenPicture2(ActionEvent actionEvent) throws IOException {
+
+        initialiseFileChooser();
+
+        //Set the selected file or null if no file has been selected
+        File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
+
+        if (file != null) {
+            imageView2.setImage(new Image(file.toURI().toString()));
+            entryToView.setPathPicture2(imageView2.getImage().getUrl());
+            Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
+
+
+        } else {
+            System.out.println("invalid file");
+        }
+    }
+
+    public void handleOpenPicture3(ActionEvent actionEvent) throws IOException {
+
+        initialiseFileChooser();
+
+        //Set the selected file or null if no file has been selected
+        File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
+
+        if (file != null) {
+            imageView3.setImage(new Image(file.toURI().toString()));
+            entryToView.setPathPicture3(imageView3.getImage().getUrl());
+            Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
+
+
+        } else {
+            System.out.println("invalid file");
+        }
+
+    }
+
+    //switch to the big ImageView
+    public void viewImage3(ActionEvent event) throws IOException {
+
+        //sets the picture to view
+        bigImageViewController.setImageToView(imageView3.getImage());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/BigImageView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    //switch to the big ImageView
+    public void viewImage2(ActionEvent event) throws IOException {
+
+        //sets the picture to view
+        bigImageViewController.setImageToView(imageView2.getImage());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/BigImageView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    //switch to the big ImageView
+    public void viewImage1(ActionEvent event) throws IOException {
+
+        //sets the picture to view
+        bigImageViewController.setImageToView(imageView1.getImage());
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/BigImageView.fxml"));
+        root = loader.load();
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
 }
 

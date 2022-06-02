@@ -10,4 +10,5 @@ module diary {
     opens at.jku.se.diary;
     opens at.jku.se.diary.controller;
     opens at.jku.se.diary.database;
+    opens at.jku.se.diary.exceptions;
 }
