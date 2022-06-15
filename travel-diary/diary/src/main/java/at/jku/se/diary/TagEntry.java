@@ -2,8 +2,6 @@ package at.jku.se.diary;
 
 import at.jku.se.diary.exceptions.TagEntryException;
 
-import java.util.ArrayList;
-
 public class TagEntry {
 
     private String tag;

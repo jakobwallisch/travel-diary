@@ -6,7 +6,6 @@
 package at.jku.se.diary;
 
 import at.jku.se.diary.exceptions.DiaryEntryException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -96,10 +95,6 @@ public class DiaryEntry {
             }
         }
         return false;
-    }
-
-    public static void setPictures(){
-
     }
 
     public String getTitle() {
