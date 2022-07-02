@@ -21,8 +21,6 @@ import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
-
-import java.awt.desktop.AppForegroundListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -88,10 +86,6 @@ public class ViewEntryController implements Initializable {
 
     public void setEntryToView(DiaryEntry entryToView) {
         this.entryToView = entryToView;
-    }
-
-    public void switchToEditEntry(ActionEvent event) throws IOException{
-
     }
 
 
@@ -180,7 +174,6 @@ public class ViewEntryController implements Initializable {
     }
 
     public void removeTagEntry(ActionEvent event) throws IOException {
-        //tagEntryArrayListController.addAll(entryToView.getTagEntryArrayList());
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         tagEntryArrayListController.remove(selectedID);
         ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
@@ -202,7 +195,6 @@ public class ViewEntryController implements Initializable {
         }
         TagEntry tagEntry = TagEntry.createNewTagEntry(tagTextfield.getText(), tag, (int) tagRating.getRating());
 
-        //entryToView.getTagEntryArrayList().add(tagEntry);
         tagEntryArrayListController.add(tagEntry);
 
         tagRating.setRating(2.0);

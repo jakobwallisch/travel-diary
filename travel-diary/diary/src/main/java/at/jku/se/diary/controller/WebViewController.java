@@ -55,7 +55,6 @@ public class WebViewController implements Initializable{
     }
 
     public void loadPage(String url){
-        //webEngine.load("https://www.google.com/maps/dir/Linz/+/Sch%C3%A4rding");
         webEngine.load(url);
     }
 

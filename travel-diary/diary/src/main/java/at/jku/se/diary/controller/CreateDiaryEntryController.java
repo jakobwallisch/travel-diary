@@ -48,24 +48,6 @@ public class CreateDiaryEntryController implements Initializable {
     @FXML
     private ImageView imageView3;
 
-    //buttons for adding a picture
-    @FXML
-    private Button btnOpenPicture1;
-    @FXML
-    private Button btnOpenPicture2;
-    @FXML
-    private Button btnOpenPicture3;
-    //buttons to delete a picture
-    @FXML
-    private Button btnDeletePicture1;
-    @FXML
-    private Button btnDeletePicture2;
-    @FXML
-    private Button btnDeletePicture3;
-
-    @FXML
-    private Button createDiaryEntryButton;
-
     @FXML
     private ChoiceBox tagChoiceBox;
 
@@ -121,10 +103,6 @@ public class CreateDiaryEntryController implements Initializable {
         } catch (DiaryEntryException e) {
             AlertBox.display("Error", e.getMessage());
         }
-
-        //Read data from FXML File
-        //newEntry.setTitle(diaryTitleTextfield.getText());
-
     }
 
     // Get back to the Homescreen -Method
