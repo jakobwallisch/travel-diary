@@ -24,6 +24,7 @@ import org.controlsfx.control.Rating;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ViewEntryController implements Initializable {
@@ -236,7 +237,8 @@ public class ViewEntryController implements Initializable {
         fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
 
         //Gets the extension filters used in the displayed file dialog
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
+                "Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
 
     }
 

@@ -14,7 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.ChoiceBox;
@@ -93,7 +92,7 @@ public class CreateDiaryEntryController implements Initializable {
             //create new entry by calling the method createNewEntry(with parameters title, location, notes and date)
             DiaryEntry newEntry = DiaryEntry.createNewEntry(
                     diaryTitleTextfield.getText(), diaryLocationTextfield.getText(),
-                    diaryNotesTextfield.getText(), diaryDate.getValue(),
+                    diaryNotesTextfield.getHtmlText(), diaryDate.getValue(),
                     tagEntryArrayListController);
 
             //stores the URLs of the selected images

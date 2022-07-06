@@ -2,7 +2,6 @@ package at.jku.se.diary.controller;
 
 import at.jku.se.diary.Application;
 import at.jku.se.diary.DiaryEntry;
-import at.jku.se.diary.TagEntry;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
@@ -25,7 +21,6 @@ import org.controlsfx.control.Rating;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -177,13 +172,16 @@ public class HomeScreenController implements Initializable {
         filterList.predicateProperty().bind(Bindings.createObjectBinding(()
                         -> entry
                         -> entry.getTitle().toLowerCase().contains(titleFilterTextfield.getText().toLowerCase())
-                        && ((entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText().toLowerCase()))|| tagTextTextfield.getText().equalsIgnoreCase(""))
+                        && ((entry.containsTagTextFilter(entry.getTagEntryArrayList(), tagTextTextfield.getText().toLowerCase()))
+                        || tagTextTextfield.getText().equalsIgnoreCase(""))
                         && entry.getLocation().toLowerCase().contains(locationFilterTextfield.getText().toLowerCase())
                         && (((entry.getDate().isAfter(startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
                         && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
                         && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase())
-                        && ((entry.containsTagFilter(entry.getTagEntryArrayList(), tagChoiceBox.getValue().toString())) || (tagChoiceBox.getValue().equals("all")))
-                        && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString())) || (tagRating.getRating() == 0)),
+                        && ((entry.containsTagFilter(entry.getTagEntryArrayList(), tagChoiceBox.getValue().toString()))
+                        || (tagChoiceBox.getValue().equals("all")))
+                        && ((entry.containsTagRatingFilter(entry.getTagEntryArrayList(), (int) tagRating.getRating(), tagChoiceBox.getValue().toString()))
+                        || (tagRating.getRating() == 0)),
 
 
                 titleFilterTextfield.textProperty(),
