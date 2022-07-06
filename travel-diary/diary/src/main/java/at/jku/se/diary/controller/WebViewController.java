@@ -1,7 +1,7 @@
 package at.jku.se.diary.controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.*;
+import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -55,12 +55,11 @@ public class WebViewController implements Initializable{
     }
 
     public void loadPage(String url){
-        //webEngine.load("https://www.google.com/maps/dir/Linz/+/Sch%C3%A4rding");
         webEngine.load(url);
     }
 
-    public void setLocations(List<String> locations) {
-        this.locations = locations;
+    public static void setLocations(List<String> locations1) {
+        locations = locations1;
     }
 
     public void setLocationsOneEntry(String locationToStore){

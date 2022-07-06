@@ -35,7 +35,7 @@ public class Application extends javafx.application.Application {
         try {
             database.readTagsFromDatabase();
         } catch (final IOException e) {
-//            e.printStackTrace(System.err);
+
         }
 
         // Initialize our Application Singleton

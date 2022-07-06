@@ -1,7 +1,6 @@
 package at.jku.se.diary.controller;
 
 import at.jku.se.diary.Application;
-import at.jku.se.diary.DiaryEntry;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,7 @@ public class TagViewController implements Initializable {
 
     @FXML
     private ChoiceBox<String> tagChoiceBox;
-    //private ChoiceBox<String> tagChoiceBox;
+
 
     private Stage stage;
     static private Scene scene;

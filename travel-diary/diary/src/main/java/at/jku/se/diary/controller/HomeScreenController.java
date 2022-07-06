@@ -138,7 +138,8 @@ public class HomeScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //creating a observableList for filtering purposes
-        ObservableList<DiaryEntry> list = FXCollections.observableArrayList(Application.getInstance().getEntryDatabase().getDiaryEntries());
+        ObservableList<DiaryEntry> list = FXCollections.observableArrayList(
+                Application.getInstance().getEntryDatabase().getDiaryEntries());
         //creating a filteredList with the items of the observableList for filtering purposes
         FilteredList<DiaryEntry> filterList = new FilteredList<>(list);
         //set the Items of the tableView
@@ -149,7 +150,7 @@ public class HomeScreenController implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
         //initialises the datePicker fields
-        startDatePicker.setValue(LocalDate.of(2022, 01, 01));
+        startDatePicker.setValue(LocalDate.of(2022, 1, 1));
         endDatePicker.setValue(LocalDate.now());
 
         //filtering logic
@@ -157,8 +158,10 @@ public class HomeScreenController implements Initializable {
                         -> entry
                         -> entry.getTitle().toLowerCase().contains(titleFilterTextfield.getText().toLowerCase())
                         && entry.getLocation().toLowerCase().contains(locationFilterTextfield.getText().toLowerCase())
-                        && (((entry.getDate().isAfter(startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
-                        && ((entry.getDate().isBefore(endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
+                        && (((entry.getDate().isAfter(
+                                startDatePicker.getValue())) || entry.getDate().isEqual(startDatePicker.getValue()))
+                        && ((entry.getDate().isBefore(
+                                endDatePicker.getValue())) || (entry.getDate().isEqual(endDatePicker.getValue()))))
                         && entry.getNotes().toLowerCase().contains(notesFilterTextfield.getText().toLowerCase()),
 
                 titleFilterTextfield.textProperty(),

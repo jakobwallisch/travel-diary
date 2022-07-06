@@ -10,7 +10,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -102,7 +109,10 @@ public class CreateDiaryEntryController implements Initializable {
     public void createDiaryEntry(ActionEvent event) throws IOException {
         try {
             //create new entry by calling the method createNewEntry(with parameters title, location, notes and date)
-            DiaryEntry newEntry = DiaryEntry.createNewEntry(diaryTitleTextfield.getText(), diaryLocationTextfield.getText(), diaryNotesTextfield.getText(), diaryDate.getValue(), tagEntryArrayListController);
+            DiaryEntry newEntry = DiaryEntry.createNewEntry(
+                    diaryTitleTextfield.getText(), diaryLocationTextfield.getText(),
+                    diaryNotesTextfield.getText(), diaryDate.getValue(),
+                    tagEntryArrayListController);
 
             //stores the URLs of the selected images
             if (!(imageView1.getImage() == null)) {
@@ -121,9 +131,6 @@ public class CreateDiaryEntryController implements Initializable {
         } catch (DiaryEntryException e) {
             AlertBox.display("Error", e.getMessage());
         }
-
-        //Read data from FXML File
-        //newEntry.setTitle(diaryTitleTextfield.getText());
 
     }
 
@@ -154,11 +161,13 @@ public class CreateDiaryEntryController implements Initializable {
         fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
 
         //Gets the extension filters used in the displayed file dialog
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter(
+                        "Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
 
     }
 
-
+    private final String errorMessage = "invalid file";
     public void handleOpenPicture1(ActionEvent actionEvent) {
 
         initialiseFileChooser();
@@ -169,7 +178,7 @@ public class CreateDiaryEntryController implements Initializable {
         if (file != null) {
             imageView1.setImage(new Image(file.toURI().toString()));
         } else {
-            System.out.println("invalid file");
+            System.out.println(errorMessage);
         }
     }
 
@@ -183,7 +192,7 @@ public class CreateDiaryEntryController implements Initializable {
         if (file != null) {
             imageView2.setImage(new Image(file.toURI().toString()));
         } else {
-            System.out.println("invalid file");
+            System.out.println(errorMessage);
         }
     }
 
@@ -197,7 +206,7 @@ public class CreateDiaryEntryController implements Initializable {
         if (file != null) {
             imageView3.setImage(new Image(file.toURI().toString()));
         } else {
-            System.out.println("invalid file");
+            System.out.println(errorMessage);
         }
 
     }

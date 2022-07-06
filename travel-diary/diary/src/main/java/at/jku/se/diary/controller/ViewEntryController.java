@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ViewEntryController implements Initializable {
@@ -51,8 +50,8 @@ public class ViewEntryController implements Initializable {
         return entryToView;
     }
 
-    public void setEntryToView(DiaryEntry entryToView) {
-        this.entryToView = entryToView;
+    public static void setEntryToView(DiaryEntry entryToView1) {
+        entryToView = entryToView1;
     }
 
     // Get back to the Homescreen -Method

@@ -1,10 +1,11 @@
 package at.jku.se.diary;
-
-import javafx.scene.*;
-import javafx.stage.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.geometry.*;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.Modality;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.geometry.Pos;
 
 
 public class AlertBox {

@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 public class Database {
 
-    //private static File database = new File("/.database.json");
     private static final File database = new File("database.json");
     private static final File tags = new File("tags.json");
 
@@ -126,13 +125,6 @@ public class Database {
     //returns the titles of all the entries
     public List<String> getTitlesOfAllDiaryEntries(){
         return diaryEntries.stream().map(DiaryEntry::getTitle).collect(Collectors.toList());
-//
-//        ArrayList<String> result= new ArrayList<>();
-//
-//        for (DiaryEntry e: diaryEntries) {
-//            result.add(e.getTitle());
-//        }
-//        return result;
     }
 
 

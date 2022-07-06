@@ -7,12 +7,11 @@ package at.jku.se.diary;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 /**
  *
- * @author reinhold
+ * @author 
  */
 
 public class DiaryEntry {
@@ -38,11 +37,9 @@ public class DiaryEntry {
 
     private ArrayList<TagEntry> tagEntryArrayList = new ArrayList<>();
 
-
-    public DiaryEntry() {
-    }
-
-    public static DiaryEntry createNewEntry(String title, String location, String notes, LocalDate date, ArrayList<TagEntry> tagEntryArrayList) throws DiaryEntryException {
+    public static DiaryEntry createNewEntry(
+            String title, String location, String notes, LocalDate date, ArrayList<TagEntry> tagEntryArrayList)
+            throws DiaryEntryException {
         if(title == null || title.length() < 1) {
             throw new DiaryEntryException("No title inserted!");
         }
@@ -62,10 +59,6 @@ public class DiaryEntry {
         newEntry.setDate(date);
         newEntry.setTagEntryArrayList(tagEntryArrayList);
         return newEntry;
-    }
-
-    public static void setPictures(){
-
     }
 
     public String getTitle() {
