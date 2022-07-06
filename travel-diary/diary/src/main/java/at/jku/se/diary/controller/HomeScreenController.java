@@ -14,7 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
@@ -44,7 +47,6 @@ public class HomeScreenController implements Initializable {
     private TableColumn<DiaryEntry, LocalDate> dateColumn;
     @FXML
     private TableColumn<DiaryEntry, String> locationColumn;
-
 
     //for filtering
     @FXML
@@ -146,7 +148,8 @@ public class HomeScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //creating a observableList for filtering purposes
-        ObservableList<DiaryEntry> list = FXCollections.observableArrayList(Application.getInstance().getEntryDatabase().getDiaryEntries());
+        ObservableList<DiaryEntry> list = FXCollections.observableArrayList(
+                Application.getInstance().getEntryDatabase().getDiaryEntries());
         //creating a filteredList with the items of the observableList for filtering purposes
         FilteredList<DiaryEntry> filterList = new FilteredList<>(list);
         //set the Items of the tableView
@@ -157,8 +160,10 @@ public class HomeScreenController implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
         //initialises the datePicker fields
-        startDatePicker.setValue(LocalDate.of(2022, 01, 01));
-        endDatePicker.setValue(LocalDate.of(2022,8,01));
+        startDatePicker.setValue(LocalDate.of(2022, 1, 1));
+        endDatePicker.setValue(LocalDate.now());
+        startDatePicker.setValue(LocalDate.of(2022, 1, 1));
+        endDatePicker.setValue(LocalDate.of(2022,8,1));
         //initialises tagChoiceBox
         tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
         tagChoiceBox.setValue("all");
@@ -197,12 +202,12 @@ public class HomeScreenController implements Initializable {
         titleFilterTextfield.setText("");
     }
 
-    //resets the filter parameter to a default value
+    //resets the filter paramter to a default value
     public void resetFilter(ActionEvent event) throws IOException {
         titleFilterTextfield.setText("");
         locationFilterTextfield.setText("");
         startDatePicker.setValue(LocalDate.of(2021, 12, 1));
-        endDatePicker.setValue(LocalDate.of(2022,8,01));
+        endDatePicker.setValue(LocalDate.of(2022,8,1));
         tagChoiceBox.setValue("all");
         tagRating.setRating(0);
         tagTextTextfield.setText("");

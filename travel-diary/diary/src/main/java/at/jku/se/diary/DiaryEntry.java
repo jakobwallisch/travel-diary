@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author reinhold
+ * @author
  */
 
 public class DiaryEntry {
@@ -38,11 +38,9 @@ public class DiaryEntry {
 
     private ArrayList<TagEntry> tagEntryArrayList = new ArrayList<>();
 
-
-    public DiaryEntry() {
-    }
-
-    public static DiaryEntry createNewEntry(String title, String location, String notes, LocalDate date, ArrayList<TagEntry> tagEntryArrayList) throws DiaryEntryException {
+    public static DiaryEntry createNewEntry(
+            String title, String location, String notes, LocalDate date, ArrayList<TagEntry> tagEntryArrayList)
+            throws DiaryEntryException {
         if(title == null || title.length() < 1) {
             throw new DiaryEntryException("No title inserted!");
         }

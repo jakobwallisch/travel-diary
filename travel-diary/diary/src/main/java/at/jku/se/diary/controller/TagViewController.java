@@ -25,6 +25,7 @@ public class TagViewController implements Initializable {
     @FXML
     private ChoiceBox<String> tagChoiceBox;
 
+
     private Stage stage;
     static private Scene scene;
     private Parent root;
