@@ -188,7 +188,9 @@ public class Database {
      * An Exception will be thrown if the FileWriter cannot be created
      */
     public void readEntriesFromDatabase() throws IOException {
-        if (!database.exists()) return;
+        if (!database.exists()){
+            return;
+        }
         System.out.println("dir"+dir);
         Gson json = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())

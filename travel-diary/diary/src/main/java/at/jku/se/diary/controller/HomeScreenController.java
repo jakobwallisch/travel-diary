@@ -34,8 +34,6 @@ public class HomeScreenController implements Initializable {
     private Scene scene;
     private Parent root;
 
-    private final WebViewController webViewController = new WebViewController();
-
     @FXML
     private Button btnDirectory;
 

@@ -20,6 +20,10 @@ import java.util.ResourceBundle;
  */
 public class BigImageViewController implements Initializable {
 
+    public BigImageViewController() {
+
+    }
+
     @FXML
     private ImageView imageView;
     private static Image imageToView;
