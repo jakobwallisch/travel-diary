@@ -21,13 +21,64 @@ import java.util.stream.Collectors;
 
 public class Database {
 
-    private static final File database = new File("database.json");
+    public Database() throws IOException {
+        dir = this.readPathFromDatabase();
+        database = new File(dir,"database.json");
+    }
+
+    private static String dir;
+    private static final File path = new File("path.json");
+    //private static final File database = new File("database.json");
+    private static File database = null; //= new File(dir,"database.json");
     private static final File tags = new File("tags.json");
 
 
 
     private ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
     private ArrayList<String> tagEntries = new ArrayList<>();
+    private static String absPath;
+
+
+    public void storePathInDatabase(String absolutePath) throws IOException {
+
+        absPath=absolutePath;
+
+        Gson json = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+
+        try (final FileWriter fw = new FileWriter(path)) { // make sure FileWriter is closed when leaving scope
+            json.toJson(absPath, fw);
+        }
+    }
+
+    public String readPathFromDatabase() throws IOException {
+        if (!path.exists()) {
+            return System.getProperty("user.dir");
+        }
+
+        Gson json = new GsonBuilder()
+                .create();
+
+        //ArrayList<String> loadedTags;
+        String pathForDatabase;
+
+        try (final FileReader fr = new FileReader(path)) { // make sure FileReader is closed when leaving scope
+            pathForDatabase = json.fromJson(fr, new TypeToken<String>() {}.getType());
+        }catch (Exception e){
+            throw new RuntimeException("Error creating FileReader");
+        }
+
+        // if we didn't load anything (empty file or the like), then stick with an empty list
+        if (pathForDatabase != null) {
+            absPath = pathForDatabase;
+            System.out.println(absPath+"gelesen");
+            System.out.println("Working Directory = " + System.getProperty("user.dir"));
+            return absPath;
+        }
+        return "";
+    }
+
 
     /**
      *
@@ -143,6 +194,8 @@ public class Database {
      */
 
     public void readEntriesFromDatabase() throws IOException {
+        if (!database.exists()) return;
+        System.out.println("dir"+dir);
         Gson json = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();

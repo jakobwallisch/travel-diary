@@ -32,7 +32,7 @@ class DatabaseTest {
     }
 
     @Test
-    void storeTagInDatabaseTest() {
+    void storeTagInDatabaseTest() throws IOException{
         String tag = tagName;
         Database database1 = new Database();
         assertDoesNotThrow(() -> {
@@ -53,7 +53,7 @@ class DatabaseTest {
     }
 
     @Test
-    void deleteEntryInDatabaseTest() {
+    void deleteEntryInDatabaseTest() throws IOException {
         DiaryEntry temp = new DiaryEntry();
         Database database3 = new Database();
 
@@ -67,7 +67,7 @@ class DatabaseTest {
     }
 
     @Test
-    void deleteTagInDatabaseTest() {
+    void deleteTagInDatabaseTest() throws IOException{
         String tag = tagName;
         Database database4 = new Database();
         assertDoesNotThrow(() -> {
@@ -118,7 +118,7 @@ class DatabaseTest {
     }
 
     @Test
-    void getTitlesOfAllDiaryEntriesTest() {
+    void getTitlesOfAllDiaryEntriesTest() throws IOException {
         LocalDate date = LocalDate.of(2022, 5, 25);
         Database database7 = new Database();
         assertDoesNotThrow(() -> {
@@ -146,7 +146,7 @@ class DatabaseTest {
     }
 
     @Test
-    void getLocationsOfDiaryEntriesTest() throws DiaryEntryException {
+    void getLocationsOfDiaryEntriesTest() throws DiaryEntryException, IOException {
         Database database9 = new Database();
         LocalDate date = LocalDate.of(2022, 5, 26);
         assertDoesNotThrow(() -> {

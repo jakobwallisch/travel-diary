@@ -71,9 +71,9 @@ public class DiaryEntry {
             throw new DiaryEntryException("No date inserted!");
         }
 
-        if(location == null || location.length() < 1){
-            throw new DiaryEntryException("No location inserted!");
-        }
+        //if(location == null || location.length() < 1){
+        //    throw new DiaryEntryException("No location inserted!");
+        //}
 
         DiaryEntry newEntry = new DiaryEntry();
         newEntry.setTitle(title);

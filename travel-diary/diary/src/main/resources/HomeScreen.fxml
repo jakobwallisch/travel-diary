@@ -69,5 +69,10 @@
          </font></Label>
       <Rating fx:id="tagRating" layoutX="394.0" layoutY="166.0" prefHeight="0.0" prefWidth="150.0" />
       <TextField fx:id="tagTextTextfield" layoutX="203.0" layoutY="169.0" promptText="Structured info filter" />
+      <Button fx:id="btnDirectory" layoutX="873.0" layoutY="617.0" mnemonicParsing="false" onAction="#chooseDirectory" prefHeight="30.0" prefWidth="134.0" text="Change Folder 🗁">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

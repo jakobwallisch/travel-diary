@@ -15,9 +15,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -32,6 +36,9 @@ public class HomeScreenController implements Initializable {
 
     private ViewEntryController viewEntryController = new ViewEntryController();
     private WebViewController webViewController = new WebViewController();
+
+    @FXML
+    private Button btnDirectory;
 
     //TableView on Homescreen
     @FXML
@@ -142,6 +149,8 @@ public class HomeScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        btnDirectory.setTooltip(new Tooltip("Click to choose a Folder where you want store diary entries. You must restart for these changes to take effect."));
+
         //creating a observableList for filtering purposes
         ObservableList<DiaryEntry> list = FXCollections.observableArrayList(
                 Application.getInstance().getEntryDatabase().getDiaryEntries());
@@ -224,5 +233,32 @@ public class HomeScreenController implements Initializable {
         stage.show();
 
     }
+
+    DirectoryChooser directoryChooser = new DirectoryChooser();
+
+    public void initialiseDirectoryChooser() {
+        //Set the title of the displayed file dialog
+        directoryChooser.setTitle("Choose Folder");
+
+        //Set the initial directory for the displayed file dialog
+        //user.home refers to the path to the user directory
+        directoryChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
+
+    }
+    @FXML
+    public void chooseDirectory(ActionEvent event) throws IOException {
+
+        initialiseDirectoryChooser();
+
+        //Set the selected directory or null if no directory has been selected
+        File selectedDirectory = directoryChooser.showDialog(null);
+        if (selectedDirectory != null) {
+            System.out.println(selectedDirectory.getAbsolutePath());
+            Application.getInstance().getEntryDatabase().storePathInDatabase(selectedDirectory.getAbsolutePath());
+        } else {
+            System.out.println("invalid directory");
+        }
+    }
+
 }
 

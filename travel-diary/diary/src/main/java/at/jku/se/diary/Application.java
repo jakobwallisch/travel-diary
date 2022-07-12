@@ -33,7 +33,8 @@ public class Application extends javafx.application.Application {
      * application class
      * IOException will be thrown if the entries from the database cannot be read
      */
-    public Application() {
+
+    public Application() throws IOException {
         try {
             database.readEntriesFromDatabase();
         } catch (final IOException e) {
@@ -43,7 +44,7 @@ public class Application extends javafx.application.Application {
         try {
             database.readTagsFromDatabase();
         } catch (final IOException e) {
-
+            e.printStackTrace(System.err);
         }
 
         // Initialize our Application Singleton
