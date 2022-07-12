@@ -51,9 +51,9 @@ public class DiaryEntry {
             throw new DiaryEntryException("No date inserted!");
         }
 
-        if(location == null || location.length() < 1){
-            throw new DiaryEntryException("No location inserted!");
-        }
+        //if(location == null || location.length() < 1){
+        //    throw new DiaryEntryException("No location inserted!");
+        //}
 
         DiaryEntry newEntry = new DiaryEntry();
         newEntry.setTitle(title);
@@ -70,7 +70,7 @@ public class DiaryEntry {
         for (TagEntry tag: arrayList) {
             if (tag.getTag().equalsIgnoreCase(filterValue)){
                 return true;
-            };
+            }
         }
         return false;
     }
@@ -79,7 +79,7 @@ public class DiaryEntry {
         for (TagEntry tag: arrayList) {
             if ((tag.getRating() == rating) && (tag.getTag().equalsIgnoreCase(filterValue))){
                 return true;
-            };
+            }
         }
         return false;
     }

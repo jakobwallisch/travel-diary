@@ -25,7 +25,7 @@ public class Application extends javafx.application.Application {
         return instance;
     }
 
-    public Application() {
+    public Application() throws IOException {
         try {
             database.readEntriesFromDatabase();
         } catch (final IOException e) {
