@@ -17,21 +17,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This is a controller class for the TagViewController.fxml file
+ */
 public class TagViewController implements Initializable {
 
     @FXML
     private TextField addTagTextfield;
-
     @FXML
     private ChoiceBox<String> tagChoiceBox;
 
-
-    private Stage stage;
-    static private Scene scene;
-    private Parent root;
-
-
-    public void createTagEntry(ActionEvent event) throws IOException {
+    /**
+     * This method creates a new tag object and stores it in the database (json-file)
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
+    public void createTagEntry() throws IOException {
 
         if (addTagTextfield.getText().isBlank()) {
             Alert a = new Alert(Alert.AlertType.INFORMATION );
@@ -52,32 +52,39 @@ public class TagViewController implements Initializable {
             a.setContentText("This tag is already exists");
             a.setTitle("Tag already exists");
             a.show();
-
         }
-
     }
 
+    /**
+     * Get back to the home-screen
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
     }
 
 
-    // Maybe use ComboBox => has a setPromptText property
+    /**
+     * initializes the choice box component on the the tag view screen (JavaFX Component)
+     * @param url JavaFX parameter
+     * @param resourceBundle JavaFx parameter
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
     }
 
     @FXML
-    void removeTag(ActionEvent event) throws IOException {
+    private void removeTag() throws IOException {
         String tag = tagChoiceBox.getValue();
         if (tag==null) {
             System.out.println("leerer String");
@@ -86,7 +93,6 @@ public class TagViewController implements Initializable {
             a.setTitle("Nothing selected");
             a.show();
             return;
-
         }
         Application.getInstance().getEntryDatabase().deleteTagInDatabase(tag);
         tagChoiceBox.getItems().clear();

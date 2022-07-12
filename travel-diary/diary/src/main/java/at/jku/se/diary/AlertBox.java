@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 
-
+/**
+ * This class represents an AlertBox Object which will be used when certain events occur
+ */
 public class AlertBox {
     /**
      * @param title

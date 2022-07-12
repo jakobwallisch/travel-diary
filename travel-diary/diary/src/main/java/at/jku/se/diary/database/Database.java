@@ -16,29 +16,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This class is used to create a Database
+ * This class represents the logic of the "database"
  */
-
 public class Database {
 
-    public Database() throws IOException {
+    public Database() {
         dir = this.readPathFromDatabase();
         database = new File(dir,"database.json");
     }
 
     private static String dir;
     private static final File path = new File("path.json");
-    //private static final File database = new File("database.json");
-    private static File database = null; //= new File(dir,"database.json");
+
+    private static File database = null;
     private static final File tags = new File("tags.json");
-
-
 
     private ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
     private ArrayList<String> tagEntries = new ArrayList<>();
     private static String absPath;
 
-
+    /**
+     * This method stores the absolute path of the database file (working directory)
+     * @param absolutePath the absolute path of the database file
+     * @throws IOException throws an exception if there is anything wrong with file handling
+     */
     public void storePathInDatabase(String absolutePath) throws IOException {
 
         absPath=absolutePath;
@@ -52,7 +53,11 @@ public class Database {
         }
     }
 
-    public String readPathFromDatabase() throws IOException {
+    /**
+     * This method reads the current storage location of the database file
+     * @return returns the absolute path of the database file
+     */
+    public String readPathFromDatabase(){
         if (!path.exists()) {
             return System.getProperty("user.dir");
         }
@@ -60,7 +65,6 @@ public class Database {
         Gson json = new GsonBuilder()
                 .create();
 
-        //ArrayList<String> loadedTags;
         String pathForDatabase;
 
         try (final FileReader fr = new FileReader(path)) { // make sure FileReader is closed when leaving scope
@@ -68,7 +72,6 @@ public class Database {
         }catch (Exception e){
             throw new RuntimeException("Error creating FileReader");
         }
-
         // if we didn't load anything (empty file or the like), then stick with an empty list
         if (pathForDatabase != null) {
             absPath = pathForDatabase;
@@ -81,11 +84,9 @@ public class Database {
 
 
     /**
-     *
-     * @param tagName
      * A tag with tagName will be saved in the database
-     * @throws IOException
-     * Throws exception if the Filewriter cannot be created
+     * @param tagName name of the tag to be stored
+     * @throws IOException Throws exception if the Filewriter cannot be created
      */
     public void storeTagInDatabase(String tagName) throws IOException {
 
@@ -101,13 +102,11 @@ public class Database {
     }
 
     /**
-     * @param entry
      * Stores an entry in the database
-     * @throws IOException
-     * Throws exception if the FileWriter cannot be created
+     * @param entry entry to store in the database
+     * @throws IOException Throws exception if the FileWriter cannot be created
      */
     public void storeEntryInDatabase(DiaryEntry entry) throws IOException {
-
         diaryEntries.add(entry);
 
         Gson json = new GsonBuilder()
@@ -121,8 +120,8 @@ public class Database {
    }
 
     /**
-     * @param entry
      * Deletes an entry from the database
+     * @param entry entry to delete
      * @throws IOException
      * Throws exception if the FileWriter cannot be created
      */
@@ -141,20 +140,17 @@ public class Database {
     }
 
     /**
-     * @param entry
      * Updates a specific entry from the database
-     * @throws IOException
-     * An exception will be thrown if the entry cannot be updated
+     * @param entry entry which will be updated
+     * @throws IOException An exception will be thrown if the entry cannot be updated
      * Throws exception if the FileWriter cannot be created
      */
     public void updateEntryInDatabase(DiaryEntry entry) throws IOException{
 
-        DiaryEntry newEntry = entry;
-
         for (DiaryEntry e: diaryEntries) {
-            if (e.getTitle().equalsIgnoreCase(newEntry.getTitle())){
+            if (e.getTitle().equalsIgnoreCase(entry.getTitle())){
                 deleteEntryInDatabase(e);
-                storeEntryInDatabase(newEntry);
+                storeEntryInDatabase(entry);
 
                 Gson json = new GsonBuilder()
                         .setPrettyPrinting()
@@ -169,10 +165,9 @@ public class Database {
     }
 
     /**
-     * @param tag
      * Deletes a specific tag from the database
-     * @throws IOException
-     * Throws exception if the FileWriter cannot be created
+     * @param tag tag which will be deleted
+     * @throws IOException Throws exception if the FileWriter cannot be created
      */
     public void deleteTagInDatabase(String tag) throws IOException {
         tagEntries.remove(tag);
@@ -192,7 +187,6 @@ public class Database {
      * @throws IOException
      * An Exception will be thrown if the FileWriter cannot be created
      */
-
     public void readEntriesFromDatabase() throws IOException {
         if (!database.exists()) return;
         System.out.println("dir"+dir);
@@ -216,8 +210,7 @@ public class Database {
 
     /**
      * This method reads all tags from the database
-     * @throws IOException
-     * An Exception will be thrown if the FileWriter cannot be created
+     * @throws IOException An Exception will be thrown if the FileWriter cannot be created
      */
     public void readTagsFromDatabase() throws IOException {
         Gson json = new GsonBuilder()
@@ -239,30 +232,24 @@ public class Database {
 
     /**
      * This method returns all titles of every entry in the database in a list
-     * @return
-     * returns a list
+     * @return returns a list with all titles of the entries
      */
-    //returns the titles of all the entries
     public List<String> getTitlesOfAllDiaryEntries(){
         return diaryEntries.stream().map(DiaryEntry::getTitle).collect(Collectors.toList());
     }
 
     /**
      * This method returns all Entries in a List
-     * @return
-     * returns a list
+     * @return returns a list with all of the stored diary entries
      */
-    //Getter
     public List<DiaryEntry> getDiaryEntries() {
         return Collections.unmodifiableList(diaryEntries);
     }
 
     /**
      * This method returns all locations of the DiaryEntries in a list
-     * @return
-     * returns a list
+     * @return returns a list of all locations
      */
-    //Get locations of the entries to show them on the map
     public List<String> getLocationsOfDiaryEntries(){
 
         List<DiaryEntry> allEntries = this.getDiaryEntries();
@@ -272,14 +259,12 @@ public class Database {
 
             result.add(entry.getLocation());
         }
-
         return result;
     }
 
     /**
      * This method returns all tag entries in a list
-     * @return
-     * returns a list
+     * @return returns a list with all tagEntries
      */
     public List<String> getTagEntries() {
         return Collections.unmodifiableList(tagEntries);

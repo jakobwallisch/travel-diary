@@ -13,28 +13,25 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-
-
+/**
+ * This is the main class of the program
+ * it contains the main method to start the program
+ */
 public class Application extends javafx.application.Application {
 
     private static Application instance;
 
-    private Database database = new Database();
+    private final Database database = new Database();
 
     /**
      * return the instance of the application
-     * @return
+     * @return instance of the application class
      */
     public static Application getInstance() {
         return instance;
     }
 
-    /**
-     * application class
-     * IOException will be thrown if the entries from the database cannot be read
-     */
-
-    public Application() throws IOException {
+    public Application() {
         try {
             database.readEntriesFromDatabase();
         } catch (final IOException e) {
@@ -56,7 +53,7 @@ public class Application extends javafx.application.Application {
 
     /**
      * returns the entry database
-     * @return
+     * @return the database object
      */
     public Database getEntryDatabase() {
         return database;
@@ -64,9 +61,8 @@ public class Application extends javafx.application.Application {
 
     /**
      * start method to start the applicaiton
-     * @param stage
-     * @throws Exception
-     * if the loader cannot load the root an exception will be thrown
+     * @param stage the stage objcet to be loaded
+     * @throws Exception if the loader cannot load the root an exception will be thrown
      */
     @Override
     public void start(Stage stage) throws Exception {

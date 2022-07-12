@@ -15,9 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 
@@ -27,15 +25,16 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-
+/**
+ * This is a controller class for the HomeScreenController.fxml file
+ */
 public class HomeScreenController implements Initializable {
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    private ViewEntryController viewEntryController = new ViewEntryController();
-    private WebViewController webViewController = new WebViewController();
+    private final WebViewController webViewController = new WebViewController();
 
     @FXML
     private Button btnDirectory;
@@ -69,17 +68,23 @@ public class HomeScreenController implements Initializable {
     private TextField tagTextTextfield;
 
 
-
+    /**
+     * This method deletes the selected entry in the tableview
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     @FXML
-        //this annotation is needed
-        // Deletes the selected entry in the tableview
     void removeDiaryEntry(ActionEvent event) throws IOException {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         Application.getInstance().getEntryDatabase().deleteEntryInDatabase(tableView.getItems().get(selectedID));
         switchToHomescreen(event);
     }
 
-    // Get to the CreateDiaryEntry Screen - Method --- for the "zurück zum Homescreen" button
+    /**
+     * Get back to the CreateDiaryEntry Screen
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchToCreateDiaryEntry(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
@@ -92,7 +97,11 @@ public class HomeScreenController implements Initializable {
         stage.show();
     }
 
-    //switches to the TagView window
+    /**
+     * Get back to the TagView Screen
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchTagView(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
@@ -105,14 +114,17 @@ public class HomeScreenController implements Initializable {
         stage.show();
     }
 
-
-    //switch to the entry-view of the selected entry in the tableview
+    /**
+     * Switch to the entry-view screen of the selected entry in the tableview
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchToViewEntry(ActionEvent event) throws IOException {
 
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
 
         //sets the entry to view
-        viewEntryController.setEntryToView(tableView.getItems().get(selectedID));
+        ViewEntryController.setEntryToView(tableView.getItems().get(selectedID));
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/ViewEntry.fxml"));
@@ -125,13 +137,14 @@ public class HomeScreenController implements Initializable {
 
     }
 
-    //switch to the WebView of the selected entry in the tableview
+    /**
+     * Switch to the web-view screen of the selected entry in the tableview
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchToWebView(ActionEvent event) throws IOException {
 
-        webViewController.setLocations(Application.getInstance().getEntryDatabase().getLocationsOfDiaryEntries());
-
-        System.out.println(webViewController.getLocations().toString());
-        System.out.println(webViewController.getLocations().size());
+        WebViewController.setLocations(Application.getInstance().getEntryDatabase().getLocationsOfDiaryEntries());
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/WebView.fxml"));
@@ -144,8 +157,11 @@ public class HomeScreenController implements Initializable {
 
     }
 
-    //This window initialises the tableview on the HomeScreen
-    //also the filtering logic is stored in this method
+    /**
+     * This method initializes the tableview on the HomeScreen and contains the filtering logic
+     * @param url JavaFx parameter
+     * @param resourceBundle JavaFx parameter
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -204,13 +220,17 @@ public class HomeScreenController implements Initializable {
         ));
     }
 
-    //this method refreshes the datePicker fields
-    public void refreshDate(ActionEvent event) throws IOException {
+    /**
+     * this method refreshes the datePicker fields on the home-screen
+     */
+    public void refreshDate() {
         titleFilterTextfield.setText("");
     }
 
-    //resets the filter paramter to a default value
-    public void resetFilter(ActionEvent event) throws IOException {
+    /**
+     * This method resets the filter parameters (to a default value)
+     */
+    public void resetFilter() {
         titleFilterTextfield.setText("");
         locationFilterTextfield.setText("");
         startDatePicker.setValue(LocalDate.of(2021, 12, 1));
@@ -218,10 +238,14 @@ public class HomeScreenController implements Initializable {
         tagChoiceBox.setValue("all");
         tagRating.setRating(0);
         tagTextTextfield.setText("");
-        refreshDate(event);
+        refreshDate();
     }
 
-    // Get back to the Homescreen -Method
+    /**
+     * Get back to the home-screen
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
@@ -236,6 +260,9 @@ public class HomeScreenController implements Initializable {
 
     DirectoryChooser directoryChooser = new DirectoryChooser();
 
+    /**
+     * This method initializes the directory chooser component where you can choose the new storage location
+     */
     public void initialiseDirectoryChooser() {
         //Set the title of the displayed file dialog
         directoryChooser.setTitle("Choose Folder");
@@ -245,11 +272,15 @@ public class HomeScreenController implements Initializable {
         directoryChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
 
     }
+
+    /**
+     * This method is for choosing a new storage location of the database (json file)
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     @FXML
-    public void chooseDirectory(ActionEvent event) throws IOException {
+    public void chooseDirectory() throws IOException {
 
         initialiseDirectoryChooser();
-
         //Set the selected directory or null if no directory has been selected
         File selectedDirectory = directoryChooser.showDialog(null);
         if (selectedDirectory != null) {

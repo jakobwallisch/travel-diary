@@ -27,6 +27,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * This is a controller class for the ViewEntryController.fxml file
+ */
 public class ViewEntryController implements Initializable {
 
     private Stage stage;
@@ -74,28 +77,27 @@ public class ViewEntryController implements Initializable {
     //this entry will be displayed
     static DiaryEntry entryToView;
 
-    private WebViewController webViewController = new WebViewController();
+    private final WebViewController webViewController = new WebViewController();
 
-    private BigImageViewController bigImageViewController = new BigImageViewController();
+    public final BigImageViewController bigImageViewController = new BigImageViewController();
 
     private ArrayList<TagEntry> tagEntryArrayListController;
 
-    public DiaryEntry getEntryToView() {
-        return entryToView;
-    }
 
+    /**
+     * Sets the entry which will be viewed
+     * @param entryToView1 the entry which will be viewed
+     */
     public static void setEntryToView(DiaryEntry entryToView1) {
         entryToView = entryToView1;
     }
 
 
     /**
-     *The switch to Homescreen method switches from any screen on the GUI to the homescreen by loading and showing a new Stage!
-     * @param event
-     * event is used to trigger the switch after pressing the button in the GUI!
+     *The switch to Homescreen method switches from any screen on the GUI to the home-screen by loading and showing a new Stage
+     * @param event event is used to trigger the switch after pressing the button in the GUI
     */
     public void switchToHomescreen(ActionEvent event) throws IOException {
-
         entryToView.setNotes(notesOfEntryToView.getHtmlText());
         entryToView.setDate(dateOfTitleToView.getValue());
         entryToView.setLocation(locationOfTitleToView.getText());
@@ -109,12 +111,11 @@ public class ViewEntryController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
 
     //Method to delete the displayed entry (Delete Button in ViewEntry-Window)
     @FXML
-    void removeDiaryEntry(ActionEvent event) throws IOException {
+    private void removeDiaryEntry(ActionEvent event) throws IOException {
         //Delete the entry from the database
         Application.getInstance().getEntryDatabase().deleteEntryInDatabase(entryToView);
 
@@ -126,16 +127,13 @@ public class ViewEntryController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
-    /**
-     *The initialize method is used to show a new entry
-     * in the entry view!
-     * @param url //what is the usage of url?
-     * @param resourceBundle
-     * //what is the usage of resourceBundle
-     */
 
+    /**
+     * selects/ initializes the entry to view
+     * @param url JavaFX parameter
+     * @param resourceBundle JavaFx parameter
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleOfEntry.setText(entryToView.getTitle());
@@ -167,10 +165,8 @@ public class ViewEntryController implements Initializable {
     }
 
     /**
-     * The switch to web view method is used to switch the web view to a selected
-     * entry in the tableView
-     * @param event
-     * event is used to trigger the switch after pressing the button in the GUI!
+     * The switch to web view method is used to switch the web view to a selected entry in the tableView
+     * @param event event is used to trigger the switch after pressing the button in the GUI
      */
     public void switchToWebView(ActionEvent event) throws IOException {
 
@@ -189,12 +185,9 @@ public class ViewEntryController implements Initializable {
     }
 
     /**
-     *The remove tag entry method is used to remove
-     * entries from the table view
-     * @param event
-     * event is used to trigger the switch after pressing the button in the GUI!
+     *This method is used to remove the selected entry from the table view
      */
-    public void removeTagEntry(ActionEvent event) throws IOException {
+    public void removeTagEntry(){
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         tagEntryArrayListController.remove(selectedID);
         ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
@@ -203,14 +196,11 @@ public class ViewEntryController implements Initializable {
     }
 
     /**
-     *The create tag entry method is used to create a tag entry and add it
-     * to the tag entry array list controller
+     *The create tag entry method is used to create a tag entry and add it to the tag entry array list controller
      * create tag entry uses the method create new tag entry from the class TagEntry
-     * @param event
-     * event is used to trigger the switch after pressing the button in the GUI!
      */
     //Method to create TagEntry and add it to tagEntryArrayListController
-    public void createTagEntry(ActionEvent event) throws IOException, TagEntryException {
+    public void createTagEntry() throws TagEntryException {
         String tag = (String) tagChoiceBox.getValue();
         //GUI abhängig, deshalb nicht in methode ausgelagert
         if (tag == null) {
@@ -239,22 +229,23 @@ public class ViewEntryController implements Initializable {
     }
 
     /**
-     * The methods handle delete picture 1, 2 and 3 are used to
-     * delete a selected picture from the image view
-     * @param actionEvent
-     * actionEvent is used to trigger the switch after pressing the button in the GUI!
+     * This method is used to delete a selected picture from the imageView1
      */
-    // Methods to delete de selected picture from the image view
-    public void handleDeletePicture1(ActionEvent actionEvent) {
+    public void handleDeletePicture1() {
         imageView1.setImage(null);
         entryToView.setPathPicture1(null);
     }
-
-    public void handleDeletePicture2(ActionEvent actionEvent) {
+    /**
+     * This method is used to delete a selected picture from the imageView2
+     */
+    public void handleDeletePicture2() {
         imageView2.setImage(null);
         entryToView.setPathPicture2(null);
     }
-    public void handleDeletePicture3(ActionEvent actionEvent){
+    /**
+     * This method is used to delete a selected picture from the imageView3
+     */
+    public void handleDeletePicture3(){
         imageView3.setImage(null);
         entryToView.setPathPicture3(null);
     }
@@ -263,37 +254,22 @@ public class ViewEntryController implements Initializable {
     final FileChooser fileChooser = new FileChooser();
 
     /**
-     * This method is used to set the fileChooser for handling pictures
+     * This method is used to initialize the fileChooser for handling pictures
      *
      */
-
     public void initialiseFileChooser() {
-        /**
-         * Here the title of the field is set to know that u have to chose a picture now
-         */
+
         fileChooser.setTitle("Foto auswählen");
-        /**
-         * Set the initial directory for the displayed file dialog
-         * user.home refers to the path to the user directory
-         */
-
         fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
-
-        /**
-         * Gets the extension filters used in the displayed file dialog
-         */
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
                 "Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
-
     }
 
     /**
-     * @param actionEvent
-     * The classes handle open picture 1, 2 and 3 are used to set Pictures or null if no file has been selected
-     * @throws IOException
-     * If selected picture is null then an Exception will be thrown
+     * This method is used to set Pictures or null if no file has been selected
+     * @throws IOException if the selected picture is null then an Exception will be thrown
      */
-    public void handleOpenPicture1(ActionEvent actionEvent) throws IOException {
+    public void handleOpenPicture1() throws IOException {
 
         initialiseFileChooser();
 
@@ -307,8 +283,11 @@ public class ViewEntryController implements Initializable {
             System.out.println("invalid file");
         }
     }
-
-    public void handleOpenPicture2(ActionEvent actionEvent) throws IOException {
+    /**
+     * This method is used to set Pictures or null if no file has been selected
+     * @throws IOException if the selected picture is null then an Exception will be thrown
+     */
+    public void handleOpenPicture2() throws IOException {
 
         initialiseFileChooser();
 
@@ -319,17 +298,17 @@ public class ViewEntryController implements Initializable {
             imageView2.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture2(imageView2.getImage().getUrl());
             Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
-
-
         } else {
             System.out.println("invalid file");
         }
     }
-
-    public void handleOpenPicture3(ActionEvent actionEvent) throws IOException {
+    /**
+     * This method is used to set Pictures or null if no file has been selected
+     * @throws IOException if the selected picture is null then an Exception will be thrown
+     */
+    public void handleOpenPicture3() throws IOException {
 
         initialiseFileChooser();
-
         //Set the selected file or null if no file has been selected
         File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
 
@@ -337,27 +316,18 @@ public class ViewEntryController implements Initializable {
             imageView3.setImage(new Image(file.toURI().toString()));
             entryToView.setPathPicture3(imageView3.getImage().getUrl());
             Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
-
-
         } else {
             System.out.println("invalid file");
         }
-
     }
 
     /**
-     * The methods view image 1, 2 and 3 are used to switch to the big imaage view
-     * @param event
-     * event is necessary for the communication when the user clicks on an image to show it on the screen
-     * @throws IOException
-     * If the FXMLLoader cannot load the big image view an exception will be thrown
+     * This method is used to switch to the big image view
+     * @param event event is necessary for the communication when the user clicks on an image to show it on the screen
+     * @throws IOException If the FXMLLoader cannot load the big image view an exception will be thrown
      */
-
     public void viewImage3(ActionEvent event) throws IOException {
 
-        /**
-         * sets the picture to view
-         */
         bigImageViewController.setImageToView(imageView3.getImage());
 
         FXMLLoader loader = new FXMLLoader();
@@ -369,11 +339,11 @@ public class ViewEntryController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
     /**
-     * switch to the big ImageView
+     * This method is used to switch to the big image view
+     * @param event event is necessary for the communication when the user clicks on an image to show it on the screen
+     * @throws IOException If the FXMLLoader cannot load the big image view an exception will be thrown
      */
-
     public void viewImage2(ActionEvent event) throws IOException {
 
         //sets the picture to view
@@ -389,7 +359,11 @@ public class ViewEntryController implements Initializable {
         stage.show();
     }
 
-    //switch to the big ImageView
+    /**
+     * This method is used to switch to the big image view
+     * @param event event is necessary for the communication when the user clicks on an image to show it on the screen
+     * @throws IOException If the FXMLLoader cannot load the big image view an exception will be thrown
+     */
     public void viewImage1(ActionEvent event) throws IOException {
 
         //sets the picture to view
@@ -404,7 +378,5 @@ public class ViewEntryController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
 

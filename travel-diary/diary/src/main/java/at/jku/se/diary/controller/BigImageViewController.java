@@ -13,75 +13,53 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * This is a controller class for the BigImageView.fxml file
+ */
 public class BigImageViewController implements Initializable {
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
-    private static List<String> locations = new ArrayList<>();
 
     @FXML
     private ImageView imageView;
-
     private static Image imageToView;
-
 
     public Image getImageToView() {
         return imageToView;
     }
 
+    /**
+     * Setter for the image which will be viewed
+     * @param imageToView image which will be viewed
+     */
     public void setImageToView(Image imageToView) {
-        this.imageToView = imageToView;
+        BigImageViewController.imageToView = imageToView;
     }
 
+    /**
+     * initializes the BigImageViewController (JavaFX Component)
+     * @param url JavaFX parameter
+     * @param resourceBundle JavaFx parameter
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         imageView.setImage(getImageToView());
     }
 
 
-    // Get back to the Homescreen -Method
-    public void switchToHomescreen(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
-        root = loader.load();
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    // Get back to the Homescreen -Method
-    public void backToCreateEntry(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateDiaryEntry.fxml"));
-        root = loader.load();
-
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    // Get back to the Homescreen -Method
+    /**
+     * Get back to the ViewEntry Screen
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchToViewEntry(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewEntry.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
-
 }

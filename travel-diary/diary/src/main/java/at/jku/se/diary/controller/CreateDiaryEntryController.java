@@ -34,7 +34,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
+/**
+ * This is a controller class for the CreateDiaryEntry.fxml file
+ */
 public class CreateDiaryEntryController implements Initializable {
 
     @FXML
@@ -74,19 +76,24 @@ public class CreateDiaryEntryController implements Initializable {
     private TableColumn<TagEntry, String> starsColumn;
 
 
-    private ArrayList<TagEntry> tagEntryArrayListController = new ArrayList<>();
+    private final ArrayList<TagEntry> tagEntryArrayListController = new ArrayList<>();
 
-
-
-    private Stage stage;
-    static private Scene scene;
-    private Parent root;
-
+    /**
+     * Getter method for the diaryDate field
+     * @return returns the value of the diaryDate field
+     */
     public LocalDate getDate(){
         return diaryDate.getValue();
     }
 
     //create diary entry, store to XML-File and stores to the listview on the homescreen
+
+    /**
+     * This method creates a new diary entry (calls DiaryEntry.createNewEntry method)
+     * The new entry will be stored in the json file and will also be stored in the listView on the home-screen
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void createDiaryEntry(ActionEvent event) throws IOException {
         try {
             //create new entry by calling the method createNewEntry(with parameters title, location, notes and date)
@@ -115,14 +122,18 @@ public class CreateDiaryEntryController implements Initializable {
 
     }
 
-    // Get back to the Homescreen -Method
+    /**
+     * Get back to the home-screen
+     * @param event The button's action, which is invoked whenever the button is fired.
+     * @throws IOException Signals that an I/O exception of some sort has occurred.
+     */
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
@@ -133,6 +144,9 @@ public class CreateDiaryEntryController implements Initializable {
     //create a file chooser object
     final FileChooser fileChooser = new FileChooser();
 
+    /**
+     * This method initializes the fileChooser object of the CreateDiaryEntry Screen
+     */
     public void initialiseFileChooser() {
         //Set the title of the displayed file dialog
         fileChooser.setTitle("Foto auswählen");
@@ -149,7 +163,11 @@ public class CreateDiaryEntryController implements Initializable {
     }
 
     private final String errorMessage = "invalid file";
-    public void handleOpenPicture1(ActionEvent actionEvent) {
+
+    /**
+     * This method sets the selected picture to the imageview1
+     */
+    public void handleOpenPicture1() {
 
         initialiseFileChooser();
 
@@ -162,8 +180,10 @@ public class CreateDiaryEntryController implements Initializable {
             System.out.println(errorMessage);
         }
     }
-
-    public void handleOpenPicture2(ActionEvent actionEvent) {
+    /**
+     * This method sets the selected picture to the imageview2
+     */
+    public void handleOpenPicture2() {
 
         initialiseFileChooser();
 
@@ -176,8 +196,10 @@ public class CreateDiaryEntryController implements Initializable {
             System.out.println(errorMessage);
         }
     }
-
-    public void handleOpenPicture3(ActionEvent actionEvent) {
+    /**
+     * This method sets the selected picture to the imageview3
+     */
+    public void handleOpenPicture3() {
 
         initialiseFileChooser();
 
@@ -193,20 +215,34 @@ public class CreateDiaryEntryController implements Initializable {
     }
 
     // Methods to delete de selected picture from the image view
-    public void handleDeletePicture1(ActionEvent actionEvent) {
+
+    /**
+     * This methods deletes the picture of the imageview1
+     */
+    public void handleDeletePicture1() {
         imageView1.setImage(null);
     }
-
-    public void handleDeletePicture2(ActionEvent actionEvent) {
+    /**
+     * This methods deletes the picture of the imageview2
+     */
+    public void handleDeletePicture2() {
         imageView2.setImage(null);
     }
-    public void handleDeletePicture3(ActionEvent actionEvent){
+    /**
+     * This methods deletes the picture of the imageview3
+     */
+    public void handleDeletePicture3(){
         imageView3.setImage(null);
     }
 
 
     //Method to create TagEntry and add it to tagEntryArrayListController
-    public void createTagEntry(ActionEvent event) throws IOException, TagEntryException {
+
+    /**
+     * This method creates an TagEntry and add it to the tagEntryArrayListController
+     * @throws TagEntryException will be thrown if anything goes wrong while adding a tag to the entry
+     */
+    public void createTagEntry() throws TagEntryException {
         String tag = (String) tagChoiceBox.getValue();
         //GUI abhängig, deshalb nicht in methode ausgelagert
         if (tag == null) {
@@ -233,19 +269,25 @@ public class CreateDiaryEntryController implements Initializable {
         starsColumn.setCellValueFactory(new PropertyValueFactory<>("starString"));
     }
 
-
-    public void removeTagEntry(ActionEvent event) throws IOException {
+    /**
+     * This method removes the selected tag from the tag-list of the created entry
+     */
+    public void removeTagEntry() {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         tagEntryArrayListController.remove(selectedID);
         ObservableList<TagEntry> list = FXCollections.observableArrayList(tagEntryArrayListController);
         tableView.setItems(list);
     }
 
-
+    /**
+     * initializes the CreateDiaryEntryController (JavaFX Component)
+     * initializes the tag-choice box and sets the tooltip
+     * @param url JavaFX parameter
+     * @param resourceBundle JavaFx parameter
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tagChoiceBox.getItems().addAll(Application.getInstance().getEntryDatabase().getTagEntries());
         tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
-
     }
 }

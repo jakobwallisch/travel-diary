@@ -45,7 +45,6 @@ public class TagEntry {
      * @throws TagEntryException
      * If no tag is selected an exception will be thrown
      */
-
     public static TagEntry createNewTagEntry(String tagText, String tag, int rating) throws TagEntryException {
         if(tag == null){
             throw new TagEntryException("No Tag selected!");

@@ -8,12 +8,7 @@
 <AnchorPane prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.diary.controller.BigImageViewController">
    <children>
       <ImageView fx:id="imageView" fitHeight="658.0" fitWidth="1024.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="48.0" layoutY="677.0" mnemonicParsing="false" onAction="#switchToHomescreen" text="⬅ Back to Homescreen">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="848.0" layoutY="677.0" mnemonicParsing="false" onAction="#switchToViewEntry" text="⬅ Back to Entry">
+      <Button layoutX="893.0" layoutY="676.0" mnemonicParsing="false" onAction="#switchToViewEntry" text="⬅ Back to Entry">
          <font>
             <Font size="14.0" />
          </font>
