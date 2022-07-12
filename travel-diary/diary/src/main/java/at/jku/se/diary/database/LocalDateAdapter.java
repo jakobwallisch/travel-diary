@@ -8,6 +8,11 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * This is an adapter class which contains a reader and a writer
+ * it extends the class TypeAdapter
+ */
+
 class LocalDateAdapter extends TypeAdapter<LocalDate> {
     @Override
     public void write(final JsonWriter jsonWriter, final LocalDate localDate) throws IOException {

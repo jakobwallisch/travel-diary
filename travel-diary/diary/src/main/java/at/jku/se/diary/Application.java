@@ -21,10 +21,18 @@ public class Application extends javafx.application.Application {
 
     private Database database = new Database();
 
+    /**
+     * return the instance of the application
+     * @return
+     */
     public static Application getInstance() {
         return instance;
     }
 
+    /**
+     * application class
+     * IOException will be thrown if the entries from the database cannot be read
+     */
     public Application() {
         try {
             database.readEntriesFromDatabase();
@@ -45,10 +53,20 @@ public class Application extends javafx.application.Application {
         instance = this;
     }
 
+    /**
+     * returns the entry database
+     * @return
+     */
     public Database getEntryDatabase() {
         return database;
     }
 
+    /**
+     * start method to start the applicaiton
+     * @param stage
+     * @throws Exception
+     * if the loader cannot load the root an exception will be thrown
+     */
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();

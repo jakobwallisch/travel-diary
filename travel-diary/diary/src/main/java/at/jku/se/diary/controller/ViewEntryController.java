@@ -89,7 +89,11 @@ public class ViewEntryController implements Initializable {
     }
 
 
-    // Get back to the Homescreen -Method
+    /**
+     *The switch to Homescreen method switches from any screen on the GUI to the homescreen by loading and showing a new Stage!
+     * @param event
+     * event is used to trigger the switch after pressing the button in the GUI!
+    */
     public void switchToHomescreen(ActionEvent event) throws IOException {
 
         entryToView.setNotes(notesOfEntryToView.getHtmlText());
@@ -124,8 +128,14 @@ public class ViewEntryController implements Initializable {
         stage.show();
 
     }
+    /**
+     *The initialize method is used to show a new entry
+     * in the entry view!
+     * @param url //what is the usage of url?
+     * @param resourceBundle
+     * //what is the usage of resourceBundle
+     */
 
-    //shows the clicked entry in the entry view
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleOfEntry.setText(entryToView.getTitle());
@@ -156,7 +166,12 @@ public class ViewEntryController implements Initializable {
         tagChoiceBox.setTooltip(new Tooltip("Please choose a Tag"));
     }
 
-    //switch to the WebView of the selected entry in the tableview
+    /**
+     * The switch to web view method is used to switch the web view to a selected
+     * entry in the tableView
+     * @param event
+     * event is used to trigger the switch after pressing the button in the GUI!
+     */
     public void switchToWebView(ActionEvent event) throws IOException {
 
         //set the Location of the Entry which will be displayed
@@ -173,6 +188,12 @@ public class ViewEntryController implements Initializable {
 
     }
 
+    /**
+     *The remove tag entry method is used to remove
+     * entries from the table view
+     * @param event
+     * event is used to trigger the switch after pressing the button in the GUI!
+     */
     public void removeTagEntry(ActionEvent event) throws IOException {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         tagEntryArrayListController.remove(selectedID);
@@ -181,6 +202,13 @@ public class ViewEntryController implements Initializable {
 
     }
 
+    /**
+     *The create tag entry method is used to create a tag entry and add it
+     * to the tag entry array list controller
+     * create tag entry uses the method create new tag entry from the class TagEntry
+     * @param event
+     * event is used to trigger the switch after pressing the button in the GUI!
+     */
     //Method to create TagEntry and add it to tagEntryArrayListController
     public void createTagEntry(ActionEvent event) throws IOException, TagEntryException {
         String tag = (String) tagChoiceBox.getValue();
@@ -210,6 +238,12 @@ public class ViewEntryController implements Initializable {
 
     }
 
+    /**
+     * The methods handle delete picture 1, 2 and 3 are used to
+     * delete a selected picture from the image view
+     * @param actionEvent
+     * actionEvent is used to trigger the switch after pressing the button in the GUI!
+     */
     // Methods to delete de selected picture from the image view
     public void handleDeletePicture1(ActionEvent actionEvent) {
         imageView1.setImage(null);
@@ -228,25 +262,41 @@ public class ViewEntryController implements Initializable {
     //create a file chooser object
     final FileChooser fileChooser = new FileChooser();
 
-    public void initialiseFileChooser() {
-        //Set the title of the displayed file dialog
-        fileChooser.setTitle("Foto auswählen");
+    /**
+     * This method is used to set the fileChooser for handling pictures
+     *
+     */
 
-        //Set the initial directory for the displayed file dialog
-        //user.home refers to the path to the user directory
+    public void initialiseFileChooser() {
+        /**
+         * Here the title of the field is set to know that u have to chose a picture now
+         */
+        fileChooser.setTitle("Foto auswählen");
+        /**
+         * Set the initial directory for the displayed file dialog
+         * user.home refers to the path to the user directory
+         */
+
         fileChooser.setInitialDirectory(new File(System.getProperty(("user.home"))));
 
-        //Gets the extension filters used in the displayed file dialog
+        /**
+         * Gets the extension filters used in the displayed file dialog
+         */
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
                 "Image Files ", "*.png", "*.jpg", "*.jpeg", "*.jfif"));
 
     }
 
+    /**
+     * @param actionEvent
+     * The classes handle open picture 1, 2 and 3 are used to set Pictures or null if no file has been selected
+     * @throws IOException
+     * If selected picture is null then an Exception will be thrown
+     */
     public void handleOpenPicture1(ActionEvent actionEvent) throws IOException {
 
         initialiseFileChooser();
 
-        //Set the selected file or null if no file has been selected
         File file = fileChooser.showOpenDialog(null); //shows a new file open dialog
 
         if (file != null) {
@@ -295,10 +345,19 @@ public class ViewEntryController implements Initializable {
 
     }
 
-    //switch to the big ImageView
+    /**
+     * The methods view image 1, 2 and 3 are used to switch to the big imaage view
+     * @param event
+     * event is necessary for the communication when the user clicks on an image to show it on the screen
+     * @throws IOException
+     * If the FXMLLoader cannot load the big image view an exception will be thrown
+     */
+
     public void viewImage3(ActionEvent event) throws IOException {
 
-        //sets the picture to view
+        /**
+         * sets the picture to view
+         */
         bigImageViewController.setImageToView(imageView3.getImage());
 
         FXMLLoader loader = new FXMLLoader();
@@ -311,7 +370,10 @@ public class ViewEntryController implements Initializable {
         stage.show();
     }
 
-    //switch to the big ImageView
+    /**
+     * switch to the big ImageView
+     */
+
     public void viewImage2(ActionEvent event) throws IOException {
 
         //sets the picture to view

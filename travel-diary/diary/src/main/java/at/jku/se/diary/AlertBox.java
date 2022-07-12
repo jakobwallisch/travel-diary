@@ -9,7 +9,13 @@ import javafx.geometry.Pos;
 
 
 public class AlertBox {
-
+    /**
+     * @param title
+     * title of the alert
+     * @param message
+     * This method displays an alert on the screen
+     * it has a title and a message which will be shown at the screen
+     */
     public static void display(String title, String message){
         Stage window = new Stage();
 
