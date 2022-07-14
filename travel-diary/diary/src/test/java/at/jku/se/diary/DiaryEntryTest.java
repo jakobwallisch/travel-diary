@@ -14,18 +14,13 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * @author Florian Schindlbauer
- */
+
 class DiaryEntryTest {
 
     private final DiaryEntry e = new DiaryEntry();
     private final ArrayList<TagEntry> tagEntryArrayList= new ArrayList<>();
     private final ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
-    /**
-     * Test of createDiaryEntry method, of class CreateDiaryEntryController
-     * by using method createNewEntry of class DiaryEntry.
-     */
+
     @Test
     void TestCreateDiaryEntry() throws DiaryEntryException {
         assertThrows(DiaryEntryException.class, () -> {
@@ -62,9 +57,7 @@ class DiaryEntryTest {
         assertTrue(diaryEntries.stream().noneMatch(entry -> entry.equals(removed)));
     }
 
-    /**
-     * Test of setTitle method of class DiaryEntry.
-     */
+
 
     private String testTitle = "Visiting Linz";
     @Test
@@ -73,18 +66,14 @@ class DiaryEntryTest {
         assertEquals(e.getTitle(), testTitle);
         assertNotEquals(e.getTitle(), "visiting Linz");
     }
-    /**
-     * Test of getTitle method of class DiaryEntry.
-     */
+
     @Test
     void TestGetTitle() {
         e.setTitle(testTitle);
         e.getTitle();
         assertEquals(e.getTitle(), testTitle);
     }
-    /**
-     * Test of getNotes method of class DiaryEntry.
-     */
+
     @Test
     void TestGetNotes() {
         e.getNotes();
@@ -92,9 +81,7 @@ class DiaryEntryTest {
         e.setNotes("Es war sehr cool");
         assertEquals(e.getNotes(), "Es war sehr cool");
     }
-    /**
-     * Test of setNotes method of class DiaryEntry.
-     */
+
 
     private String testNotes = "Es war sehr cool!";
     @Test
@@ -103,9 +90,7 @@ class DiaryEntryTest {
         assertEquals(e.getNotes(), testNotes);
         assertNotEquals(e.getNotes(), "es war sehr cool");
     }
-    /**
-     * Test of getLocation method of class DiaryEntry.
-     */
+
 
     private String testLocation = "Linz";
 
@@ -117,17 +102,13 @@ class DiaryEntryTest {
         assertEquals(e.getLocation(), testLocation);
         assertNotEquals(e.getLocation(), "linz");
     }
-    /**
-     * Test of setLocation method of class DiaryEntry.
-     */
+
     @Test
     void TestSetLocation() {
         e.setLocation(testLocation);
         assertEquals(e.getLocation(), testLocation);
     }
-    /**
-     * Test of getDate method of class DiaryEntry.
-     */
+
     @Test
     void TestGetDate() {
         e.getDate();
@@ -136,17 +117,13 @@ class DiaryEntryTest {
         assertEquals(e.getDate(), LocalDate.of(2022, 5, 21));
         assertNotEquals(e.getDate(), LocalDate.of(2022, 1, 10));
     }
-    /**
-     * Test of setDate method of class DiaryEntry.
-     */
+
     @Test
     void TestSetDate() {
         e.setDate(LocalDate.of(2022, 5, 21));
         assertEquals(e.getDate(), LocalDate.of(2022, 5, 21));
     }
-    /**
-     * Test of getPathPicture1 method of class DiaryEntry.
-     */
+
 
     private String testPath = "img.png";
     private String testPath2 = "img.png2";
@@ -160,17 +137,13 @@ class DiaryEntryTest {
         assertEquals(e.getPathPicture1(), testPath);
         assertNotEquals(e.getPathPicture1(), testPath2);
     }
-    /**
-     * Test of setPathPicture1 method of class DiaryEntry.
-     */
+
     @Test
     void TestSetPathPicture1() {
         e.setPathPicture1(testPath);
         assertEquals(e.getPathPicture1(), testPath);
     }
-    /**
-     * Test of getPathPicture2 method of class DiaryEntry.
-     */
+
     @Test
     void TestGetPathPicture2() {
         e.getPathPicture2();
@@ -179,17 +152,13 @@ class DiaryEntryTest {
         assertEquals(e.getPathPicture2(), testPath);
         assertNotEquals(e.getPathPicture2(), testPath2);
     }
-    /**
-     * Test of setPathPicture2 method of class DiaryEntry.
-     */
+
     @Test
     void TestSetPathPicture2() {
         e.setPathPicture2(testPath);
         assertEquals(e.getPathPicture2(), testPath);
     }
-    /**
-     * Test of getPathPicture3 method of class DiaryEntry.
-     */
+
     @Test
     void TestGetPathPicture3() {
         e.getPathPicture3();
@@ -198,9 +167,7 @@ class DiaryEntryTest {
         assertEquals(e.getPathPicture3(), testPath);
         assertNotEquals(e.getPathPicture3(), testPath2);
     }
-    /**
-     * Test of setPathPicture3 method of class DiaryEntry.
-     */
+
     @Test
     void TestSetPathPicture3(){
         e.setPathPicture3(testPath);
