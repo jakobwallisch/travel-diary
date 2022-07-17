@@ -21,11 +21,14 @@ class DiaryEntryTest {
     private final ArrayList<TagEntry> tagEntryArrayList= new ArrayList<>();
     private final ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
 
+    /**
+     * Method for testing to create a diary entry (using the createNewEntry method)
+     * @throws DiaryEntryException
+     * Assertion will be thrown if the title or the date is null
+     */
     @Test
     void TestCreateDiaryEntry() throws DiaryEntryException {
-        assertThrows(DiaryEntryException.class, () -> {
-            DiaryEntry.createNewEntry(null, null, null, null, null);
-        });
+        assertThrows(DiaryEntryException.class, () -> DiaryEntry.createNewEntry(null, null, null, null, null));
         tagEntryArrayList.add(new TagEntry("Bar", "Schöne Strandbar", 4));
         tagEntryArrayList.add(new TagEntry("Hotel", "schöne Hotelbar", 5));
         LocalDate date = LocalDate.of(2022, 5, 25);
@@ -45,7 +48,11 @@ class DiaryEntryTest {
         assertEquals(e2.getPathPicture3(), "pic3");
     }
 
-
+    /**
+     * Testing to remove an already existing entry
+     * @throws DiaryEntryException
+     * Exception can be thrown if the method createNewEntry fails
+     */
 
     @Test
     void TestRemoveDiaryEntry() throws DiaryEntryException {
@@ -59,7 +66,11 @@ class DiaryEntryTest {
 
 
 
-    private String testTitle = "Visiting Linz";
+    private final String testTitle = "Visiting Linz";
+
+    /**
+     * Testing to set the title of an entry
+     */
     @Test
     void TestSetTitle() {
         e.setTitle(testTitle);
@@ -67,57 +78,73 @@ class DiaryEntryTest {
         assertNotEquals(e.getTitle(), "visiting Linz");
     }
 
+    /**
+     * Testing to get the title of an entry
+     */
     @Test
     void TestGetTitle() {
         e.setTitle(testTitle);
-        e.getTitle();
         assertEquals(e.getTitle(), testTitle);
     }
 
+    /**
+     * Testing to get the notes of an entry
+     */
     @Test
     void TestGetNotes() {
-        e.getNotes();
-        assertEquals(e.getNotes(), null);
+        assertNull(e.getNotes());
         e.setNotes("Es war sehr cool");
         assertEquals(e.getNotes(), "Es war sehr cool");
     }
 
-
-    private String testNotes = "Es war sehr cool!";
+    /**
+     * Testing to set the notes of an entry
+     */
     @Test
     void TestSetNotes() {
+        String testNotes = "Es war sehr cool!";
         e.setNotes(testNotes);
         assertEquals(e.getNotes(), testNotes);
         assertNotEquals(e.getNotes(), "es war sehr cool");
     }
 
 
-    private String testLocation = "Linz";
+    private final String testLocation = "Linz";
 
+    /**
+     * Testing to get the location of an entry
+     */
     @Test
     void TestGetLocation() {
-        e.getLocation();
-        assertEquals(e.getLocation(), null);
+        assertNull(e.getLocation());
         e.setLocation(testLocation);
         assertEquals(e.getLocation(), testLocation);
         assertNotEquals(e.getLocation(), "linz");
     }
 
+    /**
+     * Testing to set the location of an entry
+     */
     @Test
     void TestSetLocation() {
         e.setLocation(testLocation);
         assertEquals(e.getLocation(), testLocation);
     }
 
+    /**
+     * Testing to get the date of an entry
+     */
     @Test
     void TestGetDate() {
-        e.getDate();
-        assertEquals(e.getDate(), null);
+        assertNull(e.getDate());
         e.setDate(LocalDate.of(2022, 5, 21));
         assertEquals(e.getDate(), LocalDate.of(2022, 5, 21));
         assertNotEquals(e.getDate(), LocalDate.of(2022, 1, 10));
     }
 
+    /**
+     * Testing to set the date of an entry
+     */
     @Test
     void TestSetDate() {
         e.setDate(LocalDate.of(2022, 5, 21));
@@ -125,49 +152,63 @@ class DiaryEntryTest {
     }
 
 
-    private String testPath = "img.png";
-    private String testPath2 = "img.png2";
+    private final String testPath = "img.png";
+    private final String testPath2 = "img.png2";
 
-
+    /**
+     * Testing to get the path of the first picture that is added to an entry
+     */
     @Test
     void TestGetPathPicture1() {
-        e.getPathPicture1();
-        assertEquals(e.getPathPicture1(), null);
+        assertNull(e.getPathPicture1());
         e.setPathPicture1(testPath);
         assertEquals(e.getPathPicture1(), testPath);
         assertNotEquals(e.getPathPicture1(), testPath2);
     }
 
+    /**
+     * Testing to set the path of the first picture that is added to an entry
+     */
     @Test
     void TestSetPathPicture1() {
         e.setPathPicture1(testPath);
         assertEquals(e.getPathPicture1(), testPath);
     }
 
+    /**
+     * Testing to get the path of the second picture that is added to an entry
+     */
     @Test
     void TestGetPathPicture2() {
-        e.getPathPicture2();
-        assertEquals(e.getPathPicture2(), null);
+        assertNull(e.getPathPicture2());
         e.setPathPicture2(testPath);
         assertEquals(e.getPathPicture2(), testPath);
         assertNotEquals(e.getPathPicture2(), testPath2);
     }
 
+    /**
+     * Testing to set the path of the second picture that is added to an entry
+     */
     @Test
     void TestSetPathPicture2() {
         e.setPathPicture2(testPath);
         assertEquals(e.getPathPicture2(), testPath);
     }
 
+    /**
+     * Testing to get the path of the third picture that is added to an entry
+     */
     @Test
     void TestGetPathPicture3() {
-        e.getPathPicture3();
-        assertEquals(e.getPathPicture3(), null);
+        assertNull(e.getPathPicture3());
         e.setPathPicture3(testPath);
         assertEquals(e.getPathPicture3(), testPath);
         assertNotEquals(e.getPathPicture3(), testPath2);
     }
 
+    /**
+     * Testing to set the path of the third picture that is added to an entry
+     */
     @Test
     void TestSetPathPicture3(){
         e.setPathPicture3(testPath);
