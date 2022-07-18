@@ -104,6 +104,7 @@ public class ViewEntryController implements Initializable {
         entryToView.setDate(dateOfTitleToView.getValue());
         entryToView.setLocation(locationOfTitleToView.getText());
         entryToView.setTagEntryArrayList(tagEntryArrayListController);
+        entryToView.setTitle(titleOfEntryTextfield.getText());
         Application.getInstance().getEntryDatabase().updateEntryInDatabase(entryToView);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeScreen.fxml"));
