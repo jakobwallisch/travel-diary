@@ -6,21 +6,21 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-/**
- * @author Florian Schindlbauer
- */
+
 class TagEntryTest {
+
+
+    private static final String tag = "Strand";
+    private static final String text = "Es war sehr schoen";
+    private static final String tag2 = "tag";
+    private static final String textTest = "Test";
+    private static final String textTestLowerCase = "test";
+
     /**
-     * Test of createNewTagEntry method, of class CreateDiaryEntryController
-     * by using method createNewTagEntry of class TagEntry.
+     * Testing the createNewTagEntry method which is called to create a new tag
+     * @throws TagEntryException
+     * Exception will be thrown if the tag parameter (title) is null
      */
-
-    private static String tag = "Strand";
-    private static String text = "Es war sehr schoen";
-    private static String tag2 = "tag";
-    private static String textTest = "Test";
-    private static String textTestLowerCase = "test";
-
     @Test
     void createNewTagEntry() throws TagEntryException {
         TagEntry tagEntry = TagEntry.createNewTagEntry(text, tag, 4);
@@ -31,9 +31,13 @@ class TagEntryTest {
         assertEquals(t.getRating(), 0);
         TagEntry t2 = TagEntry.createNewTagEntry("Es war sehr schoen!!!!", "Bar", 6);
         assertEquals(t2.getRating(), 5);
+        assertThrows(TagEntryException.class, () -> TagEntry.createNewTagEntry("Es war schön", null, 2));
     }
+
     /**
-     * Test of getTag method of class TagEntry.
+     * Testing to return a tag
+     * @throws TagEntryException
+     * Exception will be thrown if the method createNewTagEntry throws it
      */
     @Test
     void getTag() throws TagEntryException {
@@ -41,32 +45,37 @@ class TagEntryTest {
         assertEquals(t.getTag(), tag);
 
     }
+
     /**
-     * Test of setTag method of class TagEntry.
+     * Testing to set a tag
+     * @throws TagEntryException
+     * Exception can be thrown if the createNewTagEntry throws it
      */
-
-
     @Test
     void setTag() throws TagEntryException {
-        assertThrows(TagEntryException.class, () ->{
-            TagEntry.createNewTagEntry(tag, null, 3);
-        });
+        assertThrows(TagEntryException.class, () -> TagEntry.createNewTagEntry(tag, null, 3));
         TagEntry t = TagEntry.createNewTagEntry(textTest, tag2, 5);
         t.setTag("neuerTag");
         assertEquals(t.getTag(), "neuerTag");
     }
+
     /**
-     * Test of getTagText method of class TagEntry.
+     * Testing to get the text of a tag, can be null
+     * @throws TagEntryException
+     * Exception can be thrown if the createNewTagEntry throws it
      */
     @Test
     void getTagText() throws TagEntryException {
         TagEntry t = TagEntry.createNewTagEntry(textTest, tag2, 5);
         assertEquals(t.getTagText(), textTest);
         TagEntry t2 = TagEntry.createNewTagEntry(null, tag2, 5);
-        assertEquals(t2.getTagText(), null);
+        assertNull(t2.getTagText());
     }
+
     /**
-     * Test of setTagText method of class TagEntry.
+     * Testing to set the tag text of a tag
+     * @throws TagEntryException
+     * Exception can be thrown if the createNewTagEntry throws it
      */
     @Test
     void setTagText() throws TagEntryException {
@@ -74,11 +83,11 @@ class TagEntryTest {
         t.setTagText("neuerText");
         assertEquals(t.getTagText(), "neuerText");
     }
+
     /**
-     * Test of getStarString method of class TagEntry.
-     * If the right amount of stars appears is already tested in createNewTagEntry class, as after using this method
-     * a for loop prints out the right amount of stars.
-     * this for loop is determined in the method createNewTagEntry so it can not be ignored or passed over!
+     * Testing to set the amount of rating stars
+     * @throws TagEntryException
+     * Exception can be thrown if the createNewTagEntry throws it
      */
     @Test
     void setStarString() throws TagEntryException {
@@ -93,6 +102,8 @@ class TagEntryTest {
      * Test of getRating method of class TagEntry.
      * This method just return the integer number that you gave the created tag entry as parameter in method
      * createNewTagEntry
+     * @throws TagEntryException
+     * Exception can be thrown if the createNewTagEntry throws it
      */
     @Test
     void getRating() throws TagEntryException {
@@ -103,6 +114,8 @@ class TagEntryTest {
      * Test of setRating method of class TagEntry.
      * If the rating is less than one it will automatically be 0.
      * In case it is greater than 5 it will automatically be set to 5.
+     * @throws TagEntryException
+     * Exception can be thrown if the createNewTagEntry throws it
      */
     @Test
     void setRating() throws TagEntryException {
