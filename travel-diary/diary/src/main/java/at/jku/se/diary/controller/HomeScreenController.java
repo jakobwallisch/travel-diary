@@ -282,7 +282,6 @@ public class HomeScreenController implements Initializable {
         //Set the selected directory or null if no directory has been selected
         File selectedDirectory = directoryChooser.showDialog(null);
         if (selectedDirectory != null) {
-            System.out.println(selectedDirectory.getAbsolutePath());
             Application.getInstance().getEntryDatabase().storePathInDatabase(selectedDirectory.getAbsolutePath());
         } else {
             System.out.println("invalid directory");
