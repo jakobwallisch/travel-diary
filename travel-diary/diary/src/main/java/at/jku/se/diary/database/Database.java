@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
  * This class represents the logic of the "database"
  */
 public class Database {
-
+    /**
+     * constructor of database class
+     */
     public Database() {
         dir = this.readPathFromDatabase();
         database = new File(dir,"database.json");

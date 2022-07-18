@@ -31,6 +31,9 @@ public class Application extends javafx.application.Application {
         return instance;
     }
 
+    /**
+     * Constructor of Application class
+     */
     public Application() {
         try {
             database.readEntriesFromDatabase();
@@ -83,6 +86,10 @@ public class Application extends javafx.application.Application {
             stage.show();
     }
 
+    /**
+     * main method
+     * @param args don't know how to descripe this
+     */
     public static void main(String[] args) {
         launch();
     }

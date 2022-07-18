@@ -25,6 +25,10 @@ public class DiaryEntry {
     private String pathPicture2;
     private String pathPicture3;
 
+    /**
+     * getter for the tagArrayList
+     * @return returns the tagArrayList
+     */
     public ArrayList<TagEntry> getTagEntryArrayList() {
         return tagEntryArrayList;
     }

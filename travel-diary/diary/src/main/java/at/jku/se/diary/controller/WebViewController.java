@@ -86,6 +86,7 @@ public class WebViewController implements Initializable{
     /**
      *The switch to Homescreen method switches from any screen on the GUI to the home-screen by loading and showing a new Stage
      * @param event event is used to trigger the switch after pressing the button in the GUI
+     * @throws IOException ioexception
      */
     public void switchToHomescreen(ActionEvent event) throws IOException {
 

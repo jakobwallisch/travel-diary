@@ -65,6 +65,7 @@ public class ViewEntryController implements Initializable {
     @FXML
     private ImageView imageView3;
 
+
     @FXML
     private ChoiceBox tagChoiceBox;
 
@@ -79,7 +80,7 @@ public class ViewEntryController implements Initializable {
 
     private final WebViewController webViewController = new WebViewController();
 
-    public final BigImageViewController bigImageViewController = new BigImageViewController();
+    final BigImageViewController bigImageViewController = new BigImageViewController();
 
     private ArrayList<TagEntry> tagEntryArrayListController;
 
@@ -96,6 +97,7 @@ public class ViewEntryController implements Initializable {
     /**
      *The switch to Homescreen method switches from any screen on the GUI to the home-screen by loading and showing a new Stage
      * @param event event is used to trigger the switch after pressing the button in the GUI
+     * @throws IOException ioexception
     */
     public void switchToHomescreen(ActionEvent event) throws IOException {
         entryToView.setNotes(notesOfEntryToView.getHtmlText());
@@ -167,6 +169,7 @@ public class ViewEntryController implements Initializable {
     /**
      * The switch to web view method is used to switch the web view to a selected entry in the tableView
      * @param event event is used to trigger the switch after pressing the button in the GUI
+     * @throws IOException ioexception
      */
     public void switchToWebView(ActionEvent event) throws IOException {
 
@@ -198,6 +201,7 @@ public class ViewEntryController implements Initializable {
     /**
      *The create tag entry method is used to create a tag entry and add it to the tag entry array list controller
      * create tag entry uses the method create new tag entry from the class TagEntry
+     * @throws TagEntryException ioexception
      */
     //Method to create TagEntry and add it to tagEntryArrayListController
     public void createTagEntry() throws TagEntryException {

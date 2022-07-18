@@ -61,7 +61,7 @@ public class TagEntry {
         tagEntry.setRating(rating);
         tagEntry.setStarString("");
         for(int i = 0; i< rating;i++) {
-            tagEntry.setStarString(tagEntry.getStarString() + '★');
+            tagEntry.setStarString(tagEntry.getStarString());
         }
         return tagEntry;
     }

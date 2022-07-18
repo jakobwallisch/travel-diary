@@ -20,6 +20,9 @@ import java.util.ResourceBundle;
  */
 public class BigImageViewController implements Initializable {
 
+    /**
+     * constructor of BigImageViewController class
+     */
     public BigImageViewController() {
 
     }
@@ -28,6 +31,10 @@ public class BigImageViewController implements Initializable {
     private ImageView imageView;
     private static Image imageToView;
 
+    /**
+     * getter for the image to view
+     * @return the image to view
+     */
     public Image getImageToView() {
         return imageToView;
     }

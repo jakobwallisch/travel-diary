@@ -1,3 +1,6 @@
+/**
+ * module-info
+ */
 module diary {
     requires javafx.graphics;
     requires javafx.controls;
